@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSP Winter MUN 2026 — Youth for Sustainable Policy · Model United Nations</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a08;
+  --g-deep:#0d2b20;
+  --g-dark:#0f6e56;
+  --g-mid:#1d9e75;
+  --g-light:#e1f5ee;
+  --g-pale:#f0faf5;
+  --amber:#ba7517;
+  --amber-light:#ef9f27;
+  --amber-pale:#faeeda;
+  --purple:#7f77dd;
+  --purple-pale:#eeedfe;
+  --purple-deep:#3c3489;
+  --blue:#185fa5;
+  --blue-pale:#e6f1fb;
+  --red:#a32d2d;
+  --red-pale:#fcebeb;
+  --cream:#f5f2eb;
+  --warm:#faf9f5;
+  --mid:#6b6b60;
+  --sub:#8a8a7e;
+  --border:rgba(0,0,0,0.08);
+  --border-strong:rgba(0,0,0,0.13);
+  --card:#fff;
+  --radius:12px;
+  --radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ── TOPNAV ── */
+.topnav{
+  background:var(--g-deep);
+  padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-left{display:flex;align-items:center;gap:0}
+.nav-brand{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 24px 14px 0;
+  border-right:1px solid rgba(255,255,255,0.1);
+  margin-right:8px;flex-shrink:0;
+}
+.nav-brand-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--g-mid);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+}
+.nav-brand-mark svg{width:16px;height:16px}
+.nav-brand-text{display:flex;flex-direction:column;gap:1px}
+.nav-brand-name{font-family:'Fraunces',serif;font-size:14px;color:#fff;font-weight:500;line-height:1.1}
+.nav-brand-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.nav-links{display:flex;gap:0}
+.nav-link{
+  padding:14px 14px;
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+.nav-link:hover{color:rgba(255,255,255,.8)}
+.nav-link.active{color:#fff;border-bottom-color:var(--g-mid)}
+.nav-cta{
+  padding:9px 20px;
+  background:var(--amber);color:#fff;
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;
+  border-radius:6px;
+  transition:background .2s;white-space:nowrap;
+  flex-shrink:0;
+}
+.nav-cta:hover{background:var(--amber-light)}
+
+/* ── ALERT BANNER ── */
+.alert-banner{
+  background:var(--purple);padding:10px 48px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.alert-banner p{font-size:12px;color:#fff;font-family:'DM Mono',monospace;letter-spacing:.04em}
+.alert-dot{width:6px;height:6px;border-radius:50%;background:var(--amber-light);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── HERO ── */
+.hero{
+  background:var(--g-deep);
+  padding:80px 48px 0;
+  position:relative;overflow:hidden;
+  min-height:580px;display:flex;align-items:flex-end;
+}
+.hero-bg-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.6) 40%,rgba(0,0,0,.3) 100%);
+}
+.hero-glow{
+  position:absolute;top:-200px;right:-100px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(29,158,117,.18) 0%,transparent 70%);
+}
+.hero-glow2{
+  position:absolute;bottom:0;left:-80px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(127,119,221,.12) 0%,transparent 70%);
+}
+.hero-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 340px;gap:60px;
+  align-items:flex-end;width:100%;padding-bottom:64px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(29,158,117,.18);border:1px solid rgba(29,158,117,.3);
+  padding:5px 14px;border-radius:100px;
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--g-mid);
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;
+}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--g-mid);display:block}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(42px,5vw,66px);font-weight:700;
+  color:#fff;line-height:1.05;letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.hero h1 em{color:var(--g-mid);font-style:italic}
+.hero-subtitle{
+  font-size:clamp(14px,1.5vw,17px);color:rgba(255,255,255,.55);
+  max-width:520px;line-height:1.65;margin-bottom:32px;
+}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.hero-meta-item{display:flex;align-items:center;gap:8px}
+.hero-meta-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.hero-meta-val{font-size:13px;color:rgba(255,255,255,.8);font-weight:500}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{
+  padding:13px 28px;background:var(--g-mid);color:#fff;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  border-radius:8px;border:none;cursor:pointer;
+  transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--g-dark);transform:translateY(-1px)}
+.btn-outline{
+  padding:13px 28px;background:transparent;
+  border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.75);
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;
+  border-radius:8px;cursor:pointer;
+  transition:border-color .2s,color .2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{border-color:rgba(255,255,255,.55);color:#fff}
+
+/* hero countdown card */
+.hero-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:28px;
+  backdrop-filter:blur(4px);
+}
+.hcard-label{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);
+  margin-bottom:20px;
+}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.cd-unit{
+  background:rgba(255,255,255,.06);border-radius:8px;
+  padding:14px 6px;text-align:center;
+  border:1px solid rgba(255,255,255,.07);
+}
+.cd-num{
+  font-family:'Fraunces',serif;font-size:28px;font-weight:600;
+  color:#fff;line-height:1;display:block;margin-bottom:4px;
+}
+.cd-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.hcard-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:0 0 20px}
+.hcard-detail{display:flex;justify-content:space-between;margin-bottom:10px}
+.hcard-detail:last-child{margin-bottom:0}
+.hcard-dk{font-size:12px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.04em}
+.hcard-dv{font-size:12px;color:rgba(255,255,255,.75);font-weight:500}
+
+/* ── SECTION BASICS ── */
+section{padding:72px 48px}
+.section-eyebrow{
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--g-dark);margin-bottom:10px;
+}
+.section-title{
+  font-family:'Fraunces',serif;font-size:clamp(28px,3.5vw,40px);
+  font-weight:600;line-height:1.1;letter-spacing:-.01em;
+  color:var(--ink);margin-bottom:12px;
+}
+.section-lead{
+  font-size:16px;color:var(--mid);max-width:620px;line-height:1.75;
+}
+.section-head{margin-bottom:48px}
+
+/* ── ABOUT STRIP ── */
+.about-strip{
+  background:var(--card);
+  border-top:3px solid var(--g-mid);
+  padding:0 48px;
+}
+.about-inner{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-left:1px solid var(--border);
+}
+.about-stat{
+  padding:40px 32px;
+  border-right:1px solid var(--border);
+  border-bottom:none;
+}
+.about-stat-num{
+  font-family:'Fraunces',serif;font-size:42px;
+  font-weight:700;color:var(--g-deep);line-height:1;margin-bottom:6px;
+}
+.about-stat-num sup{font-size:20px;vertical-align:super}
+.about-stat-label{font-size:13px;color:var(--mid);line-height:1.4;max-width:130px}
+
+/* ── COMMITTEES ── */
+.committees{background:var(--cream)}
+.committee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.comm-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:box-shadow .2s,transform .2s;
+}
+.comm-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-3px)}
+.comm-top{padding:28px 28px 22px}
+.comm-badge{
+  display:inline-block;
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;
+  margin-bottom:16px;
+}
+.badge-ga{background:var(--g-light);color:var(--g-dark)}
+.badge-crisis{background:var(--red-pale);color:var(--red)}
+.badge-sc{background:var(--blue-pale);color:var(--blue)}
+.badge-special{background:var(--purple-pale);color:var(--purple-deep)}
+.badge-env{background:var(--amber-pale);color:var(--amber)}
+.comm-name{
+  font-family:'Fraunces',serif;font-size:20px;font-weight:600;
+  color:var(--ink);margin-bottom:6px;line-height:1.2;
+}
+.comm-topic{font-size:13px;color:var(--mid);line-height:1.55;margin-bottom:16px}
+.comm-meta{display:flex;gap:16px}
+.comm-meta-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--sub)}
+.comm-bottom{
+  padding:16px 28px;
+  border-top:1px solid var(--border);
+  background:var(--warm);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.comm-difficulty{display:flex;gap:4px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border-strong)}
+.dot.filled{background:var(--g-mid)}
+.dot.filled-red{background:var(--red)}
+.comm-difficulty-label{font-size:11px;color:var(--sub);font-family:'DM Mono',monospace;letter-spacing:.04em}
+.comm-link{
+  font-size:12px;font-weight:500;color:var(--g-dark);
+  display:flex;align-items:center;gap:4px;
+}
+.comm-link svg{width:12px;height:12px;transition:transform .2s}
+.comm-card:hover .comm-link svg{transform:translateX(3px)}
+
+/* ── VIRTUAL INFRA ── */
+.infra{background:var(--g-deep);padding:72px 48px;position:relative;overflow:hidden}
+.infra-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.infra-inner{position:relative;z-index:2}
+.infra .section-eyebrow{color:var(--g-mid)}
+.infra .section-title{color:#fff}
+.infra .section-lead{color:rgba(255,255,255,.5)}
+.infra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.infra-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);padding:28px;
+  transition:background .2s,border-color .2s;
+}
+.infra-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+.infra-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(29,158,117,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;flex-shrink:0;
+}
+.infra-icon svg{width:22px;height:22px;stroke:var(--g-mid)}
+.infra-card h3{
+  font-family:'Fraunces',serif;font-size:17px;font-weight:600;
+  color:#fff;margin-bottom:8px;line-height:1.2;
+}
+.infra-card p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65}
+.infra-tag{
+  margin-top:16px;display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--g-mid);
+  background:rgba(29,158,117,.12);
+  border:1px solid rgba(29,158,117,.2);
+  padding:4px 10px;border-radius:100px;
+}
+.infra-tag span{width:5px;height:5px;border-radius:50%;background:var(--g-mid);display:block}
+
+/* platform showcase */
+.platform-row{
+  margin-top:48px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);
+  display:grid;grid-template-columns:1fr 1fr;overflow:hidden;
+}
+.platform-left{padding:40px;border-right:1px solid rgba(255,255,255,.08)}
+.platform-right{padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
+.plat-title{font-family:'Fraunces',serif;font-size:22px;color:#fff;font-weight:600;margin-bottom:6px}
+.plat-sub{font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:24px}
+.plat-feature{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.plat-feature:last-child{margin-bottom:0}
+.plat-check{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(29,158,117,.25);
+  flex-shrink:0;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;
+}
+.plat-check svg{width:10px;height:10px;stroke:var(--g-mid)}
+.plat-feature-text{font-size:13px;color:rgba(255,255,255,.6);line-height:1.55}
+.platform-mini{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:8px;padding:16px;
+}
+.pmini-icon{font-family:'DM Mono',monospace;font-size:18px;color:var(--g-mid);margin-bottom:8px}
+.pmini-label{font-size:12px;color:#fff;font-weight:500;margin-bottom:4px}
+.pmini-desc{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+
+/* ── CRISIS ENGINE ── */
+.crisis{background:var(--card);padding:72px 48px}
+.crisis-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.crisis-visual{position:relative}
+.crisis-feed{
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+}
+.cfeed-header{
+  background:var(--red);padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.cfeed-title{
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  display:flex;align-items:center;gap:8px;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.cfeed-time{font-size:11px;color:rgba(255,255,255,.7);font-family:'DM Mono',monospace}
+.cfeed-items{padding:0}
+.cfeed-item{
+  padding:16px 20px;border-bottom:1px solid var(--border);
+  display:flex;gap:14px;cursor:default;
+  transition:background .15s;
+}
+.cfeed-item:last-child{border-bottom:none}
+.cfeed-item:hover{background:var(--warm)}
+.cfeed-priority{
+  flex-shrink:0;margin-top:3px;
+  font-family:'DM Mono',monospace;font-size:9px;
+  padding:3px 7px;border-radius:4px;
+  font-weight:500;letter-spacing:.04em;height:fit-content;
+}
+.prio-critical{background:var(--red-pale);color:var(--red)}
+.prio-high{background:var(--amber-pale);color:var(--amber)}
+.prio-normal{background:var(--g-light);color:var(--g-dark)}
+.cfeed-body h4{font-size:13px;font-weight:500;margin-bottom:3px;color:var(--ink)}
+.cfeed-body p{font-size:12px;color:var(--mid);line-height:1.5}
+.cfeed-body time{font-size:11px;color:var(--sub);font-family:'DM Mono',monospace}
+.crisis-content .section-eyebrow{color:var(--red)}
+.crisis-features{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+.cf-item{
+  display:flex;gap:16px;align-items:flex-start;
+  background:var(--warm);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:18px;
+}
+.cf-num{
+  font-family:'Fraunces',serif;font-size:24px;font-weight:700;
+  color:var(--g-pale);-webkit-text-stroke:2px var(--g-mid);
+  flex-shrink:0;line-height:1;width:28px;
+}
+.cf-text h4{font-size:14px;font-weight:500;margin-bottom:3px}
+.cf-text p{font-size:12px;color:var(--mid);line-height:1.6}
+
+/* ── ROP ── */
+.rop{background:var(--warm);padding:72px 48px}
+.rop-layout{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+.rop-sidebar{position:sticky;top:80px}
+.rop-toc{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.rop-toc-header{
+  background:var(--g-deep);padding:16px 20px;
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.7);
+}
+.rop-toc-item{
+  padding:12px 20px;border-bottom:1px solid var(--border);
+  font-size:13px;color:var(--ink);
+  display:flex;align-items:center;gap:8px;
+  transition:background .15s;cursor:pointer;
+}
+.rop-toc-item:last-child{border-bottom:none}
+.rop-toc-item:hover{background:var(--warm)}
+.rop-toc-item.active{color:var(--g-dark);font-weight:500}
+.rop-toc-item-num{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--sub);width:20px;flex-shrink:0;
+}
+.rop-main{}
+.rop-section{margin-bottom:40px}
+.rop-section h3{
+  font-family:'Fraunces',serif;font-size:20px;font-weight:600;
+  margin-bottom:16px;padding-bottom:10px;
+  border-bottom:2px solid var(--g-light);color:var(--g-deep);
+}
+.rop-table{width:100%;border-collapse:collapse;font-size:13px}
+.rop-table th{
+  background:var(--g-deep);color:rgba(255,255,255,.85);
+  padding:10px 16px;text-align:left;
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.rop-table td{
+  padding:11px 16px;border-bottom:1px solid var(--border);
+  vertical-align:top;line-height:1.55;
+}
+.rop-table tr:last-child td{border-bottom:none}
+.rop-table tr:hover td{background:var(--warm)}
+.rop-tag{
+  display:inline-block;padding:2px 8px;border-radius:4px;
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.tag-req{background:var(--g-light);color:var(--g-dark)}
+.tag-opt{background:var(--amber-pale);color:var(--amber)}
+.tag-dip{background:var(--purple-pale);color:var(--purple-deep)}
+.rop-box{
+  background:var(--g-pale);border:1px solid rgba(29,158,117,.2);
+  border-left:4px solid var(--g-mid);
+  border-radius:var(--radius-sm);padding:18px 20px;
+  margin-top:16px;font-size:13px;line-height:1.65;color:var(--ink);
+}
+.rop-box strong{color:var(--g-dark)}
+.rop-phrase-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.rop-phrase{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:14px 16px;
+}
+.rop-phrase-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-bottom:6px}
+.rop-phrase-text{font-size:13px;font-style:italic;color:var(--ink);line-height:1.5}
+
+/* ── BACKGROUND GUIDES ── */
+.guides{background:var(--cream)}
+.guides-grid{display:grid;grid-template-columns:2fr 1fr;gap:28px}
+.guide-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.guide-card.featured .guide-header{background:var(--g-deep);padding:40px}
+.guide-header{padding:32px}
+.guide-tag{
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;display:inline-block;margin-bottom:16px;
+}
+.guide-tag-study{background:var(--amber-pale);color:var(--amber)}
+.guide-tag-rop{background:var(--purple-pale);color:var(--purple-deep)}
+.guide-tag-research{background:var(--blue-pale);color:var(--blue)}
+.guide-tag-featured{background:rgba(29,158,117,.2);color:var(--g-mid)}
+.guide-title{font-family:'Fraunces',serif;font-size:22px;font-weight:600;line-height:1.2;margin-bottom:8px}
+.guide-card.featured .guide-title{color:#fff}
+.guide-card.featured .guide-desc{color:rgba(255,255,255,.55)}
+.guide-desc{font-size:13px;color:var(--mid);line-height:1.65;margin-bottom:20px}
+.guide-meta-row{display:flex;gap:20px;flex-wrap:wrap}
+.guide-meta-item{font-size:11px;color:var(--sub);font-family:'DM Mono',monospace;letter-spacing:.03em}
+.guide-meta-item b{color:var(--ink);font-weight:500}
+.guide-card.featured .guide-meta-item{color:rgba(255,255,255,.4)}
+.guide-card.featured .guide-meta-item b{color:rgba(255,255,255,.8)}
+.guide-body{padding:24px 32px;border-top:1px solid var(--border)}
+.guide-checklist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.guide-checklist li{
+  font-size:13px;color:var(--mid);
+  display:flex;align-items:flex-start;gap:10px;
+  line-height:1.55;
+}
+.guide-checklist li::before{
+  content:'';width:16px;height:16px;border-radius:50%;
+  background:var(--g-light);flex-shrink:0;margin-top:2px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%230f6e56' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 6.5L5 9l4.5-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+.guide-download{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:500;color:var(--g-dark);
+  margin-top:18px;
+}
+.guide-side{display:flex;flex-direction:column;gap:20px}
+.guide-mini{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  flex:1;
+}
+.guide-mini h4{font-family:'Fraunces',serif;font-size:16px;font-weight:600;margin-bottom:8px}
+.guide-mini p{font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:16px}
+.resource-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.resource-list li{
+  font-size:12px;color:var(--mid);
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;background:var(--warm);border-radius:6px;
+}
+.resource-list li::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--g-mid);flex-shrink:0;
+}
+
+/* ── SECRETARIAT ── */
+.secretariat{background:var(--card);padding:72px 48px}
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.staff-card{
+  background:var(--warm);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;text-align:center;
+  transition:transform .2s,box-shadow .2s;
+}
+.staff-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.07)}
+.staff-avatar{
+  width:64px;height:64px;border-radius:50%;
+  margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:22px;font-weight:600;
+  color:#fff;
+}
+.av-green{background:linear-gradient(135deg,var(--g-dark),var(--g-mid))}
+.av-purple{background:linear-gradient(135deg,var(--purple-deep),var(--purple))}
+.av-amber{background:linear-gradient(135deg,#7a4a00,var(--amber))}
+.av-blue{background:linear-gradient(135deg,#0c447c,var(--blue))}
+.av-red{background:linear-gradient(135deg,#791f1f,var(--red))}
+.staff-name{font-family:'Fraunces',serif;font-size:16px;font-weight:600;margin-bottom:3px}
+.staff-role{font-size:11px;color:var(--sub);font-family:'DM Mono',monospace;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.staff-bio{font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:12px}
+.staff-badge{
+  display:inline-block;font-family:'DM Mono',monospace;font-size:9px;
+  padding:3px 9px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;
+}
+.sb-sg{background:var(--g-light);color:var(--g-dark)}
+.sb-dsg{background:var(--purple-pale);color:var(--purple-deep)}
+.sb-cd{background:var(--red-pale);color:var(--red)}
+.sb-dir{background:var(--amber-pale);color:var(--amber)}
+.comms-row{
+  margin-top:48px;
+  background:var(--warm);border:1px solid var(--border);
+  border-radius:var(--radius);padding:32px;
+  display:flex;align-items:center;gap:48px;flex-wrap:wrap;
+}
+.comms-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);flex-shrink:0}
+.comms-channels{display:flex;gap:16px;flex-wrap:wrap;flex:1}
+.channel-pill{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:100px;
+  font-size:13px;font-weight:500;
+}
+.ch-discord{background:#5865F2;color:#fff}
+.ch-zoom{background:#2d8cff;color:#fff}
+.ch-email{background:var(--g-light);color:var(--g-dark)}
+.ch-handbook{background:var(--amber-pale);color:var(--amber)}
+
+/* ── SCHEDULE ── */
+.schedule{background:var(--cream);padding:72px 48px}
+.sched-layout{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start}
+.day-tabs{display:flex;flex-direction:column;gap:8px}
+.day-tab{
+  padding:14px 20px;border-radius:var(--radius-sm);
+  cursor:pointer;transition:background .15s;
+  border:1px solid var(--border);background:var(--card);
+}
+.day-tab:hover{background:var(--warm)}
+.day-tab.active{background:var(--g-deep);border-color:var(--g-deep)}
+.day-tab-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.day-tab.active .day-tab-label{color:rgba(255,255,255,.5)}
+.day-tab-name{font-family:'Fraunces',serif;font-size:16px;font-weight:600;margin-top:2px}
+.day-tab.active .day-tab-name{color:#fff}
+.day-tab-summary{font-size:12px;color:var(--sub);margin-top:2px}
+.day-tab.active .day-tab-summary{color:rgba(255,255,255,.45)}
+.sched-content{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.sched-header{background:var(--g-deep);padding:20px 28px;display:flex;align-items:center;justify-content:space-between}
+.sched-header h3{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:#fff}
+.sched-header p{font-size:12px;color:rgba(255,255,255,.45);font-family:'DM Mono',monospace}
+.sched-timeline{padding:0}
+.sched-event{
+  display:flex;gap:0;
+  border-bottom:1px solid var(--border);
+}
+.sched-event:last-child{border-bottom:none}
+.sched-time{
+  width:100px;padding:18px 20px;flex-shrink:0;
+  border-right:1px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  color:var(--sub);line-height:1.4;
+}
+.sched-body{padding:18px 20px;flex:1}
+.sched-body h4{font-size:14px;font-weight:500;margin-bottom:3px}
+.sched-body p{font-size:12px;color:var(--mid);line-height:1.55}
+.sched-type{
+  flex-shrink:0;padding:18px 16px;
+  display:flex;align-items:flex-start;
+}
+.stype{
+  font-family:'DM Mono',monospace;font-size:9px;
+  padding:3px 8px;border-radius:4px;font-weight:500;letter-spacing:.04em;
+}
+.stype-plenary{background:var(--g-light);color:var(--g-dark)}
+.stype-committee{background:var(--purple-pale);color:var(--purple-deep)}
+.stype-crisis{background:var(--red-pale);color:var(--red)}
+.stype-break{background:var(--amber-pale);color:var(--amber)}
+.stype-ceremony{background:var(--blue-pale);color:var(--blue)}
+.stype-social{background:#f3e8ff;color:#6b21a8}
+
+/* ── AWARDS ── */
+.awards{background:var(--card);padding:72px 48px}
+.awards-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.award-card{
+  border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);
+}
+.award-header{padding:24px 28px}
+.award-best{background:linear-gradient(135deg,#3c2a00,#7a4a00)}
+.award-outstanding{background:linear-gradient(135deg,var(--g-deep),#1a5438)}
+.award-verbal{background:linear-gradient(135deg,var(--purple-deep),#534ab7)}
+.award-research{background:linear-gradient(135deg,#0c447c,var(--blue))}
+.award-header-icon{
+  font-family:'Fraunces',serif;font-size:32px;margin-bottom:12px;
+  display:block;
+}
+.award-header h3{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:#fff;margin-bottom:4px}
+.award-header p{font-size:12px;color:rgba(255,255,255,.5)}
+.award-body{padding:24px 28px;background:var(--warm)}
+.award-criteria{list-style:none;display:flex;flex-direction:column;gap:10px}
+.award-criteria li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink);line-height:1.55}
+.ac-label{
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+  flex-shrink:0;padding:2px 8px;border-radius:4px;margin-top:1px;
+  width:60px;text-align:center;
+}
+.ac-policy{background:var(--g-light);color:var(--g-dark)}
+.ac-writing{background:var(--blue-pale);color:var(--blue)}
+.ac-diplo{background:var(--purple-pale);color:var(--purple-deep)}
+.ac-crisis{background:var(--red-pale);color:var(--red)}
+.ac-collab{background:var(--amber-pale);color:var(--amber)}
+.rubric-bar{
+  margin-top:32px;
+  background:var(--warm);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+}
+.rubric-bar h4{font-family:'Fraunces',serif;font-size:17px;font-weight:600;margin-bottom:16px;color:var(--g-deep)}
+.rubric-row{margin-bottom:16px}
+.rubric-row:last-child{margin-bottom:0}
+.rubric-meta{display:flex;justify-content:space-between;margin-bottom:6px}
+.rubric-label{font-size:13px;color:var(--ink)}
+.rubric-pct{font-family:'DM Mono',monospace;font-size:11px;color:var(--sub)}
+.rubric-track{height:6px;background:var(--border);border-radius:100px;overflow:hidden}
+.rubric-fill{height:100%;border-radius:100px;transition:width 1s ease}
+.rf-policy{background:var(--g-mid);width:30%}
+.rf-writing{background:var(--blue);width:25%}
+.rf-diplo{background:var(--purple);width:20%}
+.rf-crisis{background:var(--red);width:15%}
+.rf-collab{background:var(--amber);width:10%}
+
+/* ── NETWORKING ── */
+.networking{background:var(--warm);padding:72px 48px}
+.network-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.netcard{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  transition:transform .2s,box-shadow .2s;
+}
+.netcard:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.07)}
+.netcard-icon{
+  width:40px;height:40px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+}
+.ni-purple{background:var(--purple-pale)}
+.ni-green{background:var(--g-light)}
+.ni-amber{background:var(--amber-pale)}
+.netcard h3{font-family:'Fraunces',serif;font-size:17px;font-weight:600;margin-bottom:8px}
+.netcard p{font-size:13px;color:var(--mid);line-height:1.65}
+.region-grid{
+  margin-top:48px;display:grid;
+  grid-template-columns:repeat(5,1fr);gap:12px;
+}
+.region-pill{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px 16px;text-align:center;
+  font-size:12px;color:var(--ink);
+}
+.region-pill-flag{font-size:20px;display:block;margin-bottom:4px}
+.region-pill-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--sub);margin-top:3px}
+
+/* ── REGISTRATION ── */
+.registration{
+  background:var(--g-deep);padding:80px 48px;
+  position:relative;overflow:hidden;
+}
+.reg-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.reg-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start;
+}
+.reg-left .section-eyebrow{color:var(--g-mid)}
+.reg-left .section-title{color:#fff}
+.reg-left .section-lead{color:rgba(255,255,255,.5)}
+.reg-tiers{margin-top:36px;display:flex;flex-direction:column;gap:12px}
+.reg-tier{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius-sm);padding:16px 20px;
+}
+.reg-tier-label{font-size:14px;font-weight:500;color:#fff}
+.reg-tier-sub{font-size:12px;color:rgba(255,255,255,.45)}
+.reg-tier-price{
+  font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--g-mid)
+}
+.reg-tier-price span{font-size:12px;font-weight:400;color:rgba(255,255,255,.35);font-family:'DM Sans',sans-serif}
+.reg-form{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:36px;
+  backdrop-filter:blur(4px);
+}
+.form-title{
+  font-family:'Fraunces',serif;font-size:20px;font-weight:600;
+  color:#fff;margin-bottom:6px;
+}
+.form-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-label{
+  display:block;font-size:11px;font-weight:500;
+  font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-bottom:7px;
+}
+.form-input{
+  width:100%;padding:11px 16px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius-sm);
+  font-family:'DM Sans',sans-serif;font-size:14px;color:#fff;
+  outline:none;transition:border-color .2s,background .2s;
+  appearance:none;
+}
+.form-input::placeholder{color:rgba(255,255,255,.3)}
+.form-input:focus{border-color:var(--g-mid);background:rgba(255,255,255,.1)}
+.form-select{
+  width:100%;padding:11px 16px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius-sm);
+  font-family:'DM Sans',sans-serif;font-size:14px;color:rgba(255,255,255,.7);
+  outline:none;cursor:pointer;
+  transition:border-color .2s;
+}
+.form-select option{background:#1a3d2e;color:#fff}
+.form-select:focus{border-color:var(--g-mid)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-submit{
+  width:100%;padding:15px;
+  background:var(--g-mid);color:#fff;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  border:none;border-radius:var(--radius-sm);cursor:pointer;
+  transition:background .2s,transform .15s;margin-top:8px;
+}
+.btn-submit:hover{background:var(--g-dark);transform:translateY(-1px)}
+.form-note{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:12px;line-height:1.5}
+
+/* ── FAQ ── */
+.faq{background:var(--cream);padding:72px 48px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+.faq-item{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+}
+.faq-item h4{font-size:14px;font-weight:500;margin-bottom:8px;color:var(--ink)}
+.faq-item p{font-size:13px;color:var(--mid);line-height:1.65}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--g-deep);padding:60px 48px 32px;
+}
+.footer-inner{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;
+  padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08);
+}
+.footer-brand-name{font-family:'Fraunces',serif;font-size:18px;color:#fff;font-weight:500;margin-bottom:6px}
+.footer-brand-desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.65;max-width:260px}
+.footer-col h5{
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:16px;
+}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links li a{font-size:13px;color:rgba(255,255,255,.55);transition:color .2s}
+.footer-links li a:hover{color:#fff}
+.footer-bottom{
+  padding-top:24px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace}
+.footer-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  padding:5px 12px;border-radius:100px;
+}
+.footer-badge span{width:6px;height:6px;border-radius:50%;background:var(--g-mid)}
+
+/* animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner{animation:fadeInUp .7s ease both}
+
+/* responsive basics */
+@media(max-width:1100px){
+  .committee-grid{grid-template-columns:1fr 1fr}
+  .staff-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:800px){
+  .topnav{padding:0 20px}
+  .nav-links{display:none}
+  section,.about-strip,.registration{padding:52px 20px}
+  .hero{padding:52px 20px 0}
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .committee-grid{grid-template-columns:1fr}
+  .infra-grid{grid-template-columns:1fr}
+  .platform-row{grid-template-columns:1fr}
+  .crisis-layout,.rop-layout,.guides-grid,.awards-layout,
+  .sched-layout,.reg-inner,.faq-grid{grid-template-columns:1fr}
+  .network-grid{grid-template-columns:1fr}
+  .region-grid{grid-template-columns:repeat(3,1fr)}
+  .about-inner{grid-template-columns:1fr 1fr}
+  .staff-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+  .rop-sidebar{position:static}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPNAV -->
+<nav class="topnav" role="navigation" aria-label="Main navigation">
+  <div class="nav-left">
+    <div class="nav-brand">
+      <div class="nav-brand-mark">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2L14 6V10L8 14L2 10V6L8 2Z" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="8" r="2.2" fill="#fff"/></svg>
+      </div>
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">YSP Winter MUN 2026</span>
+        <span class="nav-brand-sub">Youth for Sustainable Policy</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#committees" class="nav-link active">Committees</a>
+      <a href="#infra" class="nav-link">Platform</a>
+      <a href="#crisis" class="nav-link">Crisis</a>
+      <a href="#rop" class="nav-link">Rules</a>
+      <a href="#guides" class="nav-link">Preparation</a>
+      <a href="#secretariat" class="nav-link">Secretariat</a>
+      <a href="#schedule" class="nav-link">Schedule</a>
+      <a href="#awards" class="nav-link">Awards</a>
+    </div>
+  </div>
+  <a href="#registration" class="nav-cta">Register Now</a>
+</nav>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner" role="alert">
+  <span class="alert-dot"></span>
+  <p>Applications Open · Deadline 15 October 2026 · Committee placements announced 1 November</p>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <span class="hero-eyebrow"><span></span>Winter Edition · Virtual · ASEAN &amp; Beyond</span>
+      <h1>Youth for Sustainable<br><em>Policy</em> Winter MUN 2026</h1>
+      <p class="hero-subtitle">A premier virtual Model United Nations experience uniting youth delegates aged 16–28 across Southeast Asia and the world — debating the crises that define our generation.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Dates</span>
+          <span class="hero-meta-val">5–7 Dec 2026</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Format</span>
+          <span class="hero-meta-val">Virtual · Zoom + Discord</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Delegates</span>
+          <span class="hero-meta-val">Up to 200</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Countries</span>
+          <span class="hero-meta-val">30+ expected</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#registration" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          Apply as Delegate
+        </a>
+        <a href="#committees" class="btn-outline">View Committees</a>
+      </div>
+    </div>
+    <div class="hero-card" role="timer" aria-label="Countdown to conference">
+      <p class="hcard-label">Conference Begins In</p>
+      <div class="countdown">
+        <div class="cd-unit"><span class="cd-num" id="cd-days">137</span><span class="cd-lbl">Days</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-hrs">14</span><span class="cd-lbl">Hours</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-min">22</span><span class="cd-lbl">Mins</span></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-sec">08</span><span class="cd-lbl">Secs</span></div>
+      </div>
+      <hr class="hcard-divider">
+      <div class="hcard-detail">
+        <span class="hcard-dk">Opens</span>
+        <span class="hcard-dv">5 Dec · 09:00 SGT</span>
+      </div>
+      <div class="hcard-detail">
+        <span class="hcard-dk">Closes</span>
+        <span class="hcard-dv">7 Dec · 17:30 SGT</span>
+      </div>
+      <div class="hcard-detail">
+        <span class="hcard-dk">Committees</span>
+        <span class="hcard-dv">5 Active</span>
+      </div>
+      <div class="hcard-detail">
+        <span class="hcard-dk">Sessions</span>
+        <span class="hcard-dv">6 Committee Sessions</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip" aria-label="Key statistics">
+  <div class="about-inner">
+    <div class="about-stat">
+      <div class="about-stat-num">200<sup>+</sup></div>
+      <div class="about-stat-label">Delegates from across Southeast Asia and beyond</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">5</div>
+      <div class="about-stat-label">Committees including two crisis tracks</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">30<sup>+</sup></div>
+      <div class="about-stat-label">Countries represented annually</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">3</div>
+      <div class="about-stat-label">Days of intensive virtual diplomacy and debate</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMITTEES -->
+<section class="committees" id="committees">
+  <div class="section-head">
+    <p class="section-eyebrow">Committees 2026</p>
+    <h2 class="section-title">Five arenas. One shared mission.</h2>
+    <p class="section-lead">Each committee is designed to challenge delegates to think beyond borders — with topics that reflect real, ongoing international crises and policy debates.</p>
+  </div>
+  <div class="committee-grid">
+
+    <div class="comm-card">
+      <div class="comm-top">
+        <span class="comm-badge badge-ga">General Assembly</span>
+        <h3 class="comm-name">UNGA — Third Committee</h3>
+        <p class="comm-topic">Addressing the Nexus Between Climate Migration and Human Rights: A Framework for Binding International Protection Standards</p>
+        <div class="comm-meta">
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+            6 sessions
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+            Res. writing
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2l1.8 3.6L14 6.4l-3 2.9.7 4.1L8 11.6l-3.7 1.8.7-4.1-3-2.9 4.2-.8z"/></svg>
+            40 seats
+          </span>
+        </div>
+      </div>
+      <div class="comm-bottom">
+        <div>
+          <div class="comm-difficulty"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div>
+          <span class="comm-difficulty-label">Intermediate</span>
+        </div>
+        <a href="#guides" class="comm-link">Background Guide <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+
+    <div class="comm-card">
+      <div class="comm-top">
+        <span class="comm-badge badge-sc">Security Council</span>
+        <h3 class="comm-name">UN Security Council</h3>
+        <p class="comm-topic">Restoring Regional Stability in the Indo-Pacific: Sovereignty, Grey-Zone Tactics, and the Limits of Multilateral Response</p>
+        <div class="comm-meta">
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+            6 sessions
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+            Directives
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2l1.8 3.6L14 6.4l-3 2.9.7 4.1L8 11.6l-3.7 1.8.7-4.1-3-2.9 4.2-.8z"/></svg>
+            15 seats
+          </span>
+        </div>
+      </div>
+      <div class="comm-bottom">
+        <div>
+          <div class="comm-difficulty"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></div>
+          <span class="comm-difficulty-label">Advanced</span>
+        </div>
+        <a href="#guides" class="comm-link">Background Guide <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+
+    <div class="comm-card">
+      <div class="comm-top">
+        <span class="comm-badge badge-crisis">Ad Hoc Crisis</span>
+        <h3 class="comm-name">Ad Hoc Crisis — Joint Cabinet</h3>
+        <p class="comm-topic">The Cascading Financial Contagion of 2026: A G20 Emergency Finance Ministers' Council Facing Sovereign Debt Cascade and Currency Warfare</p>
+        <div class="comm-meta">
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+            6 sessions
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+            Live updates
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2l1.8 3.6L14 6.4l-3 2.9.7 4.1L8 11.6l-3.7 1.8.7-4.1-3-2.9 4.2-.8z"/></svg>
+            25 seats
+          </span>
+        </div>
+      </div>
+      <div class="comm-bottom">
+        <div>
+          <div class="comm-difficulty"><span class="dot filled-red"></span><span class="dot filled-red"></span><span class="dot filled-red"></span></div>
+          <span class="comm-difficulty-label">Expert</span>
+        </div>
+        <a href="#guides" class="comm-link">Background Guide <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+
+    <div class="comm-card">
+      <div class="comm-top">
+        <span class="comm-badge badge-env">Environment</span>
+        <h3 class="comm-name">UNEP Special Session</h3>
+        <p class="comm-topic">Governing the Geoengineering Frontier: Solar Radiation Management, Transboundary Risk, and the Architecture of Global Atmospheric Governance</p>
+        <div class="comm-meta">
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+            6 sessions
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+            Res. writing
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2l1.8 3.6L14 6.4l-3 2.9.7 4.1L8 11.6l-3.7 1.8.7-4.1-3-2.9 4.2-.8z"/></svg>
+            40 seats
+          </span>
+        </div>
+      </div>
+      <div class="comm-bottom">
+        <div>
+          <div class="comm-difficulty"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div>
+          <span class="comm-difficulty-label">Intermediate</span>
+        </div>
+        <a href="#guides" class="comm-link">Background Guide <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+
+    <div class="comm-card">
+      <div class="comm-top">
+        <span class="comm-badge badge-special">Youth Assembly</span>
+        <h3 class="comm-name">YSP Youth Special Assembly</h3>
+        <p class="comm-topic">Renegotiating the Intergenerational Social Contract: Youth Representation Mechanisms in Multilateral Climate Finance Frameworks</p>
+        <div class="comm-meta">
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+            6 sessions
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M8 2l6 6-6 6"/></svg>
+            Policy paper
+          </span>
+          <span class="comm-meta-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2l1.8 3.6L14 6.4l-3 2.9.7 4.1L8 11.6l-3.7 1.8.7-4.1-3-2.9 4.2-.8z"/></svg>
+            30 seats
+          </span>
+        </div>
+      </div>
+      <div class="comm-bottom">
+        <div>
+          <div class="comm-difficulty"><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div>
+          <span class="comm-difficulty-label">Beginner–Intermediate</span>
+        </div>
+        <a href="#guides" class="comm-link">Background Guide <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h8M6 2l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Join waitlist card -->
+    <div class="comm-card" style="border:2px dashed var(--border-strong);background:var(--warm);">
+      <div class="comm-top" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--g-light);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="var(--g-dark)" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+        </div>
+        <h3 class="comm-name" style="font-size:17px">Additional Committees</h3>
+        <p class="comm-topic">A sixth committee may be added depending on delegate demand. Join the waitlist to be notified.</p>
+        <a href="#registration" class="btn-primary" style="margin-top:16px;font-size:13px;padding:10px 22px;background:var(--g-mid)">Join Waitlist</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIRTUAL INFRASTRUCTURE -->
+<section class="infra" id="infra">
+  <div class="infra-inner">
+    <div class="section-head">
+      <p class="section-eyebrow">Platform & Infrastructure</p>
+      <h2 class="section-title">Built for real diplomacy, not just video calls.</h2>
+      <p class="section-lead">YSP Winter MUN 2026 runs on a layered virtual infrastructure purpose-built to replicate the flow, spontaneity, and formality of an in-person conference — without the bottlenecks.</p>
+    </div>
+    <div class="infra-grid">
+      <div class="infra-card">
+        <div class="infra-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/></svg>
+        </div>
+        <h3>Designated Breakout Rooms</h3>
+        <p>Each committee has pre-assigned Zoom breakout rooms for moderated caucus, unmoderated caucus, and bloc negotiations — active on demand with one-click access during sessions.</p>
+        <div class="infra-tag"><span></span> Zoom Pro · Multi-room</div>
+      </div>
+      <div class="infra-card">
+        <div class="infra-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Synchronised Digital Timer</h3>
+        <p>A shared, Chair-controlled debate timer is visible to all delegates simultaneously. Speaking time, unmoderated caucus durations, and voting periods are all centrally managed with zero lag.</p>
+        <div class="infra-tag"><span></span> Live sync · Chair-controlled</div>
+      </div>
+      <div class="infra-card">
+        <div class="infra-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Discord Crisis & Comms Hub</h3>
+        <p>Every committee has a dedicated Discord server with channels for directives, crisis updates, bloc chats, and staff contact — open 24 hours during the conference for delegate communications.</p>
+        <div class="infra-tag"><span></span> Discord · Real-time</div>
+      </div>
+      <div class="infra-card">
+        <div class="infra-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Live Document Sharing</h3>
+        <p>Working papers, draft resolutions, and amendment proposals are shared via Google Drive in real-time. Delegates can co-author, comment, and submit documents directly through the platform without email.</p>
+        <div class="infra-tag"><span></span> Google Drive · Collaborative</div>
+      </div>
+      <div class="infra-card">
+        <div class="infra-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Speakers List Dashboard</h3>
+        <p>A live, publicly visible Google Sheets speakers list is updated by the dais in real-time. Delegates can view their position, request extensions, and track procedural motions — no raised hands needed.</p>
+        <div class="infra-tag"><span></span> Live · Auto-refreshed</div>
+      </div>
+      <div class="infra-card">
+        <div class="infra-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Dedicated Technical Support</h3>
+        <p>A dedicated tech support volunteer is on-call throughout every session. Delegates facing connectivity issues, audio problems, or platform errors receive response within 5 minutes via a priority Discord channel.</p>
+        <div class="infra-tag"><span></span> &lt;5 min response time</div>
+      </div>
+    </div>
+
+    <div class="platform-row">
+      <div class="platform-left">
+        <p class="plat-title">Zoom Pro + Discord — The YSP MUN Stack</p>
+        <p class="plat-sub">Two platforms, one seamless experience. Zoom handles the formal committee sessions and breakout caucuses; Discord powers real-time crisis communication, bloc coordination, and informal networking between sessions.</p>
+        <div class="plat-feature">
+          <div class="plat-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6.5L4.5 9L10 3"/></svg></div>
+          <p class="plat-feature-text">All Zoom rooms pre-configured with committee name, Chair controls, and waiting room enabled for procedural security</p>
+        </div>
+        <div class="plat-feature">
+          <div class="plat-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6.5L4.5 9L10 3"/></svg></div>
+          <p class="plat-feature-text">Screen-share slots reserved for Chairs, Crisis Directors, and guest speakers — delegates cannot hijack sessions</p>
+        </div>
+        <div class="plat-feature">
+          <div class="plat-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6.5L4.5 9L10 3"/></svg></div>
+          <p class="plat-feature-text">Discord channels are read-only during formal session — crisis updates arrive in structured format from Secretariat-verified accounts only</p>
+        </div>
+        <div class="plat-feature">
+          <div class="plat-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6.5L4.5 9L10 3"/></svg></div>
+          <p class="plat-feature-text">Full platform onboarding session held 48 hours before the conference opens — recorded for late joiners</p>
+        </div>
+      </div>
+      <div class="platform-right">
+        <div class="platform-mini">
+          <div class="pmini-icon">⚡</div>
+          <p class="pmini-label">Unmoderated Caucus Hubs</p>
+          <p class="pmini-desc">Instant-access Zoom sub-rooms for bloc talks — no waiting for Chair to manually split rooms</p>
+        </div>
+        <div class="platform-mini">
+          <div class="pmini-icon">🔒</div>
+          <p class="pmini-label">Secure Voting</p>
+          <p class="pmini-desc">Anonymous procedural voting via Google Forms — results appear on Chair dashboard within 30 seconds</p>
+        </div>
+        <div class="platform-mini">
+          <div class="pmini-icon">🌐</div>
+          <p class="pmini-label">12 Timezone Zones</p>
+          <p class="pmini-desc">Schedule designed around SGT/UTC+8 with sessions accessible from UTC-5 through UTC+9</p>
+        </div>
+        <div class="platform-mini">
+          <div class="pmini-icon">📋</div>
+          <p class="pmini-label">Chair Notes Portal</p>
+          <p class="pmini-desc">Chairs document procedural decisions in real-time — full session record available after the conference</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRISIS ENGINE -->
+<section class="crisis" id="crisis">
+  <div class="crisis-layout">
+    <div class="crisis-visual">
+      <div class="crisis-feed" role="feed" aria-label="Simulated crisis news feed">
+        <div class="cfeed-header">
+          <span class="cfeed-title"><span class="live-dot"></span>YSP CRISIS WIRE</span>
+          <span class="cfeed-time">Session 3 · Day 2 · 14:32 SGT</span>
+        </div>
+        <div class="cfeed-items">
+          <div class="cfeed-item">
+            <span class="cfeed-priority prio-critical">CRITICAL</span>
+            <div class="cfeed-body">
+              <h4>IMF emergency liquidity facility suspended</h4>
+              <p>The IMF Board has suspended the emergency liquidity facility for three affected economies pending governance review. Finance Ministers must respond within 45 minutes.</p>
+              <time>2 mins ago</time>
+            </div>
+          </div>
+          <div class="cfeed-item">
+            <span class="cfeed-priority prio-high">HIGH</span>
+            <div class="cfeed-body">
+              <h4>New bloc formation: BRICS+ joint statement circulating</h4>
+              <p>An unofficial BRICS+ joint statement on alternative currency settlement mechanisms is circulating outside formal channels. Crisis Director demands formal response.</p>
+              <time>11 mins ago</time>
+            </div>
+          </div>
+          <div class="cfeed-item">
+            <span class="cfeed-priority prio-high">HIGH</span>
+            <div class="cfeed-body">
+              <h4>G7 unilateral currency swap activated</h4>
+              <p>The G7 chair has unilaterally activated a USD 800B currency swap arrangement without Security Council endorsement. Three member states have formally protested.</p>
+              <time>28 mins ago</time>
+            </div>
+          </div>
+          <div class="cfeed-item">
+            <span class="cfeed-priority prio-normal">UPDATE</span>
+            <div class="cfeed-body">
+              <h4>Draft directive D-12 accepted for floor debate</h4>
+              <p>The Chairs have accepted Draft Directive D-12 (Temporary Capital Controls Framework) for floor consideration. Sponsors: Germany, Japan, Singapore, Brazil.</p>
+              <time>41 mins ago</time>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;background:var(--warm);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
+        <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin-bottom:12px">Crisis Document Queue</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px">
+            <span style="font-size:12px;color:var(--ink)">📄 Draft Directive D-12</span>
+            <span style="font-family:'DM Mono',monospace;font-size:9px;background:var(--g-light);color:var(--g-dark);padding:2px 8px;border-radius:4px">ON FLOOR</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px">
+            <span style="font-size:12px;color:var(--ink)">📋 Working Paper WP-04</span>
+            <span style="font-family:'DM Mono',monospace;font-size:9px;background:var(--amber-pale);color:var(--amber);padding:2px 8px;border-radius:4px">IN REVIEW</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px">
+            <span style="font-size:12px;color:var(--ink)">📑 Amendment A-07</span>
+            <span style="font-family:'DM Mono',monospace;font-size:9px;background:var(--purple-pale);color:var(--purple-deep);padding:2px 8px;border-radius:4px">PENDING</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="crisis-content">
+      <p class="section-eyebrow crisis-eyebrow">Crisis Committee Design</p>
+      <h2 class="section-title">Realism that forces decisions.</h2>
+      <p class="section-lead">Our crisis committees don't just simulate problems — they create cascading, interdependent crises that require delegates to track multiple developments simultaneously while staying inside formal procedure.</p>
+      <div class="crisis-features">
+        <div class="cf-item">
+          <div class="cf-num">01</div>
+          <div class="cf-text">
+            <h4>Multimedia Crisis Injections</h4>
+            <p>Realistic "news wire" updates are delivered via a simulated press feed — formatted as AFP/Reuters dispatches with timestamps, source attribution, and conflicting reports. Delegates must assess credibility while debating.</p>
+          </div>
+        </div>
+        <div class="cf-item">
+          <div class="cf-num">02</div>
+          <div class="cf-text">
+            <h4>Rapid-Response Crisis Director</h4>
+            <p>The Crisis Director responds to all directives, back-channel notes, and personal action requests within 15 minutes during sessions. Crisis updates are calibrated to force debate pivots — never to ambush arbitrarily.</p>
+          </div>
+        </div>
+        <div class="cf-item">
+          <div class="cf-num">03</div>
+          <div class="cf-text">
+            <h4>Consequence Matrix</h4>
+            <p>Every directive passed by the committee has documented downstream consequences — modelled before the conference. Delegates who ignore cascade effects will face realistic counteractions from the Crisis Staff within the same session.</p>
+          </div>
+        </div>
+        <div class="cf-item">
+          <div class="cf-num">04</div>
+          <div class="cf-text">
+            <h4>Personal Directives & Back-Channel Notes</h4>
+            <p>Delegates may submit private directives to the Crisis Director via Google Forms, simulating real back-channel diplomacy. Responses are delivered in character and may influence the broader crisis arc.</p>
+          </div>
+        </div>
+        <div class="cf-item">
+          <div class="cf-num">05</div>
+          <div class="cf-text">
+            <h4>Integrated Document Workflow</h4>
+            <p>All working papers, directives, and amendments are tracked on a shared Secretariat dashboard — delegates, Chairs, and Crisis Staff can view the live state of all documents at any point in the session.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES OF PROCEDURE -->
+<section class="rop" id="rop">
+  <div class="rop-layout">
+    <div class="rop-sidebar">
+      <div class="section-head">
+        <p class="section-eyebrow">Rules of Procedure</p>
+        <h2 class="section-title" style="font-size:clamp(24px,2.8vw,34px)">Formal structure.<br>Diplomatic language.</h2>
+        <p class="section-lead" style="font-size:14px">YSP MUN strictly follows UN parliamentary procedure. All delegates are expected to use formal diplomatic language throughout all sessions.</p>
+      </div>
+      <div class="rop-toc">
+        <div class="rop-toc-header">Contents</div>
+        <div class="rop-toc-item active"><span class="rop-toc-item-num">01</span>Debate Flow</div>
+        <div class="rop-toc-item"><span class="rop-toc-item-num">02</span>Motions & Yields</div>
+        <div class="rop-toc-item"><span class="rop-toc-item-num">03</span>Working Papers</div>
+        <div class="rop-toc-item"><span class="rop-toc-item-num">04</span>Voting Procedure</div>
+        <div class="rop-toc-item"><span class="rop-toc-item-num">05</span>Diplomatic Language</div>
+        <div class="rop-toc-item"><span class="rop-toc-item-num">06</span>Crisis Procedure</div>
+      </div>
+    </div>
+
+    <div class="rop-main">
+      <div class="rop-section" id="rop-debate">
+        <h3>01 — Debate Flow</h3>
+        <table class="rop-table">
+          <thead>
+            <tr>
+              <th style="width:180px">Mode</th>
+              <th>Description</th>
+              <th style="width:90px">Duration</th>
+              <th style="width:80px">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Formal (Moderated) Caucus</strong></td>
+              <td>Delegates speak in order from the Speakers List. The Chair recognises each delegate formally. All substantive debate occurs here.</td>
+              <td>Chair-set</td>
+              <td><span class="rop-tag tag-req">Required</span></td>
+            </tr>
+            <tr>
+              <td><strong>Unmoderated Caucus</strong></td>
+              <td>Delegates freely negotiate, draft working papers, and form blocs. The Chair suspends formal proceedings. A motion and second are required to enter.</td>
+              <td>Motion-set</td>
+              <td><span class="rop-tag tag-req">Required</span></td>
+            </tr>
+            <tr>
+              <td><strong>Moderated Caucus</strong></td>
+              <td>A short-form structured discussion on a specific subtopic. Delegates motion for a moderated caucus specifying topic and speaking time (e.g., 45 seconds per speaker).</td>
+              <td>Motion-set</td>
+              <td><span class="rop-tag tag-opt">Optional</span></td>
+            </tr>
+            <tr>
+              <td><strong>Yield to Questions</strong></td>
+              <td>A speaker may yield remaining time to questions from the floor. The Chair manages question priority. Maximum 2 questions per yield.</td>
+              <td>Remaining</td>
+              <td><span class="rop-tag tag-dip">Diplomatic</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="rop-box">
+          <strong>Note on Virtual Procedure:</strong> All motions are submitted via the Speakers List Google Form or typed in Zoom chat as <em>"[DELEGATE NAME] — Motion to [action]"</em>. The Chair will verbally recognise and call the motion to the floor. This ensures procedural fidelity in the virtual setting.
+        </div>
+      </div>
+
+      <div class="rop-section">
+        <h3>02 — Motions & Points</h3>
+        <table class="rop-table">
+          <thead>
+            <tr><th>Motion / Point</th><th>Purpose</th><th>Requires Second</th><th>Debatable</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Motion to Open Debate</td><td>Begin formal debate on an agenda item</td><td>Yes</td><td>No</td></tr>
+            <tr><td>Motion to Set Speakers Time</td><td>Change the per-speaker time allocation</td><td>Yes</td><td>No</td></tr>
+            <tr><td>Motion for Unmoderated Caucus</td><td>Suspend formal proceedings for negotiation</td><td>Yes</td><td>No</td></tr>
+            <tr><td>Motion for Moderated Caucus</td><td>Direct discussion on a sub-topic</td><td>Yes</td><td>No</td></tr>
+            <tr><td>Motion to Extend Speakers Time</td><td>Add time to current speaker only</td><td>Yes</td><td>No</td></tr>
+            <tr><td>Motion to Table Debate</td><td>Postpone debate to a later time</td><td>Yes</td><td>No, simple majority</td></tr>
+            <tr><td>Motion to Close Debate</td><td>Move to voting procedure</td><td>Yes</td><td>2 speeches against</td></tr>
+            <tr><td>Point of Order</td><td>Procedural error by Chair or delegate</td><td>No</td><td>No</td></tr>
+            <tr><td>Point of Parliamentary Inquiry</td><td>Ask Chair about procedure</td><td>No</td><td>No</td></tr>
+            <tr><td>Point of Personal Privilege</td><td>Technical/audibility issue</td><td>No</td><td>No</td></tr>
+            <tr><td>Right of Reply</td><td>Respond to direct personal attack</td><td>No</td><td>Chair discretion</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rop-section">
+        <h3>05 — Diplomatic Language</h3>
+        <p style="font-size:13px;color:var(--mid);margin-bottom:16px">Formal diplomatic register is mandatory throughout all committee sessions. First-person references ("I", "we") are prohibited. Use country-referential third person at all times.</p>
+        <div class="rop-phrase-grid">
+          <div class="rop-phrase">
+            <div class="rop-phrase-title">To Agree</div>
+            <div class="rop-phrase-text">"The delegation of [Country] aligns with the position of the distinguished delegate…"</div>
+          </div>
+          <div class="rop-phrase">
+            <div class="rop-phrase-title">To Disagree</div>
+            <div class="rop-phrase-text">"The delegation respectfully takes issue with the assertion that…"</div>
+          </div>
+          <div class="rop-phrase">
+            <div class="rop-phrase-title">Yielding the Floor</div>
+            <div class="rop-phrase-text">"The delegation yields the remaining time to the Chair."</div>
+          </div>
+          <div class="rop-phrase">
+            <div class="rop-phrase-title">Requesting the Floor</div>
+            <div class="rop-phrase-text">"The delegation of [Country] respectfully requests to be added to the Speakers List."</div>
+          </div>
+          <div class="rop-phrase">
+            <div class="rop-phrase-title">Introducing a Motion</div>
+            <div class="rop-phrase-text">"The delegation moves for an unmoderated caucus of [X] minutes for the purpose of [Y]."</div>
+          </div>
+          <div class="rop-phrase">
+            <div class="rop-phrase-title">Expressing Concern</div>
+            <div class="rop-phrase-text">"The delegation wishes to express grave concern regarding the proposal set forth in clause [X]…"</div>
+          </div>
+        </div>
+        <div class="rop-box" style="margin-top:20px">
+          <strong>Chair Enforcement:</strong> Chairs will issue one verbal caution for procedural language violations. A second violation results in the delegate's speaking time being suspended for the remainder of that session. Delegates are strongly encouraged to review the full Diplomatic Language Reference document provided in the delegate preparation package.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKGROUND GUIDES & DELEGATE PREPARATION -->
+<section class="guides" id="guides">
+  <div class="section-head">
+    <p class="section-eyebrow">Delegate Preparation</p>
+    <h2 class="section-title">Everything you need. Before the gavel drops.</h2>
+    <p class="section-lead">YSP MUN delegates receive a full preparation package before the conference. Knowledge gaps are a disadvantage — we eliminate them before day one.</p>
+  </div>
+  <div class="guides-grid">
+    <div class="guide-card featured">
+      <div class="guide-header">
+        <span class="guide-tag guide-tag-featured">Flagship Resource</span>
+        <h3 class="guide-title">Committee Background Guides — All Five Committees</h3>
+        <p class="guide-desc">Comprehensive 20–30 page background guides written by the YSP Secretariat for each committee. Each guide includes topic history, current policy landscape, key stakeholder positions, bloc analysis, and 3–5 specific research questions delegates should be able to answer on arrival.</p>
+        <div class="guide-meta-row">
+          <span class="guide-meta-item"><b>Format:</b> PDF + Google Docs</span>
+          <span class="guide-meta-item"><b>Released:</b> 6 weeks pre-conference</span>
+          <span class="guide-meta-item"><b>Pages:</b> 20–30 per committee</span>
+          <span class="guide-meta-item"><b>Access:</b> Free · No account required</span>
+        </div>
+      </div>
+      <div class="guide-body">
+        <ul class="guide-checklist">
+          <li>Topic history and evolution from 1945 to present</li>
+          <li>Current geopolitical landscape and key actor positions</li>
+          <li>Relevant UN resolutions, treaties, and legal frameworks</li>
+          <li>ASEAN and Global South perspectives specifically highlighted</li>
+          <li>Suggested research questions and policy positions starters</li>
+          <li>Bibliography of peer-reviewed and UN-sourced references</li>
+        </ul>
+        <a href="#registration" class="guide-download">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v8M5 8l3 3 3-3"/><path d="M3 13h10"/></svg>
+          Download All Background Guides (available post-registration)
+        </a>
+      </div>
+    </div>
+
+    <div class="guide-side">
+      <div class="guide-mini">
+        <span class="guide-tag guide-tag-rop" style="margin-bottom:12px;display:inline-block">Rules</span>
+        <h4>Full Rules of Procedure Document</h4>
+        <p>A 12-page complete ROP document tailored to YSP MUN's virtual format — covering every motion, voting procedure, amendment process, and crisis-specific addition.</p>
+        <ul class="resource-list">
+          <li>Virtual procedure amendments</li>
+          <li>Worked examples for each motion</li>
+          <li>Crisis committee addendum</li>
+        </ul>
+      </div>
+      <div class="guide-mini">
+        <span class="guide-tag guide-tag-research" style="margin-bottom:12px;display:inline-block">Research</span>
+        <h4>Structured Research Kit</h4>
+        <p>A curated research toolkit covering trusted sources, country profile templates, and policy position worksheet — for experienced and first-time delegates alike.</p>
+        <ul class="resource-list">
+          <li>Country profile template (Notion)</li>
+          <li>Trusted source library (UN, ASEAN, WTO…)</li>
+          <li>Resolution-writing cheat sheet</li>
+          <li>Speech structure guide</li>
+        </ul>
+      </div>
+      <div class="guide-mini">
+        <span class="guide-tag guide-tag-study" style="margin-bottom:12px;display:inline-block">Study Sessions</span>
+        <h4>Pre-Conference Online Sessions</h4>
+        <p>Optional but strongly recommended. Two 90-minute virtual prep sessions held 3 weeks and 1 week before the conference — covering ROP, platform training, and topic briefings.</p>
+        <ul class="resource-list">
+          <li>ROP walkthrough for newcomers</li>
+          <li>Platform tech orientation</li>
+          <li>Live Q&amp;A with Secretariat</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECRETARIAT -->
+<section class="secretariat" id="secretariat">
+  <div class="section-head">
+    <p class="section-eyebrow">Secretariat & Staff</p>
+    <h2 class="section-title">The team behind the gavel.</h2>
+    <p class="section-lead">YSP MUN is led by an experienced, youth-driven Secretariat committed to rapid communication, objective Chair practice, and an inclusive conference culture for delegates at every experience level.</p>
+  </div>
+  <div class="staff-grid">
+    <div class="staff-card">
+      <div class="staff-avatar av-green">SG</div>
+      <div class="staff-name">Secretary-General</div>
+      <div class="staff-role">YSP Secretariat</div>
+      <p class="staff-bio">Oversees conference operations, secretariat communications, and opening/closing ceremonies. Primary escalation point for all policy and ethics matters.</p>
+      <span class="staff-badge sb-sg">Secretary-General</span>
+    </div>
+    <div class="staff-card">
+      <div class="staff-avatar av-purple">DSG</div>
+      <div class="staff-name">Deputy Secretary-General</div>
+      <div class="staff-role">YSP Secretariat</div>
+      <p class="staff-bio">Manages delegate experience, committee placements, and inter-committee coordination. First point of contact for delegate questions and welfare concerns.</p>
+      <span class="staff-badge sb-dsg">Deputy SG</span>
+    </div>
+    <div class="staff-card">
+      <div class="staff-avatar av-red">CD</div>
+      <div class="staff-name">Crisis Director</div>
+      <div class="staff-role">Crisis Committee</div>
+      <p class="staff-bio">Designs and executes the crisis arc for both crisis committees. Responds to all directives within 15 minutes and issues calibrated crisis injections during sessions.</p>
+      <span class="staff-badge sb-cd">Crisis Director</span>
+    </div>
+    <div class="staff-card">
+      <div class="staff-avatar av-amber">DIR</div>
+      <div class="staff-name">Director of Research</div>
+      <div class="staff-role">YSP Secretariat</div>
+      <p class="staff-bio">Authors and maintains all background guides and research resources. Coordinates with Chairs to ensure topic accuracy and equitable information access for all delegates.</p>
+      <span class="staff-badge sb-dir">Research</span>
+    </div>
+  </div>
+
+  <div class="comms-row" role="complementary" aria-label="Communication channels">
+    <span class="comms-label">Official Channels</span>
+    <div class="comms-channels">
+      <span class="channel-pill ch-discord">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Discord Server
+      </span>
+      <span class="channel-pill ch-zoom">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.5 14.5l-3.5-2V15H5.5V9H14v2.5l3.5-2v5z"/></svg>
+        Zoom Sessions
+      </span>
+      <span class="channel-pill ch-email">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        mun@ysp.org
+      </span>
+      <span class="channel-pill ch-handbook">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Delegate Handbook
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="section-head">
+    <p class="section-eyebrow">Conference Programme</p>
+    <h2 class="section-title">Three days. Six sessions. One conference.</h2>
+    <p class="section-lead">Scheduled across SGT/UTC+8 to maximise accessibility for delegates from Southeast Asia, South Asia, the Middle East, and Europe.</p>
+  </div>
+  <div class="sched-layout">
+    <div class="day-tabs">
+      <div class="day-tab active" onclick="showDay(1,this)">
+        <div class="day-tab-label">Day 01</div>
+        <div class="day-tab-name">5 December 2026</div>
+        <div class="day-tab-summary">Opening · Sessions 1–2</div>
+      </div>
+      <div class="day-tab" onclick="showDay(2,this)">
+        <div class="day-tab-label">Day 02</div>
+        <div class="day-tab-name">6 December 2026</div>
+        <div class="day-tab-summary">Sessions 3–4 · Crisis peaks</div>
+      </div>
+      <div class="day-tab" onclick="showDay(3,this)">
+        <div class="day-tab-label">Day 03</div>
+        <div class="day-tab-name">7 December 2026</div>
+        <div class="day-tab-summary">Sessions 5–6 · Closing</div>
+      </div>
+    </div>
+
+    <div id="day-schedule">
+      <div class="sched-content" id="day1-sched">
+        <div class="sched-header">
+          <h3>Day 1 — 5 December 2026</h3>
+          <p>All times SGT (UTC+8)</p>
+        </div>
+        <div class="sched-timeline">
+          <div class="sched-event">
+            <div class="sched-time">09:00–09:45</div>
+            <div class="sched-body"><h4>Opening Ceremony</h4><p>Secretary-General's address, keynote speaker, and conference pledge. All delegates join the plenary Zoom room.</p></div>
+            <div class="sched-type"><span class="stype stype-ceremony">Ceremony</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">09:45–10:00</div>
+            <div class="sched-body"><h4>Platform Orientation Walk-Through</h4><p>Live demo of Zoom breakout rooms, Discord channels, and document submission workflows.</p></div>
+            <div class="sched-type"><span class="stype stype-break">Admin</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">10:00–12:30</div>
+            <div class="sched-body"><h4>Session 1 — Opening Statements</h4><p>Committees in session. Formal opening statements, roll call, and agenda-setting. GA, SC, UNEP, Youth Assembly committees begin debate.</p></div>
+            <div class="sched-type"><span class="stype stype-committee">Session 1</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">12:30–13:30</div>
+            <div class="sched-body"><h4>Lunch Break + Networking Lounge</h4><p>Optional informal Zoom lounge open. Delegates may mingle cross-committee. Crisis Staff on standby.</p></div>
+            <div class="sched-type"><span class="stype stype-break">Break</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">13:30–16:00</div>
+            <div class="sched-body"><h4>Session 2 — Substantive Debate Opens</h4><p>All five committees resume. First working papers and draft directives may be circulated from 14:30. Crisis committee receives first injection at 14:00.</p></div>
+            <div class="sched-type"><span class="stype stype-committee">Session 2</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">16:00–17:00</div>
+            <div class="sched-body"><h4>Evening Social — Icebreaker (Cross-Regional)</h4><p>Delegate social with structured cross-regional icebreakers. Hosted on Discord stage channel. Optional trivia and culture exchange activity.</p></div>
+            <div class="sched-type"><span class="stype stype-social">Social</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sched-content" id="day2-sched" style="display:none">
+        <div class="sched-header">
+          <h3>Day 2 — 6 December 2026</h3>
+          <p>All times SGT (UTC+8)</p>
+        </div>
+        <div class="sched-timeline">
+          <div class="sched-event">
+            <div class="sched-time">09:00–09:15</div>
+            <div class="sched-body"><h4>Overnight Crisis Update Briefing</h4><p>Crisis Director delivers overnight crisis development summary. All crisis committee delegates required to attend. Three new crisis injections released simultaneously.</p></div>
+            <div class="sched-type"><span class="stype stype-crisis">Crisis</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">09:15–12:00</div>
+            <div class="sched-body"><h4>Session 3 — Working Papers &amp; Bloc Negotiations</h4><p>All committees in session. Unmoderated caucus periods expected. Crisis committee: peak crisis phase with three major injections scheduled.</p></div>
+            <div class="sched-type"><span class="stype stype-committee">Session 3</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">12:00–13:00</div>
+            <div class="sched-body"><h4>Lunch Break</h4><p>Optional mentorship match-up sessions available for delegates who signed up during registration.</p></div>
+            <div class="sched-type"><span class="stype stype-break">Break</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">13:00–16:00</div>
+            <div class="sched-body"><h4>Session 4 — Draft Resolutions &amp; Directives</h4><p>Committees move to formal resolution and directive debate. Amendments permitted from 14:00. Crisis committee: second-order consequences from Day 1 directives activated.</p></div>
+            <div class="sched-type"><span class="stype stype-committee">Session 4</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">16:30–18:00</div>
+            <div class="sched-body"><h4>Guest Speaker Panel: Youth in Diplomacy</h4><p>Live panel with practitioners from Singapore MFA, UNDP, and ASEAN Secretariat. Q&amp;A from delegates. Recorded and shared post-conference.</p></div>
+            <div class="sched-type"><span class="stype stype-plenary">Plenary</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sched-content" id="day3-sched" style="display:none">
+        <div class="sched-header">
+          <h3>Day 3 — 7 December 2026</h3>
+          <p>All times SGT (UTC+8)</p>
+        </div>
+        <div class="sched-timeline">
+          <div class="sched-event">
+            <div class="sched-time">09:00–11:30</div>
+            <div class="sched-body"><h4>Session 5 — Final Debate &amp; Amendments</h4><p>Final resolution/directive debate. Amendments to be submitted by 10:30. Crisis committee: final crisis arc resolution phase.</p></div>
+            <div class="sched-type"><span class="stype stype-committee">Session 5</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">11:30–12:30</div>
+            <div class="sched-body"><h4>Session 6 — Voting Procedure</h4><p>All committees enter formal voting procedure. Roll-call votes on all pending resolutions and directives. Crisis committee final directive outcomes announced.</p></div>
+            <div class="sched-type"><span class="stype stype-committee">Session 6</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">12:30–13:30</div>
+            <div class="sched-body"><h4>Final Break — Award Deliberation</h4><p>Chairs and Secretariat conduct final award deliberations. Delegates in networking lounge. Feedback forms open.</p></div>
+            <div class="sched-type"><span class="stype stype-break">Break</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">14:00–15:00</div>
+            <div class="sched-body"><h4>Closing Ceremony &amp; Awards</h4><p>Committee reports, delegate recognition, and awards presentation. Secretary-General's closing address. Group photograph.</p></div>
+            <div class="sched-type"><span class="stype stype-ceremony">Ceremony</span></div>
+          </div>
+          <div class="sched-event">
+            <div class="sched-time">15:00–16:00</div>
+            <div class="sched-body"><h4>Post-Conference Delegate Mixer</h4><p>Informal farewell social. Delegates share reflections, exchange contacts, and connect with the YSP community for future programmes.</p></div>
+            <div class="sched-type"><span class="stype stype-social">Social</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards" id="awards">
+  <div class="section-head">
+    <p class="section-eyebrow">Awards & Evaluation</p>
+    <h2 class="section-title">Substance over volume.</h2>
+    <p class="section-lead">YSP MUN awards are determined by a structured rubric — not speaking time. Delegates who craft precision arguments, maintain foreign policy alignment, and collaborate across blocs are recognised above all others.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+    <div>
+      <div class="awards-layout">
+        <div class="award-card">
+          <div class="award-header award-best">
+            <span class="award-header-icon">🏅</span>
+            <h3>Best Delegate</h3>
+            <p>Highest overall performance across all criteria</p>
+          </div>
+          <div class="award-body">
+            <ul class="award-criteria">
+              <li><span class="ac-label ac-policy">Policy</span> Consistent, well-researched alignment with assigned country's foreign policy positions throughout all sessions</li>
+              <li><span class="ac-label ac-writing">Writing</span> Substantive contributions to working papers and resolutions — quality of preambulatory and operative clauses</li>
+              <li><span class="ac-label ac-diplo">Diplo.</span> Strict adherence to formal diplomatic language and procedural correctness at all times</li>
+              <li><span class="ac-label ac-collab">Collab.</span> Demonstrated bloc-building, compromise-brokering, and coalition leadership</li>
+            </ul>
+          </div>
+        </div>
+        <div class="award-card">
+          <div class="award-header award-outstanding">
+            <span class="award-header-icon">🌿</span>
+            <h3>Outstanding Delegate</h3>
+            <p>Strong performance with particular depth in one or two areas</p>
+          </div>
+          <div class="award-body">
+            <ul class="award-criteria">
+              <li><span class="ac-label ac-policy">Policy</span> Accurate country representation with demonstrated research depth in opening statements and substantive debate</li>
+              <li><span class="ac-label ac-writing">Writing</span> Active contributor to working papers with clear clause-level understanding of resolution structure</li>
+              <li><span class="ac-label ac-diplo">Diplo.</span> Consistent use of formal language with minimal procedural errors across sessions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="award-card">
+          <div class="award-header award-verbal">
+            <span class="award-header-icon">🎙️</span>
+            <h3>Verbal Commendation</h3>
+            <p>Recognised for excellent diplomacy and debate skill</p>
+          </div>
+          <div class="award-body">
+            <ul class="award-criteria">
+              <li><span class="ac-label ac-diplo">Diplo.</span> Exceptional use of diplomatic language, persuasive rhetoric, and formal address</li>
+              <li><span class="ac-label ac-collab">Collab.</span> Notable contribution to cross-bloc negotiations and compromise-finding outside formal debate</li>
+            </ul>
+          </div>
+        </div>
+        <div class="award-card">
+          <div class="award-header award-research">
+            <span class="award-header-icon">📘</span>
+            <h3>Best Position Paper</h3>
+            <p>For the strongest pre-conference written submission</p>
+          </div>
+          <div class="award-body">
+            <ul class="award-criteria">
+              <li><span class="ac-label ac-policy">Policy</span> Clear articulation of country position with cited evidence and policy framework alignment</li>
+              <li><span class="ac-label ac-writing">Writing</span> Well-structured analysis with proposed solutions that reflect the country's realistic policy preferences</li>
+              <li><span class="ac-label ac-crisis">Crisis</span> For crisis committees: demonstrated anticipation of scenario developments and contingency positions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="rubric-bar">
+        <h4>Award Evaluation Rubric (per committee)</h4>
+        <div class="rubric-row">
+          <div class="rubric-meta">
+            <span class="rubric-label">Foreign Policy Adherence</span>
+            <span class="rubric-pct">30%</span>
+          </div>
+          <div class="rubric-track"><div class="rubric-fill rf-policy"></div></div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-meta">
+            <span class="rubric-label">Resolution / Directive Writing Quality</span>
+            <span class="rubric-pct">25%</span>
+          </div>
+          <div class="rubric-track"><div class="rubric-fill rf-writing"></div></div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-meta">
+            <span class="rubric-label">Procedural Accuracy & Diplomatic Language</span>
+            <span class="rubric-pct">20%</span>
+          </div>
+          <div class="rubric-track"><div class="rubric-fill rf-diplo"></div></div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-meta">
+            <span class="rubric-label">Crisis Adaptability (crisis committees only)</span>
+            <span class="rubric-pct">15%</span>
+          </div>
+          <div class="rubric-track"><div class="rubric-fill rf-crisis"></div></div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-meta">
+            <span class="rubric-label">Collaboration & Bloc Leadership</span>
+            <span class="rubric-pct">10%</span>
+          </div>
+          <div class="rubric-track"><div class="rubric-fill rf-collab"></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;background:var(--warm);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
+        <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);margin-bottom:12px">Evaluation Principles</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:13px;color:var(--mid);line-height:1.6;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px;border-left:3px solid var(--g-mid)">
+            <strong style="color:var(--ink)">No speaking-time bias.</strong> Delegates who speak less but more precisely are evaluated above those who speak frequently with lower quality.
+          </div>
+          <div style="font-size:13px;color:var(--mid);line-height:1.6;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px;border-left:3px solid var(--purple)">
+            <strong style="color:var(--ink)">Chairs do not award personal favourites.</strong> All Chair award recommendations are reviewed by the Deputy Secretary-General for consistency before announcement.
+          </div>
+          <div style="font-size:13px;color:var(--mid);line-height:1.6;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px;border-left:3px solid var(--amber)">
+            <strong style="color:var(--ink)">First-time delegates are evaluated within their own context.</strong> New delegates are not penalised for procedural learning curves in sessions 1–2, provided improvement is demonstrated by day three.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NETWORKING -->
+<section class="networking" id="networking">
+  <div class="section-head">
+    <p class="section-eyebrow">Global Community</p>
+    <h2 class="section-title">Diplomacy across time zones.</h2>
+    <p class="section-lead">Virtual conferences break geography. YSP MUN is intentionally designed to connect delegates across cultures — with structured socialising that goes beyond the committee room.</p>
+  </div>
+  <div class="network-grid">
+    <div class="netcard">
+      <div class="netcard-icon ni-purple">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Cross-Regional Icebreakers</h3>
+      <p>Structured Day 1 social activities are designed to pair delegates from different regions into small conversation groups — facilitated, not forced. Activities include regional trivia, policy debate warm-ups, and culture exchange prompts.</p>
+    </div>
+    <div class="netcard">
+      <div class="netcard-icon ni-green">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <h3>ASEAN-Global South Focus</h3>
+      <p>YSP MUN actively recruits delegates from underrepresented regions including the Pacific Islands, Sub-Saharan Africa, and South Asia. Committee topics are chosen to give these perspectives substantive, not token, relevance in debate.</p>
+    </div>
+    <div class="netcard">
+      <div class="netcard-icon ni-amber">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3>Mentorship Matching</h3>
+      <p>Delegates who opt into mentorship matching during registration are paired with a more experienced delegate from a different country for a structured 45-minute pre-conference conversation and ongoing check-in support during the conference.</p>
+    </div>
+    <div class="netcard">
+      <div class="netcard-icon ni-purple">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <h3>Post-Conference YSP Community</h3>
+      <p>All MUN delegates are invited to join the wider YSP network — accessing future programmes, research routes, and the YSP alumni community across Singapore and Southeast Asia.</p>
+    </div>
+    <div class="netcard">
+      <div class="netcard-icon ni-green">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <h3>Multilingual Welcome</h3>
+      <p>Conference communications are issued in English. Delegates who are more comfortable in Mandarin, Bahasa, or Tamil may request a pre-session language support contact from the Secretariat — no delegate should feel linguistically isolated.</p>
+    </div>
+    <div class="netcard">
+      <div class="netcard-icon ni-amber">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <h3>Recognition Beyond Awards</h3>
+      <p>Beyond formal awards, YSP MUN publishes a post-conference reflection compendium highlighting notable positions, key resolutions, and delegate insights — offering visibility to contributors who may not have taken an award home.</p>
+    </div>
+  </div>
+
+  <div class="region-grid">
+    <div class="region-pill"><span class="region-pill-flag">🇸🇬</span>Singapore<div class="region-pill-count">Host Region</div></div>
+    <div class="region-pill"><span class="region-pill-flag">🇮🇩</span>Indonesia<div class="region-pill-count">ASEAN</div></div>
+    <div class="region-pill"><span class="region-pill-flag">🇲🇾</span>Malaysia<div class="region-pill-count">ASEAN</div></div>
+    <div class="region-pill"><span class="region-pill-flag">🇵🇭</span>Philippines<div class="region-pill-count">ASEAN</div></div>
+    <div class="region-pill"><span class="region-pill-flag">🌏</span>+26 more<div class="region-pill-count">Global</div></div>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section class="registration" id="registration">
+  <div class="reg-bg"></div>
+  <div class="reg-inner">
+    <div class="reg-left">
+      <p class="section-eyebrow">Apply Now</p>
+      <h2 class="section-title">Secure your seat at the table.</h2>
+      <p class="section-lead">Applications are open until 15 October 2026. Committee placements are confirmed by 1 November. All delegates receive the full preparation package upon placement confirmation.</p>
+
+      <div class="reg-tiers">
+        <div class="reg-tier">
+          <div>
+            <div class="reg-tier-label">Individual Delegate</div>
+            <div class="reg-tier-sub">Single delegate registration · All materials included</div>
+          </div>
+          <div class="reg-tier-price">SGD 35 <span>per delegate</span></div>
+        </div>
+        <div class="reg-tier">
+          <div>
+            <div class="reg-tier-label">School Delegation (3+ delegates)</div>
+            <div class="reg-tier-sub">Group rate · Faculty advisor access included</div>
+          </div>
+          <div class="reg-tier-price">SGD 28 <span>per delegate</span></div>
+        </div>
+        <div class="reg-tier">
+          <div>
+            <div class="reg-tier-label">Financial Assistance</div>
+            <div class="reg-tier-sub">Partial and full waivers available — no delegate turned away for financial reasons</div>
+          </div>
+          <div class="reg-tier-price">Apply <span>via form</span></div>
+        </div>
+      </div>
+
+      <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:20px;font-family:'DM Mono',monospace;letter-spacing:.03em">All fees are collected via PayNow (SG), bank transfer, or PayPal. Receipts issued within 48 hours. Full refund policy: cancellations before 25 November 2026 receive 80% refund.</p>
+    </div>
+
+    <div class="reg-form" role="form" aria-label="Delegate registration form">
+      <p class="form-title">Delegate Application</p>
+      <p class="form-sub">Takes ~5 minutes · No account required</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="fname">First Name</label>
+          <input class="form-input" type="text" id="fname" placeholder="Mei Tong" autocomplete="given-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lname">Last Name</label>
+          <input class="form-input" type="text" id="lname" placeholder="Kim" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input class="form-input" type="email" id="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="country">Country / Region</label>
+        <select class="form-select" id="country">
+          <option value="" disabled selected>Select your country</option>
+          <option>Singapore</option>
+          <option>Indonesia</option>
+          <option>Malaysia</option>
+          <option>Philippines</option>
+          <option>Thailand</option>
+          <option>Vietnam</option>
+          <option>Myanmar</option>
+          <option>Cambodia</option>
+          <option>Laos</option>
+          <option>Brunei</option>
+          <option>India</option>
+          <option>Bangladesh</option>
+          <option>Sri Lanka</option>
+          <option>China</option>
+          <option>Japan</option>
+          <option>South Korea</option>
+          <option>Australia</option>
+          <option>United Kingdom</option>
+          <option>United States</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="committee1">1st Committee Choice</label>
+          <select class="form-select" id="committee1">
+            <option value="" disabled selected>Select</option>
+            <option>UNGA Third Committee</option>
+            <option>UN Security Council</option>
+            <option>Ad Hoc Crisis Committee</option>
+            <option>UNEP Special Session</option>
+            <option>YSP Youth Special Assembly</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="committee2">2nd Choice</label>
+          <select class="form-select" id="committee2">
+            <option value="" disabled selected>Select</option>
+            <option>UNGA Third Committee</option>
+            <option>UN Security Council</option>
+            <option>Ad Hoc Crisis Committee</option>
+            <option>UNEP Special Session</option>
+            <option>YSP Youth Special Assembly</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="experience">MUN Experience Level</label>
+        <select class="form-select" id="experience">
+          <option value="" disabled selected>Select experience level</option>
+          <option>First-time delegate</option>
+          <option>1–2 conferences</option>
+          <option>3–5 conferences</option>
+          <option>6+ conferences (experienced)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="financial">Financial Assistance Needed?</label>
+        <select class="form-select" id="financial">
+          <option value="" disabled selected>Select</option>
+          <option>No — paying full fee</option>
+          <option>Yes — partial assistance requested</option>
+          <option>Yes — full waiver requested</option>
+        </select>
+      </div>
+
+      <button class="btn-submit" type="button" onclick="handleSubmit()">Submit Application →</button>
+      <p class="form-note">By submitting, you agree to the YSP Winter MUN 2026 Code of Conduct and Delegate Agreement. Your information is used only for conference administration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-head">
+    <p class="section-eyebrow">Frequently Asked Questions</p>
+    <h2 class="section-title">Before you write to us.</h2>
+    <p class="section-lead">Answers to the most common pre-conference questions. Still not sure? Email mun@ysp.org or DM us on the Discord.</p>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h4>Do I need prior MUN experience to apply?</h4>
+      <p>No. The YSP Youth Special Assembly committee is specifically designed for first-time and newer delegates, with more structured Chair guidance and a gentler procedural learning curve. The preparation package is also designed to get any delegate conference-ready.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What software do I need to participate?</h4>
+      <p>Zoom (free) and Discord (free). Both are available on all devices. A stable internet connection is strongly recommended. A laptop or desktop is preferred over mobile for committee sessions, but mobile is supported.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How are committee placements decided?</h4>
+      <p>Placements are based on your committee preference ranking, experience level, and school/delegation context. The Secretariat aims to honour first-choice placements for at least 75% of delegates. Placements are final once confirmed.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can I participate if I'm not from Singapore?</h4>
+      <p>Yes — YSP MUN is a virtual conference open to youth aged 16–28 globally. The conference runs on SGT (UTC+8), and the schedule is designed to be broadly accessible from UTC-5 through UTC+9.</p>
+    </div>
+    <div class="faq-item">
+      <h4>When are background guides released?</h4>
+      <p>Background guides are released 6 weeks before the conference (by 24 October 2026) to all confirmed delegates. They are available in PDF and Google Docs format with no account required to access.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Is financial assistance genuinely available?</h4>
+      <p>Yes. YSP believes no delegate should be unable to participate due to cost. Partial and full fee waivers are awarded on a needs basis. Select the relevant option in the application form; no supporting documentation is initially required.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How are crisis updates delivered during sessions?</h4>
+      <p>Crisis updates are delivered via the YSP Crisis Wire — a structured Discord channel. Updates are formatted as news dispatches with timestamps. Delegates do not need to leave the Zoom session; Chairs read critical updates aloud during brief procedural pauses.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can my school send a delegation?</h4>
+      <p>Yes — group registrations of 3 or more delegates from the same school receive a reduced rate of SGD 28 per delegate. A faculty advisor contact is required for school delegations; advisors may attend as observers at no cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand-name">Youth for Sustainable Policy — Winter MUN 2026</p>
+      <p class="footer-brand-desc">A premier virtual Model United Nations conference for youth aged 16–28 across Southeast Asia and beyond. Hosted by the Youth for Sustainable Policy (YSP) network.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Conference</h5>
+      <ul class="footer-links">
+        <li><a href="#committees">Committees</a></li>
+        <li><a href="#infra">Platform</a></li>
+        <li><a href="#crisis">Crisis</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#awards">Awards</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Prepare</h5>
+      <ul class="footer-links">
+        <li><a href="#rop">Rules of Procedure</a></li>
+        <li><a href="#guides">Background Guides</a></li>
+        <li><a href="#secretariat">Secretariat</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>YSP Network</h5>
+      <ul class="footer-links">
+        <li><a href="#">About YSP</a></li>
+        <li><a href="#">Policy Programme</a></li>
+        <li><a href="#">Business Track</a></li>
+        <li><a href="#">Diplomacy Track</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Youth for Sustainable Policy · mun@ysp.org · Singapore</p>
+    <span class="footer-badge"><span></span>YSP Winter MUN 2026 · 5–7 December</span>
+  </div>
+</footer>
+
+<script>
+/* ── COUNTDOWN ── */
+function updateCountdown(){
+  const target=new Date('2026-12-05T09:00:00+08:00');
+  const now=new Date();
+  const diff=target-now;
+  if(diff<=0){
+    ['cd-days','cd-hrs','cd-min','cd-sec'].forEach(id=>{document.getElementById(id).textContent='00'});
+    return;
+  }
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-days').textContent=String(d).padStart(2,'0');
+  document.getElementById('cd-hrs').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-min').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-sec').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+/* ── SCHEDULE TABS ── */
+function showDay(n,el){
+  [1,2,3].forEach(i=>{
+    const s=document.getElementById('day'+i+'-sched');
+    if(s) s.style.display=i===n?'block':'none';
+  });
+  document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ── RUBRIC ANIMATE on scroll ── */
+const rubricFills=document.querySelectorAll('.rubric-fill');
+const pcts={
+  'rf-policy':'30%','rf-writing':'25%','rf-diplo':'20%','rf-crisis':'15%','rf-collab':'10%'
+};
+rubricFills.forEach(f=>{
+  Object.keys(pcts).forEach(cls=>{
+    if(f.classList.contains(cls)){
+      f.style.width='0%';
+      setTimeout(()=>{f.style.width=pcts[cls]},400);
+    }
+  });
+});
+
+/* animate rubric on first scroll into view */
+let rubricAnimated=false;
+const rubricSection=document.querySelector('.rubric-bar');
+if(rubricSection){
+  const obs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting&&!rubricAnimated){
+      rubricAnimated=true;
+      rubricFills.forEach(f=>{
+        Object.keys(pcts).forEach(cls=>{
+          if(f.classList.contains(cls)) f.style.width=pcts[cls];
+        });
+      });
+    }
+  },{threshold:.5});
+  obs.observe(rubricSection);
+}
+
+/* ── NAV ACTIVE STATE ── */
+const sections=document.querySelectorAll('section[id], header[id]');
+const navLinks=document.querySelectorAll('.nav-link');
+const navObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      navLinks.forEach(l=>{
+        l.classList.toggle('active',l.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+sections.forEach(s=>navObserver.observe(s));
+
+/* ── FORM SUBMIT ── */
+function handleSubmit(){
+  const fname=document.getElementById('fname').value;
+  const email=document.getElementById('email').value;
+  const country=document.getElementById('country').value;
+  const c1=document.getElementById('committee1').value;
+  if(!fname||!email||!country||!c1){
+    alert('Please fill in all required fields before submitting.');
+    return;
+  }
+  const btn=document.querySelector('.btn-submit');
+  btn.textContent='✓ Application Submitted!';
+  btn.style.background='var(--g-dark)';
+  btn.disabled=true;
+  setTimeout(()=>{
+    btn.textContent='Submit Application →';
+    btn.style.background='var(--g-mid)';
+    btn.disabled=false;
+  },4000);
+}
+
+/* ── CRISIS FEED LIVE SIMULATION ── */
+let tick=0;
+const timeEls=document.querySelectorAll('.cfeed-time');
+setInterval(()=>{
+  tick++;
+  if(timeEls[0]){
+    const m=22+tick;
+    const hm=m>=60?`15:${String(m-60).padStart(2,'0')}`:`14:${String(m).padStart(2,'0')}`;
+    timeEls[0].textContent=`Session 3 · Day 2 · ${hm} SGT`;
+  }
+},60000);
+</script>
+</body>
+</html>

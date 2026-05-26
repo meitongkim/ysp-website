@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSP Hong Kong — LinkedIn Job Postings</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0a0d14;
+  --paper:#f5f4f0;
+  --paper2:#eceae4;
+  --card:#ffffff;
+
+  --li:#0a66c2;
+  --li-pale:#e8f1fb;
+  --li-mid:rgba(10,102,194,0.1);
+
+  --hk:#1a3f6f;
+  --hk-light:#2563b0;
+  --hk-pale:#eef3fb;
+
+  --gold:#c49a2a;
+  --gold-pale:#fdf6e3;
+  --gold-mid:rgba(196,154,42,0.12);
+
+  --green:#1a6b4a;
+  --green-pale:#edf5f0;
+
+  --mid:#636058;
+  --dim:rgba(10,13,20,0.3);
+  --border:rgba(10,13,20,0.08);
+  --border-med:rgba(10,13,20,0.14);
+  --radius:12px;
+  --radius-sm:7px;
+}
+
+body{
+  font-family:'Lora',Georgia,serif;
+  background:var(--paper);
+  color:var(--ink);
+  font-size:15.5px;
+  line-height:1.72;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+.nav{
+  background:var(--ink);
+  display:flex;align-items:stretch;
+  position:sticky;top:0;z-index:100;
+  overflow-x:auto;padding:0 44px;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:12px;
+  padding:15px 30px 15px 0;
+  border-right:1px solid rgba(255,255,255,0.08);
+  margin-right:4px;flex-shrink:0;
+}
+.nb-mark{
+  width:28px;height:28px;border-radius:6px;
+  background:var(--li);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+}
+.nb-mark svg{width:16px;height:16px;fill:#fff}
+.nb-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#fff;letter-spacing:0.02em}
+.nb-sub{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;margin-top:1px}
+.nav-tab{
+  padding:15px 18px;
+  font-family:'DM Mono',monospace;font-size:9.5px;
+  font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;
+  user-select:none;white-space:nowrap;flex-shrink:0;
+}
+.nav-tab:hover{color:rgba(255,255,255,0.7)}
+.nav-tab.active{color:#fff;border-bottom-color:var(--li)}
+
+/* ── PANELS ── */
+.panel{display:none}.panel.active{display:block}
+
+/* ── HERO ── */
+.hero{
+  background:var(--ink);
+  padding:76px 44px 68px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 75% 30%,rgba(10,102,194,0.3) 0%,transparent 55%),
+    radial-gradient(ellipse at 15% 75%,rgba(26,63,111,0.25) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 100%,rgba(196,154,42,0.08) 0%,transparent 45%);
+  pointer-events:none;
+}
+/* Subtle grid texture */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+.hero-inner{max-width:1060px;margin:0 auto;position:relative;z-index:1}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(10,102,194,0.2);border:1px solid rgba(10,102,194,0.3);
+  border-radius:40px;padding:6px 16px;
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.12em;text-transform:uppercase;color:#6fa8dc;
+  margin-bottom:24px;
+}
+.hero-kicker-dot{width:6px;height:6px;border-radius:50%;background:#6fa8dc;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero-h1{
+  font-family:'Syne',sans-serif;font-size:clamp(36px,5.5vw,62px);
+  font-weight:800;color:#fff;line-height:1.0;
+  margin-bottom:14px;letter-spacing:-0.02em;
+}
+.hero-h1 span{color:#6fa8dc}
+.hero-sub{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:19px;color:rgba(255,255,255,0.5);
+  margin-bottom:48px;max-width:640px;line-height:1.6;
+}
+.hero-counters{
+  display:flex;gap:0;flex-wrap:wrap;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--radius);overflow:hidden;
+  background:rgba(255,255,255,0.03);
+  width:fit-content;
+}
+.hc{
+  padding:20px 32px;
+  border-right:1px solid rgba(255,255,255,0.08);
+}
+.hc:last-child{border-right:none}
+.hc-n{
+  font-family:'Syne',sans-serif;font-size:32px;
+  font-weight:800;color:#fff;line-height:1;margin-bottom:4px;
+}
+.hc-l{
+  font-family:'DM Mono',monospace;font-size:9.5px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+}
+
+/* ── BODY ── */
+.body{max-width:1060px;margin:0 auto;padding:52px 44px 100px}
+section{margin-bottom:52px}
+
+/* ── SECTION HEADER ── */
+.sec-label{
+  font-family:'DM Mono',monospace;font-size:9.5px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--mid);margin-bottom:10px;
+}
+.sec-title{
+  font-family:'Syne',sans-serif;font-size:clamp(26px,3.5vw,36px);
+  font-weight:700;line-height:1.15;margin-bottom:6px;
+  letter-spacing:-0.02em;
+}
+.sec-title em{font-family:'Lora',serif;font-weight:400;font-style:italic;color:var(--li)}
+.sec-sub{font-size:15px;color:var(--mid);max-width:680px;margin-bottom:32px;line-height:1.7;font-family:'Lora',serif}
+
+/* ── LINKEDIN POST PREVIEW ── */
+.li-post{
+  background:var(--card);
+  border:1px solid var(--border-med);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:28px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.06);
+}
+.li-post-top{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:16px 20px 0;
+}
+.li-avatar{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--hk);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;overflow:hidden;
+}
+.li-avatar-inner{
+  font-family:'Syne',sans-serif;font-size:14px;
+  font-weight:800;color:#fff;letter-spacing:-0.02em;
+}
+.li-meta{flex:1}
+.li-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:1px}
+.li-title{font-size:12.5px;color:var(--mid);line-height:1.4}
+.li-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);margin-top:3px;display:flex;align-items:center;gap:4px}
+.li-globe{font-size:11px}
+.li-body{padding:14px 20px 16px;font-size:14.5px;line-height:1.75}
+.li-body p{margin-bottom:10px}
+.li-body p:last-child{margin-bottom:0}
+.li-body strong{font-family:'Syne',sans-serif;font-weight:700}
+.li-img{
+  margin:0 0 0;
+  background:linear-gradient(135deg,var(--ink) 0%,#1a3f6f 100%);
+  padding:36px 40px;
+  position:relative;overflow:hidden;
+}
+.li-img::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 50%,rgba(10,102,194,0.4) 0%,transparent 60%);
+  pointer-events:none;
+}
+.li-img-inner{position:relative;z-index:1}
+.li-img-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);margin-bottom:10px;
+}
+.li-img-h{
+  font-family:'Syne',sans-serif;font-size:22px;
+  font-weight:800;color:#fff;line-height:1.1;
+  margin-bottom:4px;letter-spacing:-0.01em;
+}
+.li-img-sub{font-family:'Lora',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.55)}
+.li-img-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.li-chip{
+  font-family:'DM Mono',monospace;font-size:9.5px;
+  letter-spacing:0.06em;padding:5px 12px;border-radius:20px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.7);
+}
+.li-footer{
+  padding:10px 20px;border-top:1px solid var(--border);
+  display:flex;gap:0;
+}
+.li-action{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:var(--radius-sm);
+  font-family:'Syne',sans-serif;font-size:12.5px;
+  font-weight:600;color:var(--mid);cursor:pointer;
+  transition:background .15s;
+}
+.li-action:hover{background:var(--paper2)}
+.li-action svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* ── ROLE CARD (main listing) ── */
+.role-listing{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:20px;
+  transition:box-shadow .2s,transform .2s;
+}
+.role-listing:hover{
+  box-shadow:0 4px 24px rgba(0,0,0,0.08);
+  transform:translateY(-2px);
+}
+.rl-header{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:24px 28px;border-bottom:1px solid var(--border);
+}
+.rl-icon{
+  width:52px;height:52px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.rl-info{flex:1}
+.rl-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:3px;letter-spacing:-0.01em}
+.rl-org{font-size:13.5px;color:var(--li);font-family:'DM Mono',monospace;font-weight:500;margin-bottom:6px}
+.rl-meta{display:flex;flex-wrap:wrap;gap:8px}
+.rl-pill{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.06em;padding:4px 10px;border-radius:20px;
+  background:var(--paper2);color:var(--mid);
+}
+.rl-badge{
+  flex-shrink:0;font-family:'DM Mono',monospace;
+  font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;
+  padding:6px 14px;border-radius:20px;align-self:flex-start;
+}
+.badge-urgent{background:#fff3e0;color:#e65100;border:1px solid rgba(230,81,0,0.25)}
+.badge-open{background:var(--green-pale);color:var(--green);border:1px solid rgba(26,107,74,0.25)}
+.badge-key{background:var(--li-pale);color:var(--li);border:1px solid rgba(10,102,194,0.25)}
+
+.rl-body{padding:24px 28px}
+.rl-section-title{
+  font-family:'Syne',sans-serif;font-size:11px;
+  font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--mid);margin-bottom:10px;margin-top:20px;
+}
+.rl-section-title:first-child{margin-top:0}
+.rl-desc{font-size:14.5px;color:var(--mid);line-height:1.72;margin-bottom:8px}
+.rl-list{padding-left:0;list-style:none;margin-bottom:0}
+.rl-list li{
+  font-size:14px;color:var(--mid);line-height:1.65;
+  padding:5px 0 5px 20px;position:relative;border-bottom:1px solid var(--border);
+}
+.rl-list li:last-child{border-bottom:none}
+.rl-list li::before{
+  content:'→';position:absolute;left:0;top:5px;
+  color:var(--li);font-family:'DM Mono',monospace;font-size:12px;
+}
+.rl-gains{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;
+}
+@media(max-width:600px){.rl-gains{grid-template-columns:1fr}}
+.rl-gain{
+  background:var(--paper);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px 14px;
+  font-size:13px;color:var(--mid);line-height:1.6;
+}
+.rl-gain strong{display:block;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;letter-spacing:0.01em}
+
+.rl-apply{
+  padding:18px 28px;border-top:1px solid var(--border);
+  background:var(--paper);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.apply-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--li);color:#fff;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:0.02em;padding:10px 22px;border-radius:24px;
+  cursor:pointer;transition:background .2s;text-decoration:none;
+}
+.apply-btn:hover{background:var(--hk)}
+.apply-note{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--mid);letter-spacing:0.04em}
+
+/* ── DIVIDER ── */
+.div{height:1px;background:var(--border);margin:44px 0}
+
+/* ── INFO BOX ── */
+.info-box{border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:20px;font-size:14px;line-height:1.7;font-family:'Lora',serif}
+.ib-li{background:var(--li-pale);border-left:3px solid var(--li)}
+.ib-gold{background:var(--gold-pale);border-left:3px solid var(--gold)}
+.ib-green{background:var(--green-pale);border-left:3px solid var(--green)}
+
+/* ── ORG CHART ── */
+.org-chart{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:32px;
+  margin-bottom:28px;overflow-x:auto;
+}
+.org-top{display:flex;justify-content:center;margin-bottom:0}
+.org-node{
+  background:var(--ink);color:#fff;
+  border-radius:10px;padding:14px 24px;
+  text-align:center;font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:0.02em;
+  position:relative;min-width:160px;
+}
+.org-node-sub{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;margin-top:3px;font-weight:400}
+.org-line{
+  width:2px;height:32px;background:var(--border-med);
+  margin:0 auto;
+}
+.org-branch{
+  display:flex;justify-content:center;gap:16px;
+  position:relative;
+}
+.org-branch::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  height:2px;background:var(--border-med);
+  width:calc(100% - 80px);
+}
+.org-col{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;min-width:140px}
+.org-col-line{width:2px;height:24px;background:var(--border-med)}
+.org-role{
+  background:var(--paper);border:1px solid var(--border-med);
+  border-radius:8px;padding:12px 16px;text-align:center;
+  font-family:'Syne',sans-serif;font-size:11.5px;font-weight:700;
+  width:100%;letter-spacing:0.01em;
+}
+.org-role-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--mid);letter-spacing:0.08em;margin-top:2px;font-weight:400}
+.org-open{
+  margin-top:6px;font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:10px;
+}
+
+/* ── DOC FOOTER ── */
+.doc-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:28px;border-top:1px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.08em;color:var(--dim);margin-top:52px;
+}
+
+@media(max-width:768px){
+  .nav{padding:0 20px}
+  .body{padding:36px 20px 80px}
+  .hero{padding:52px 20px 48px}
+  .hero-counters{flex-direction:column;width:100%}
+  .hc{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08)}
+  .hc:last-child{border-bottom:none}
+  .li-img{padding:24px}
+  .rl-header{flex-wrap:wrap}
+  .rl-badge{align-self:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">
+      <span class="hero-kicker-dot"></span>
+      Now Recruiting · YSP Hong Kong 🇭🇰
+    </div>
+    <h1 class="hero-h1">We're Building<br><span>Hong Kong's</span><br>Policy Chapter.</h1>
+    <p class="hero-sub">Seven roles. One founding team. The chance to build something that hasn't existed here before.</p>
+    <div class="hero-counters">
+      <div class="hc"><div class="hc-n">7</div><div class="hc-l">Open Roles</div></div>
+      <div class="hc"><div class="hc-n">5–8</div><div class="hc-l">Hrs / Week</div></div>
+      <div class="hc"><div class="hc-n">100%</div><div class="hc-l">Remote</div></div>
+      <div class="hc"><div class="hc-n">16</div><div class="hc-l">Week Programme</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nb-mark">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </div>
+    <div>
+      <div class="nb-name">YSP Hong Kong</div>
+      <div class="nb-sub">LinkedIn Postings</div>
+    </div>
+  </div>
+  <div class="nav-tab active" onclick="show('post',this)">Announcement Post</div>
+  <div class="nav-tab" onclick="show('roles',this)">All Roles</div>
+  <div class="nav-tab" onclick="show('org',this)">Team Structure</div>
+</nav>
+
+<!-- ════ ANNOUNCEMENT POST ════ -->
+<div class="panel active" id="panel-post">
+<div class="body">
+
+  <section>
+    <div class="sec-label">The LinkedIn Feed Post</div>
+    <div class="sec-title">Announcement <em>Copy</em></div>
+    <div class="sec-sub">This is the post that goes on YSP's LinkedIn page and is reshared by founding team members personally. Copy the text, attach the banner image, and post. Members should repost with a personal 1–2 sentence addition about why they joined.</div>
+
+    <div class="li-post">
+      <div class="li-post-top">
+        <div class="li-avatar"><div class="li-avatar-inner">YSP</div></div>
+        <div class="li-meta">
+          <div class="li-name">Youth for Sustainable Policy</div>
+          <div class="li-title">Youth Policy Research & Education · Southeast Asia & Greater China</div>
+          <div class="li-time"><span class="li-globe">🌐</span> Just now · Sponsored</div>
+        </div>
+      </div>
+
+      <div class="li-img">
+        <div class="li-img-inner">
+          <div class="li-img-label">Youth for Sustainable Policy · Hong Kong</div>
+          <div class="li-img-h">We're building the<br>Hong Kong chapter.<br>Join us.</div>
+          <div class="li-img-sub">7 founding roles open — remote, volunteer, real impact</div>
+          <div class="li-img-chips">
+            <span class="li-chip">Chapter Director</span>
+            <span class="li-chip">Editorial Lead</span>
+            <span class="li-chip">Policy Writers ×3</span>
+            <span class="li-chip">Visual Producer</span>
+            <span class="li-chip">Partnerships Lead</span>
+            <span class="li-chip">Community Coordinator</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="li-body">
+        <p>We're looking for seven people to help us build YSP Hong Kong from the ground up. 🇭🇰</p>
+
+        <p><strong>What is YSP?</strong><br>
+        Youth for Sustainable Policy is a regional network of young people who research, write, and engage seriously with the policy questions shaping Southeast Asia and Greater China. We produce real policy briefs. We build real mentorship relationships. We give members real credentials — not participation certificates.</p>
+
+        <p>We've been building this network across ASEAN. Now we're launching in Hong Kong — because the Greater Bay Area transition, Hong Kong's role within it, and the policy literacy gap among HK youth all point to the same conclusion: this chapter needs to exist, and it needs to be built by people who actually live here.</p>
+
+        <p><strong>What we're hiring for:</strong><br>
+        ↳ Chapter Director (HK) — 1 position<br>
+        ↳ Head of Editorial & Research — 1 position<br>
+        ↳ Policy Writers — 3 positions<br>
+        ↳ Visual Producer & Content Creator — 1 position<br>
+        ↳ Partnerships & Outreach Lead — 1 position<br>
+        ↳ Community & Operations Coordinator — 1 position</p>
+
+        <p><strong>What you get:</strong><br>
+        ✦ Published policy work under your name<br>
+        ✦ Access to YSP's regional mentor network across 6+ countries<br>
+        ✦ A direct line to the YSP Greater China Annual Forum (HK, Q4 2026)<br>
+        ✦ A certificate and recommendation letter from YSP Global<br>
+        ✦ The founding team distinction — your name attached to this chapter's origin story</p>
+
+        <p><strong>The honest part:</strong><br>
+        This is a volunteer role. We are not yet funded. What we offer is real work, a real network, and a real CV line — not a salary. The commitment is 5–8 hours per week for 16 weeks, fully remote. If that trade works for you, we want to hear from you.</p>
+
+        <p>Applications close in two weeks. 20 founding team spots total across all roles.</p>
+
+        <p>🔗 Full role descriptions in comments ↓<br>
+        📩 Apply via the link in our bio or DM us directly.</p>
+
+        <p style="color:var(--mid);font-size:13.5px;font-style:italic">Tag someone in Hong Kong who should see this.</p>
+      </div>
+
+      <div style="padding:10px 20px 12px;font-family:'DM Mono',monospace;font-size:12px;color:var(--li)">
+        #YSPHongKong &nbsp;#PolicyResearch &nbsp;#HKYouth &nbsp;#GreaterBayArea &nbsp;#YouthLeadership &nbsp;#Volunteer &nbsp;#NGO &nbsp;#Sustainability &nbsp;#HongKong &nbsp;#PublicPolicy
+      </div>
+
+      <div class="li-footer">
+        <div class="li-action">
+          <svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+          Like
+        </div>
+        <div class="li-action">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Comment
+        </div>
+        <div class="li-action">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Repost
+        </div>
+        <div class="li-action">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box ib-li">
+      <p><strong>Repost instructions for founding team members:</strong> Each person who has confirmed their role should repost this announcement with 1–2 personal sentences added at the top. Example: <em>"I'm joining YSP Hong Kong as [Role]. If you're someone who reads a policy headline and immediately wants to write the analysis behind it, take a look at what we're building."</em> Personal reposts consistently outperform the organisational post in reach.</p>
+    </div>
+
+    <div class="info-box ib-gold">
+      <p><strong>Comments strategy:</strong> Pin the first comment immediately after posting. The first comment should contain links to individual role descriptions and the application form. This keeps the post body clean while making the application frictionless. Example first comment: <em>"Full role descriptions below — tap the one that fits you and apply directly. [Role 1 link] [Role 2 link] ... Application closes [date]."</em></p>
+    </div>
+  </section>
+
+  <div class="doc-footer">
+    <span>YSP Hong Kong — LinkedIn Announcement</span>
+    <span>Recruitment Drive · 2026</span>
+  </div>
+</div>
+</div>
+
+<!-- ════ ALL ROLES ════ -->
+<div class="panel" id="panel-roles">
+<div class="body">
+
+  <section>
+    <div class="sec-label">7 Open Positions</div>
+    <div class="sec-title">Full Role <em>Descriptions</em></div>
+    <div class="sec-sub">Each listing below is a complete LinkedIn job description. Copy the text from each card into a separate LinkedIn job posting or share as individual posts in the comments of the announcement.</div>
+  </section>
+
+  <!-- ROLE 1: CHAPTER DIRECTOR -->
+  <div class="role-listing">
+    <div class="rl-header">
+      <div class="rl-icon" style="background:#eef3fb;font-size:24px">🏛️</div>
+      <div class="rl-info">
+        <div class="rl-title">Chapter Director — Hong Kong</div>
+        <div class="rl-org">Youth for Sustainable Policy (YSP) · Hong Kong</div>
+        <div class="rl-meta">
+          <span class="rl-pill">🌐 Remote / Hybrid HK</span>
+          <span class="rl-pill">🕐 8–10 hrs/week</span>
+          <span class="rl-pill">🎓 Volunteer</span>
+          <span class="rl-pill">📍 Hong Kong</span>
+          <span class="rl-pill">⏱ 16 weeks + ongoing</span>
+        </div>
+      </div>
+      <div class="rl-badge badge-key">Leadership</div>
+    </div>
+    <div class="rl-body">
+      <div class="rl-section-title">About the Role</div>
+      <p class="rl-desc">The Chapter Director is the most senior member of the YSP Hong Kong founding team. You are responsible for the chapter's overall direction, external relationships, and quality of output. You report directly to YSP Global leadership (Singapore) and serve as YSP HK's primary spokesperson with university partners, media, and institutional contacts. This is a founding role — your decisions in the first 16 weeks will define the chapter's identity for years to come.</p>
+
+      <div class="rl-section-title">What You'll Do</div>
+      <ul class="rl-list">
+        <li>Lead all chapter operations and set the strategic priorities for YSP Hong Kong's first cohort</li>
+        <li>Own the university partnership process — initiate contact with HKU, CUHK, HKUST, PolyU, and CityU for MOU discussions</li>
+        <li>Chair the weekly founding team call and monthly cross-chapter coordination meeting with YSP Mainland China and Macau</li>
+        <li>Represent YSP HK at external events, panels, and institutional meetings</li>
+        <li>Oversee the Societies Ordinance (Cap. 151) registration process and manage the relationship with the Societies Officer</li>
+        <li>Approve all public-facing content before it is published across LinkedIn, WeChat, Rednote, and Weibo</li>
+        <li>Build and manage relationships with HK-based advisors, mentors, and future corporate partners</li>
+        <li>Produce the Chapter Director's section of the YSP HK Year 1 Impact Report</li>
+      </ul>
+
+      <div class="rl-section-title">Who We're Looking For</div>
+      <ul class="rl-list">
+        <li>Final year undergraduate or postgraduate student at a Hong Kong university, or a recent graduate (within 3 years) based in HK</li>
+        <li>Demonstrable interest in public policy, sustainable development, or governance — through coursework, research, or prior experience</li>
+        <li>Prior leadership experience in any context — student organisation, NGO, startup, or professional role</li>
+        <li>Comfortable communicating in both English and Traditional Chinese (Cantonese fluency a plus, not required)</li>
+        <li>Network within at least one HK university — a warm contact at a student union, faculty department, or policy society</li>
+        <li>High personal accountability and no need for micromanagement</li>
+      </ul>
+
+      <div class="rl-section-title">What You Gain</div>
+      <div class="rl-gains">
+        <div class="rl-gain"><strong>CV Title</strong>Chapter Director, YSP Hong Kong — a founding leadership role at a regional policy organisation</div>
+        <div class="rl-gain"><strong>Recommendation Letter</strong>Personal letter from YSP Global CEO addressed to universities, graduate employers, or scholarship committees</div>
+        <div class="rl-gain"><strong>Mentor Access</strong>Direct introduction to YSP's regional mentor network including policy professionals, NGO leaders, and academics</div>
+        <div class="rl-gain"><strong>GBA Forum</strong>Keynote speaker invitation at the first YSP Greater China Annual Forum, Hong Kong, Q4 2026</div>
+      </div>
+    </div>
+    <div class="rl-apply">
+      <span class="apply-note">Apply via LinkedIn · Reference: YSP-HK-DIR-2026</span>
+      <a class="apply-btn" href="#">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Apply Now
+      </a>
+    </div>
+  </div>
+
+  <!-- ROLE 2: HEAD OF EDITORIAL -->
+  <div class="role-listing">
+    <div class="rl-header">
+      <div class="rl-icon" style="background:#fdf6e3;font-size:24px">✍️</div>
+      <div class="rl-info">
+        <div class="rl-title">Head of Editorial & Research</div>
+        <div class="rl-org">Youth for Sustainable Policy (YSP) · Hong Kong</div>
+        <div class="rl-meta">
+          <span class="rl-pill">🌐 Remote</span>
+          <span class="rl-pill">🕐 6–8 hrs/week</span>
+          <span class="rl-pill">🎓 Volunteer</span>
+          <span class="rl-pill">📍 Hong Kong preferred</span>
+          <span class="rl-pill">⏱ 16 weeks + ongoing</span>
+        </div>
+      </div>
+      <div class="rl-badge badge-key">Editorial</div>
+    </div>
+    <div class="rl-body">
+      <div class="rl-section-title">About the Role</div>
+      <p class="rl-desc">The Head of Editorial & Research manages YSP Hong Kong's entire content pipeline — from the weekly WeChat discussion threads to the full-length policy briefs submitted to the Greater China Policy Review. You set the editorial standards, coach the three Policy Writers, and ensure that everything published under the YSP HK name is accurate, analytical, and genuinely useful. You are the chapter's chief quality controller.</p>
+
+      <div class="rl-section-title">What You'll Do</div>
+      <ul class="rl-list">
+        <li>Own the monthly editorial calendar — thematic planning, assignment of policy briefs to writers, and publication scheduling across all platforms</li>
+        <li>Edit and provide written feedback on all policy briefs, explainers, and Rednote captions before they are approved for publication</li>
+        <li>Produce one original policy brief per month under your own byline as a quality benchmark for the team</li>
+        <li>Run the bi-weekly writers' call — 30 minutes, structured feedback, upcoming assignments, and one policy discussion topic</li>
+        <li>Manage the bilingual translation pipeline — ensuring Traditional Chinese and English versions of key pieces are consistent in argument and tone</li>
+        <li>Source and maintain the reading list for all YSP HK content — open-access sources only, with an emphasis on HK government publications, GBA policy documents, and peer-reviewed research accessible without a paywall</li>
+        <li>Contribute to the Greater China Policy Review quarterly publication alongside editorial leads from Mainland China and Macau chapters</li>
+      </ul>
+
+      <div class="rl-section-title">Who We're Looking For</div>
+      <ul class="rl-list">
+        <li>Strong writing ability in English — you can edit a draft and explain precisely why a sentence doesn't work</li>
+        <li>Reading proficiency in Traditional Chinese (writing proficiency a bonus)</li>
+        <li>Background in social sciences, law, economics, international relations, or a related field</li>
+        <li>Genuine interest in at least one of: GBA integration, climate policy, housing economics, financial regulation, or digital governance</li>
+        <li>Prior experience editing — a student journal, a publication, a blog, a policy body — any context counts</li>
+      </ul>
+
+      <div class="rl-section-title">What You Gain</div>
+      <div class="rl-gains">
+        <div class="rl-gain"><strong>Bylines</strong>Published policy work in the Greater China Policy Review and across YSP's regional platform — real, indexed, shareable</div>
+        <div class="rl-gain"><strong>Editorial Credit</strong>Named as Head of Editorial on all YSP HK publications — a professional editorial credential</div>
+        <div class="rl-gain"><strong>Mentorship</strong>Access to YSP's network of policy researchers, academics, and think tank professionals across the region</div>
+        <div class="rl-gain"><strong>Certificate</strong>YSP Global leadership certificate and recommendation letter upon successful completion of the 16-week term</div>
+      </div>
+    </div>
+    <div class="rl-apply">
+      <span class="apply-note">Apply via LinkedIn · Reference: YSP-HK-ED-2026</span>
+      <a class="apply-btn" href="#">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Apply Now
+      </a>
+    </div>
+  </div>
+
+  <!-- ROLE 3: POLICY WRITERS x3 -->
+  <div class="role-listing">
+    <div class="rl-header">
+      <div class="rl-icon" style="background:#edf5f0;font-size:24px">📝</div>
+      <div class="rl-info">
+        <div class="rl-title">Policy Writer (×3 Positions)</div>
+        <div class="rl-org">Youth for Sustainable Policy (YSP) · Hong Kong</div>
+        <div class="rl-meta">
+          <span class="rl-pill">🌐 Fully Remote</span>
+          <span class="rl-pill">🕐 4–6 hrs/week</span>
+          <span class="rl-pill">🎓 Volunteer</span>
+          <span class="rl-pill">📍 Anywhere</span>
+          <span class="rl-pill">⏱ 16 weeks</span>
+        </div>
+      </div>
+      <div class="rl-badge badge-open">3 Spots Open</div>
+    </div>
+    <div class="rl-body">
+      <div class="rl-section-title">About the Role</div>
+      <p class="rl-desc">Policy Writers are the core of what YSP produces. You research, draft, and refine one policy brief per month (800–1,200 words) and two short-form policy explainers per month (300–500 words each) for Rednote and the WeChat community. You do not need prior policy writing experience — you need the ability to read complex source material, form a clear argument, and write it in a way a non-specialist can act on. We will teach the rest.</p>
+      <p class="rl-desc">We are recruiting three Writers with different thematic focuses so that YSP HK covers the policy landscape without overlap. Please indicate in your application which track you are applying for.</p>
+
+      <div class="rl-section-title">Three Writer Tracks</div>
+      <ul class="rl-list">
+        <li><strong>Track A — Climate & Urban Sustainability:</strong> Carbon neutrality policy, green finance, urban planning, energy transition, waste management. Relevant to HK's 2050 net-zero target and GBA environmental integration.</li>
+        <li><strong>Track B — Housing, Economy & Labour:</strong> Housing affordability, talent retention policy, fintech regulation, cross-border employment, SME policy. Relevant to HK's post-2020 economic repositioning.</li>
+        <li><strong>Track C — Digital Governance & Society:</strong> Data privacy, AI regulation, platform governance, digital identity, smart city policy. Relevant to HK's Smart City Blueprint and GBA data infrastructure debates.</li>
+      </ul>
+
+      <div class="rl-section-title">What You'll Do</div>
+      <ul class="rl-list">
+        <li>Produce one 800–1,200 word policy brief per month on an assigned topic within your track — researched, argued, and copy-edited to publication standard</li>
+        <li>Produce two 300–500 word explainers per month formatted for Rednote and WeChat — simpler language, same analytical rigour</li>
+        <li>Attend the bi-weekly writers' call with the Head of Editorial (30 minutes, online)</li>
+        <li>Post one Monday Policy Drop to the WeChat group per month in rotation with other writers</li>
+        <li>Submit one piece to the Greater China Policy Review at the end of the 16-week term as your capstone output</li>
+      </ul>
+
+      <div class="rl-section-title">Who We're Looking For</div>
+      <ul class="rl-list">
+        <li>Any level of study or career stage — from Year 1 undergraduates to young professionals in their first five years</li>
+        <li>English writing ability strong enough to produce a clear argument in 800 words — we will provide editing and feedback, but the raw material needs to be there</li>
+        <li>Genuine curiosity about your chosen track — not just general interest in "policy"</li>
+        <li>Ability to read and cite Chinese-language government sources is valued but not required</li>
+        <li>Based in Hong Kong or with strong knowledge of HK policy context</li>
+      </ul>
+
+      <div class="rl-section-title">What You Gain</div>
+      <div class="rl-gains">
+        <div class="rl-gain"><strong>4+ Bylines</strong>Minimum four published pieces under your name over 16 weeks — concrete, shareable portfolio evidence</div>
+        <div class="rl-gain"><strong>Editorial Coaching</strong>Written feedback on every draft from the Head of Editorial — the equivalent of a policy writing apprenticeship</div>
+        <div class="rl-gain"><strong>Publication Credit</strong>Named contributor in the Greater China Policy Review, a regional YSP publication</div>
+        <div class="rl-gain"><strong>Recommendation Letter</strong>Personalised letter from YSP HK Chapter Director upon completion, tailored to graduate school or employment context</div>
+      </div>
+    </div>
+    <div class="rl-apply">
+      <span class="apply-note">Specify Track A, B, or C · Reference: YSP-HK-WRITE-2026</span>
+      <a class="apply-btn" href="#">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Apply Now
+      </a>
+    </div>
+  </div>
+
+  <!-- ROLE 4: VISUAL PRODUCER -->
+  <div class="role-listing">
+    <div class="rl-header">
+      <div class="rl-icon" style="background:#fff0f2;font-size:24px">🎨</div>
+      <div class="rl-info">
+        <div class="rl-title">Visual Producer & Content Creator</div>
+        <div class="rl-org">Youth for Sustainable Policy (YSP) · Hong Kong</div>
+        <div class="rl-meta">
+          <span class="rl-pill">🌐 Fully Remote</span>
+          <span class="rl-pill">🕐 5–7 hrs/week</span>
+          <span class="rl-pill">🎓 Volunteer</span>
+          <span class="rl-pill">📍 Anywhere</span>
+          <span class="rl-pill">⏱ 16 weeks</span>
+        </div>
+      </div>
+      <div class="rl-badge badge-open">1 Spot Open</div>
+    </div>
+    <div class="rl-body">
+      <div class="rl-section-title">About the Role</div>
+      <p class="rl-desc">The Visual Producer is responsible for everything the YSP HK audience sees before they read a word. You design the Rednote carousel graphics, Weibo visual posts, WeChat banners, and LinkedIn cover images that make YSP HK's content stop the scroll. You work from a brand system (YSP's established design tokens: deep forest green, policy purple, DM Sans, Playfair Display) and adapt it to the aesthetic language of each platform — study-note warmth for Rednote, editorial authority for LinkedIn, punchy minimalism for Weibo.</p>
+
+      <div class="rl-section-title">What You'll Do</div>
+      <ul class="rl-list">
+        <li>Design 2 Rednote carousel posts per week (5–8 slides each) in Canva or Figma — bilingual EN/Traditional Chinese layout</li>
+        <li>Produce 3 Weibo graphic posts per week — adapted from the writers' content into visual-first formats</li>
+        <li>Design the monthly WeChat Official Account banner and any event promotional graphics</li>
+        <li>Maintain and expand the YSP HK Canva template library so that any team member can produce on-brand content in an emergency</li>
+        <li>Create the visual assets for the Greater China Policy Review quarterly publication</li>
+        <li>Produce all graphics for the YSP HK founding team announcement and recruitment campaign (LinkedIn banners, Rednote intro carousels)</li>
+      </ul>
+
+      <div class="rl-section-title">Who We're Looking For</div>
+      <ul class="rl-list">
+        <li>Proficiency in Canva (required) — Figma or Adobe Illustrator a significant plus</li>
+        <li>A sense of editorial design — you understand the difference between a visual that decorates and one that communicates</li>
+        <li>Familiarity with Rednote's visual language — you know what performs on the platform and why</li>
+        <li>Ability to work within a defined brand system rather than starting from scratch every time</li>
+        <li>Portfolio of any prior design work — student magazine, social media graphics, personal creative projects all count</li>
+      </ul>
+
+      <div class="rl-section-title">What You Gain</div>
+      <div class="rl-gains">
+        <div class="rl-gain"><strong>Portfolio Volume</strong>100+ published design assets over 16 weeks across four platforms — concrete, live, shareable work</div>
+        <div class="rl-gain"><strong>Brand Credit</strong>Named Visual Producer on all YSP HK publications and the Greater China Policy Review</div>
+        <div class="rl-gain"><strong>Real Briefs</strong>Working with editorial and research teams gives you the experience of designing to a real content brief — not a made-up project</div>
+        <div class="rl-gain"><strong>Certificate</strong>YSP Global certificate upon completion, referencing your role and output volume</div>
+      </div>
+    </div>
+    <div class="rl-apply">
+      <span class="apply-note">Include portfolio link · Reference: YSP-HK-VIS-2026</span>
+      <a class="apply-btn" href="#">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Apply Now
+      </a>
+    </div>
+  </div>
+
+  <!-- ROLE 5: PARTNERSHIPS LEAD -->
+  <div class="role-listing">
+    <div class="rl-header">
+      <div class="rl-icon" style="background:#eef3fb;font-size:24px">🤝</div>
+      <div class="rl-info">
+        <div class="rl-title">Partnerships & Outreach Lead</div>
+        <div class="rl-org">Youth for Sustainable Policy (YSP) · Hong Kong</div>
+        <div class="rl-meta">
+          <span class="rl-pill">🌐 Remote / HK preferred</span>
+          <span class="rl-pill">🕐 5–7 hrs/week</span>
+          <span class="rl-pill">🎓 Volunteer</span>
+          <span class="rl-pill">📍 Hong Kong preferred</span>
+          <span class="rl-pill">⏱ 16 weeks + ongoing</span>
+        </div>
+      </div>
+      <div class="rl-badge badge-open">1 Spot Open</div>
+    </div>
+    <div class="rl-body">
+      <div class="rl-section-title">About the Role</div>
+      <p class="rl-desc">The Partnerships & Outreach Lead is responsible for building YSP Hong Kong's external relationships — with universities, NGOs, professional associations, and eventually corporate partners. You are the person who cold-emails the HKU Faculty of Social Sciences, follows up with the CUHK student union, and maintains the relationship log that keeps YSP HK's outreach organised and accountable. This role requires comfort with initiating contact with strangers in a professional context and following up without being reminded.</p>
+
+      <div class="rl-section-title">What You'll Do</div>
+      <ul class="rl-list">
+        <li>Own the university MOU outreach process — draft introduction letters, manage email threads, and coordinate meetings with target institutions (HKU, CUHK, HKUST, PolyU, CityU)</li>
+        <li>Build and maintain YSP HK's partner and prospect database — tracking all contacts, last touchpoints, and next steps</li>
+        <li>Identify and approach at least 3 HK-based NGOs or policy bodies for co-event or co-publication partnerships within the first 8 weeks</li>
+        <li>Draft all formal partnership correspondence — introduction letters, MOU cover letters, event collaboration proposals — for Chapter Director approval</li>
+        <li>Recruit and manage the relationships with YSP HK's founding mentors — minimum 3 HK-based professionals from policy, NGO, or finance sectors</li>
+        <li>Coordinate the logistics of the YSP HK Launch Event (Month 5–6) including venue or Zoom setup, invitations, and RSVP management</li>
+      </ul>
+
+      <div class="rl-section-title">Who We're Looking For</div>
+      <ul class="rl-list">
+        <li>Comfortable initiating professional correspondence with people you have not met before</li>
+        <li>Organised and proactive — you close the loop without being chased</li>
+        <li>Existing network within at least one HK university or professional community</li>
+        <li>Experience in any prior outreach, business development, or relationship management context (student society, internship, volunteering)</li>
+        <li>Bilingual written English and Traditional Chinese strongly preferred for university correspondence</li>
+      </ul>
+
+      <div class="rl-section-title">What You Gain</div>
+      <div class="rl-gains">
+        <div class="rl-gain"><strong>Real BD Experience</strong>End-to-end partnership development from cold outreach to signed MOU — directly equivalent to a business development function</div>
+        <div class="rl-gain"><strong>Mentor Network</strong>Direct working relationships with the senior professionals you recruit as YSP HK mentors</div>
+        <div class="rl-gain"><strong>Event Credit</strong>Named Partnerships Lead on the YSP HK Launch Event and the GBA Annual Forum (HK, Q4 2026)</div>
+        <div class="rl-gain"><strong>Certificate + Letter</strong>YSP Global certificate and recommendation letter tailored to business, law, or public policy career contexts</div>
+      </div>
+    </div>
+    <div class="rl-apply">
+      <span class="apply-note">Reference: YSP-HK-PART-2026</span>
+      <a class="apply-btn" href="#">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Apply Now
+      </a>
+    </div>
+  </div>
+
+  <!-- ROLE 6: COMMUNITY COORDINATOR -->
+  <div class="role-listing">
+    <div class="rl-header">
+      <div class="rl-icon" style="background:#e8faf0;font-size:24px">📋</div>
+      <div class="rl-info">
+        <div class="rl-title">Community & Operations Coordinator</div>
+        <div class="rl-org">Youth for Sustainable Policy (YSP) · Hong Kong</div>
+        <div class="rl-meta">
+          <span class="rl-pill">🌐 Fully Remote</span>
+          <span class="rl-pill">🕐 4–5 hrs/week</span>
+          <span class="rl-pill">🎓 Volunteer</span>
+          <span class="rl-pill">📍 Flexible timezone</span>
+          <span class="rl-pill">⏱ 16 weeks</span>
+        </div>
+      </div>
+      <div class="rl-badge badge-open">1 Spot Open</div>
+    </div>
+    <div class="rl-body">
+      <div class="rl-section-title">About the Role</div>
+      <p class="rl-desc">The Community & Operations Coordinator is the person who ensures that everything the team commits to actually happens. You manage the WeChat community group, send the Friday wraps, maintain the Notion workspace, take meeting notes, and follow up on action items so that the Chapter Director can focus outward rather than inward. If you are someone who gets satisfaction from a well-maintained task list and a community that feels genuinely looked-after, this role was built for you.</p>
+
+      <div class="rl-section-title">What You'll Do</div>
+      <ul class="rl-list">
+        <li>Manage the YSP HK WeChat community group day-to-day — pinning announcements, moderating off-topic content, and ensuring every member question is answered within 24 hours</li>
+        <li>Send the Friday Wrap message each week — summarising the week's best contribution, upcoming events, and one forward-looking prompt</li>
+        <li>Maintain the YSP HK Notion workspace — keeping the content calendar, member database, meeting notes, and SOP library current</li>
+        <li>Take and distribute minutes for all founding team meetings within 24 hours of the meeting</li>
+        <li>Track action items and follow up with team members who have outstanding deliverables — gently, consistently</li>
+        <li>Coordinate all meeting scheduling across time zones using a shared availability system</li>
+        <li>Manage the application process for the first cohort — tracking submissions, sending acknowledgements, and coordinating interview scheduling with the Chapter Director</li>
+      </ul>
+
+      <div class="rl-section-title">Who We're Looking For</div>
+      <ul class="rl-list">
+        <li>Reliable and proactive — the Coordinator is the team's institutional memory, so consistency matters above almost everything else</li>
+        <li>Comfortable with Notion (or willing to learn it quickly) — this is your primary tool</li>
+        <li>Strong written English for community management; WeChat/Traditional Chinese a plus</li>
+        <li>Previous experience in any coordination, project management, or community management role — formal or informal</li>
+        <li>Flexible timezone — this role requires brief daily check-ins rather than long work blocks</li>
+      </ul>
+
+      <div class="rl-section-title">What You Gain</div>
+      <div class="rl-gains">
+        <div class="rl-gain"><strong>Operations Credit</strong>Named Community & Operations Coordinator on YSP HK documentation — directly applicable to project management and operations career tracks</div>
+        <div class="rl-gain"><strong>Full Visibility</strong>As the person who takes notes and tracks everything, you have unparalleled insight into how the chapter operates and grows — a learning no classroom provides</div>
+        <div class="rl-gain"><strong>Community Ownership</strong>You will have built and shaped a community of policy-engaged Hong Kong youth from day one — the kind of founding credit that is genuinely rare</div>
+        <div class="rl-gain"><strong>Certificate + Letter</strong>YSP Global certificate and tailored recommendation letter upon completion</div>
+      </div>
+    </div>
+    <div class="rl-apply">
+      <span class="apply-note">Reference: YSP-HK-OPS-2026</span>
+      <a class="apply-btn" href="#">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Apply Now
+      </a>
+    </div>
+  </div>
+
+  <div class="info-box ib-green" style="margin-top:32px">
+    <p><strong>Not sure which role fits?</strong> Apply for the one closest to your skills and note in your application if you'd consider a second role. We would rather find you the right home on the team than lose you because the fit wasn't obvious from the title alone. The founding team is small — flexibility and a genuine interest in policy matter more than a perfect role match.</p>
+  </div>
+
+  <div class="doc-footer">
+    <span>YSP Hong Kong — Role Descriptions</span>
+    <span>Recruitment Drive · 2026</span>
+  </div>
+</div>
+</div>
+
+<!-- ════ ORG CHART ════ -->
+<div class="panel" id="panel-org">
+<div class="body">
+
+  <section>
+    <div class="sec-label">Team Architecture</div>
+    <div class="sec-title">YSP Hong Kong <em>Structure</em></div>
+    <div class="sec-sub">The founding team of seven operates as a flat, collaborative unit in the first 16 weeks. There is a clear reporting line upward to YSP Global, but internally the team works as peers — the Chapter Director coordinates rather than commands.</div>
+
+    <div class="org-chart">
+      <div class="org-top">
+        <div class="org-node" style="background:#0a0d14">
+          YSP Global Leadership
+          <div class="org-node-sub">Singapore · CEO / Executive Director</div>
+        </div>
+      </div>
+      <div class="org-line"></div>
+      <div class="org-top">
+        <div class="org-node" style="background:var(--hk)">
+          Chapter Director — HK
+          <div class="org-node-sub">🏛️ 1 position · Leadership role</div>
+        </div>
+      </div>
+      <div class="org-line"></div>
+      <div class="org-branch">
+        <div class="org-col">
+          <div class="org-col-line"></div>
+          <div class="org-role">
+            Head of Editorial<br>& Research
+            <div class="org-role-sub">✍️ 1 position</div>
+          </div>
+        </div>
+        <div class="org-col">
+          <div class="org-col-line"></div>
+          <div class="org-role">
+            Visual Producer<br>& Content Creator
+            <div class="org-role-sub">🎨 1 position</div>
+          </div>
+        </div>
+        <div class="org-col">
+          <div class="org-col-line"></div>
+          <div class="org-role">
+            Partnerships &<br>Outreach Lead
+            <div class="org-role-sub">🤝 1 position</div>
+          </div>
+        </div>
+        <div class="org-col">
+          <div class="org-col-line"></div>
+          <div class="org-role">
+            Community &<br>Operations Coordinator
+            <div class="org-role-sub">📋 1 position</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-start;padding-left:0;margin-top:0">
+        <div style="display:flex;flex-direction:column;align-items:center;flex:0 0 calc(33.33% - 12px)">
+          <div class="org-line"></div>
+          <div class="org-role" style="background:var(--li-pale);border-color:rgba(10,102,194,0.2)">
+            Policy Writers ×3
+            <div class="org-role-sub">📝 Track A · B · C</div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;padding:3px 8px;border-radius:10px;background:var(--li-pale);color:var(--li)">Climate</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;padding:3px 8px;border-radius:10px;background:var(--li-pale);color:var(--li)">Economy</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;padding:3px 8px;border-radius:10px;background:var(--li-pale);color:var(--li)">Digital</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Reporting & Communication Structure</div>
+    <div class="info-box ib-li">
+      <p><strong>To YSP Global:</strong> The Chapter Director reports to YSP Global leadership (Mei Tong Kim, CEO) with a written chapter update every two weeks and attends the monthly Greater China coordination call alongside the Mainland China and Macau Chapter Directors.</p>
+    </div>
+    <div class="info-box ib-gold">
+      <p><strong>Within the team:</strong> The founding team meets weekly on Zoom or Google Meet (30 minutes, strict agenda). All action items are tracked in Notion by the Community Coordinator. Every team member communicates via a shared Slack workspace and the YSP HK founding team WeChat group for mobile-first updates.</p>
+    </div>
+    <div class="info-box ib-green">
+      <p><strong>With members:</strong> Once the first cohort is recruited, the Chapter Director and Head of Editorial are the primary member-facing contacts. Policy Writers interact with members through the WeChat community group and the bi-weekly open discussion sessions. All other roles are back-of-house during the programme.</p>
+    </div>
+  </section>
+
+  <div class="doc-footer">
+    <span>YSP Hong Kong — Team Structure</span>
+    <span>Founding Cohort · 2026</span>
+  </div>
+</div>
+</div>
+
+<script>
+function show(p, tab) {
+  document.querySelectorAll('.panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('panel-' + p).classList.add('active');
+  tab.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
