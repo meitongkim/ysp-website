@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Committee Topics — YSP Winter MUN 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mun-subpages.css">
+<style>
+  .topics{ background: linear-gradient(180deg, #fbfdfa 0%, #f3f8ef 100%) }
+
+  .toc{ display:flex; flex-wrap:wrap; gap:8px; margin-top:30px }
+  .toc a{
+    display:inline-flex; align-items:center; gap:9px; padding:9px 15px; border-radius:999px;
+    background:rgba(255,255,255,.6); border:1px solid var(--line); backdrop-filter:blur(10px);
+    font-size:13px; color:var(--ink-soft); transition:background .2s, color .2s, transform .2s;
+  }
+  .toc a:hover{ background:#fff; color:var(--ink); transform:translateY(-1px) }
+  .toc a .n{ font-family:ui-monospace,Menlo,monospace; font-size:10.5px; color:var(--mun); letter-spacing:.08em }
+
+  .topic{
+    border-radius:24px; overflow:hidden; margin-top:18px;
+    background:rgba(255,255,255,.7); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.85); box-shadow:var(--shadow-1);
+    scroll-margin-top:110px;
+  }
+  .topic-head{ padding:30px 34px 26px; border-bottom:1px solid var(--line); display:flex; gap:22px; align-items:flex-start; flex-wrap:wrap }
+  .topic-head .num{
+    font-family:"Fraunces",serif; font-weight:300; font-style:italic; font-size:52px; line-height:.9;
+    color:var(--mun-soft); flex-shrink:0;
+  }
+  .topic-head .hbody{ flex:1; min-width:260px }
+  .comm-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family: ui-monospace, Menlo, monospace; font-size:10px; font-weight:500;
+    letter-spacing:.14em; text-transform:uppercase; padding:4px 11px; border-radius:999px; margin-bottom:12px;
+  }
+  .badge-ga{ background:rgba(154,176,120,.18); color:var(--sage-deep) }
+  .badge-sc{ background:var(--mun-soft); color:var(--mun) }
+  .badge-crisis{ background:var(--crisis-soft); color:var(--crisis) }
+  .badge-env{ background:#f6ead8; color:#9c6e1e }
+  .badge-youth{ background:#e7e3f5; color:#4d3f9f }
+  .topic-head h2{ margin:0 0 6px; font-family:"Fraunces",serif; font-weight:400; font-size:27px; letter-spacing:-0.02em; color:var(--ink); line-height:1.15 }
+  .topic-head h2 em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .topic-head .seats{ display:flex; gap:16px; flex-wrap:wrap; margin-top:10px }
+  .topic-head .seats span{ font-family:ui-monospace,Menlo,monospace; font-size:11.5px; color:var(--ink-mute); letter-spacing:.04em; display:inline-flex; gap:6px; align-items:center }
+  .topic-head .seats span::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--sage); display:inline-block }
+
+  .topic-statement{
+    margin:0; padding:22px 34px; background:rgba(207,223,216,.22);
+    border-bottom:1px solid var(--line);
+    font-family:"Fraunces",serif; font-weight:300; font-size:19px; line-height:1.45; letter-spacing:-0.012em; color:var(--ink);
+  }
+  .topic-statement .lbl{ display:block; font-family:ui-monospace,Menlo,monospace; font-weight:400; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--mun); margin-bottom:8px }
+
+  .topic-body{ padding:28px 34px 32px; display:grid; grid-template-columns:1.3fr .9fr; gap:38px }
+  .topic-body h3{ font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); margin:0 0 14px; font-weight:500 }
+  .topic-body p{ color:var(--ink-soft); font-size:14.5px; line-height:1.62; margin:0 0 12px }
+  .topic-body p:last-child{ margin-bottom:0 }
+
+  .qlist{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px }
+  .qlist li{ display:flex; gap:12px; font-size:14.5px; color:var(--ink-soft); line-height:1.55 }
+  .qlist li .q{ flex-shrink:0; font-family:ui-monospace,Menlo,monospace; font-size:11px; color:var(--mun); padding-top:2px; min-width:22px }
+
+  .blocs{ display:flex; flex-direction:column; gap:10px; margin-top:4px }
+  .bloc{ padding:14px 16px; border-radius:13px; background:rgba(255,255,255,.6); border:1px solid var(--line) }
+  .bloc h4{ margin:0 0 4px; font-family:"Fraunces",serif; font-weight:400; font-size:15px; letter-spacing:-0.012em; color:var(--ink) }
+  .bloc p{ margin:0; font-size:13px; color:var(--ink-mute); line-height:1.5 }
+
+  .topic-foot{ padding:16px 34px; background:rgba(207,223,216,.2); border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px }
+  .topic-foot .meta{ font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.06em; color:var(--ink-mute) }
+  .topic-foot a{ font-size:13px; color:var(--mun); font-weight:500; display:inline-flex; gap:5px; align-items:center }
+  .topic-foot a .arr{ transition:transform .2s }
+  .topic-foot a:hover .arr{ transform:translateX(3px) }
+
+  .closer{ background: linear-gradient(180deg, #f3f8ef 0%, #eef3ee 100%) }
+
+  @media (max-width:860px){
+    .topic-body{ grid-template-columns:1fr; gap:26px }
+    .topic-head .num{ font-size:40px }
+  }
+</style>
+<style id="btn-caps">.btn,.pbc-feat-btn,.btn-primary,.btn-forest,.btn-ghost{text-transform:capitalize}</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Nav -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <img src="assets/ysp-logo.png" alt="" />
+      <span class="word">Y<i>S</i>P</span>
+    </a>
+    <div class="nav-links">
+      <a href="/programmes">Programmes</a>
+      <a href="/mun" class="active">Winter MUN</a>
+      <a href="/team">Team</a>
+      <a href="/about">About</a>
+    </div>
+    <a href="/mun#apply" class="btn btn-primary">Apply to MUN <span class="arr">↗</span></a>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="sub-hero" data-screen-label="Committee Topics — Hero">
+  <div class="container">
+    <div class="crumbs apple-reveal">
+      <span class="leaf"></span>
+      <a href="/">YSP</a><span class="sep">/</span>
+      <a href="/mun">Winter MUN 2026</a><span class="sep">/</span>
+      <a href="/mun#committees">Committees</a><span class="sep">/</span>
+      <span>Committee Topics</span>
+    </div>
+    <span class="sub-hero-eyebrow apple-reveal">Committees · 01 of 02</span>
+    <h1 class="apple-reveal" style="transition-delay:.06s">Committee <em>topics</em> in full.</h1>
+    <p class="lede apple-reveal" style="transition-delay:.14s">The complete agenda for each of the five committees at YSP Winter MUN 2026 — the topic as it will appear on your placard, the context that frames it, the questions the dais expects you to wrestle with, and the blocs you'll be negotiating between.</p>
+    <div class="sub-hero-meta apple-reveal" style="transition-delay:.22s">
+      <div class="it"><span class="k">Committees</span><span class="v">5 + waitlist</span></div>
+      <div class="it"><span class="k">Format</span><span class="v">Single-topic, six sessions</span></div>
+      <div class="it"><span class="k">Position papers due</span><span class="v">28 November 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Topics -->
+<section class="topics" data-screen-label="Committee Topics — List">
+  <div class="container">
+    <span class="eyebrow mun-eye apple-reveal"><span class="leaf"></span> The 2026 agenda</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.08s">One topic per committee, <em class="mun">chosen to force trade-offs.</em></h2>
+    <p class="section-sub apple-reveal" style="transition-delay:.16s">Every topic was selected because it has no clean answer. Each reflects a live international debate where the interests of real states genuinely diverge — so the room has somewhere to go.</p>
+
+    <nav class="toc apple-reveal" aria-label="Jump to a committee">
+      <a href="#unga"><span class="n">GA</span> UNGA Third Committee</a>
+      <a href="#unsc"><span class="n">SC</span> Security Council</a>
+      <a href="#crisis"><span class="n">JC</span> Joint Cabinet — Crisis</a>
+      <a href="#unep"><span class="n">UNEP</span> Environment Session</a>
+      <a href="#youth"><span class="n">YSA</span> Youth Assembly</a>
+    </nav>
+
+    <!-- UNGA -->
+    <article class="topic apple-reveal" id="unga">
+      <div class="topic-head">
+        <div class="num">01</div>
+        <div class="hbody">
+          <span class="comm-badge badge-ga">General Assembly</span>
+          <h2 class="serif">UNGA — <em>Third Committee</em></h2>
+          <div class="seats">
+            <span>40 seats</span><span>Intermediate</span><span>Outcome · Resolution</span>
+          </div>
+        </div>
+      </div>
+      <p class="topic-statement"><span class="lbl">Topic on the placard</span>Addressing the nexus between climate migration and human rights: a framework for binding international protection standards.</p>
+      <div class="topic-body">
+        <div>
+          <h3>Context</h3>
+          <p>By the late 2020s, climate-driven displacement is no longer a future scenario — it is an administrative reality that the existing refugee architecture was never written to handle. The 1951 Refugee Convention does not recognise environmental displacement as grounds for protection, leaving tens of millions in a legal grey zone between "migrant" and "refugee."</p>
+          <p>The Third Committee must decide whether the international community creates a new binding protection standard, extends existing instruments, or leaves the question to regional and bilateral arrangements. Each path redistributes obligation — and cost — between origin states, transit states, and destination states.</p>
+          <h3 style="margin-top:24px">Key questions before the floor</h3>
+          <ul class="qlist">
+            <li><span class="q">i.</span><span>Should "climate-displaced person" become a protected legal category, and if so, who bears the burden of proof for causation?</span></li>
+            <li><span class="q">ii.</span><span>How are protection obligations distributed between high-emitting states and the frontline states absorbing displacement?</span></li>
+            <li><span class="q">iii.</span><span>What is the role of planned, dignified relocation versus reactive emergency response?</span></li>
+            <li><span class="q">iv.</span><span>Can a binding standard survive without enforcement — and what enforcement is realistic?</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Blocs to watch</h3>
+          <div class="blocs">
+            <div class="bloc"><h4 class="serif">Frontline &amp; small-island states</h4><p>Push hardest for binding obligations and dedicated finance; least capacity to absorb cost alone.</p></div>
+            <div class="bloc"><h4 class="serif">High-income destination states</h4><p>Favour voluntary, capacity-based frameworks; wary of open-ended legal commitments.</p></div>
+            <div class="bloc"><h4 class="serif">Large transit economies</h4><p>Seek burden-sharing and finance in exchange for hosting; the swing vote of the room.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="topic-foot">
+        <span class="meta">Difficulty · Intermediate — friendly to delegates with 1–3 conferences</span>
+        <a href="/mun-background-guides#unga">Read the background guide <span class="arr">→</span></a>
+      </div>
+    </article>
+
+    <!-- UNSC -->
+    <article class="topic apple-reveal" id="unsc">
+      <div class="topic-head">
+        <div class="num">02</div>
+        <div class="hbody">
+          <span class="comm-badge badge-sc">Security Council</span>
+          <h2 class="serif">UN Security <em>Council</em></h2>
+          <div class="seats">
+            <span>15 seats</span><span>Advanced</span><span>Outcome · Directives</span>
+          </div>
+        </div>
+      </div>
+      <p class="topic-statement"><span class="lbl">Topic on the placard</span>Restoring regional stability in the Indo-Pacific: sovereignty, grey-zone tactics, and the limits of multilateral response.</p>
+      <div class="topic-body">
+        <div>
+          <h3>Context</h3>
+          <p>The Indo-Pacific has become the testing ground for "grey-zone" conflict — coercion that stays deliberately below the threshold of open war: maritime militia, infrastructure pressure, disputed exclusive economic zones, and information operations. The Security Council's tools were built for declared aggression, not for ambiguity engineered to fracture consensus.</p>
+          <p>Delegates must navigate the structural reality of the Council itself: the veto, the divide between permanent and elected members, and the credibility cost of resolutions that cannot be enforced. This is a committee about what the Council can actually do, not what it wishes it could.</p>
+          <h3 style="margin-top:24px">Key questions before the floor</h3>
+          <ul class="qlist">
+            <li><span class="q">i.</span><span>What constitutes a "threat to international peace and security" when no shot has been fired?</span></li>
+            <li><span class="q">ii.</span><span>Can the Council act meaningfully where a permanent member holds a direct stake?</span></li>
+            <li><span class="q">iii.</span><span>What is the line between freedom of navigation and provocation?</span></li>
+            <li><span class="q">iv.</span><span>Should regional mechanisms (ASEAN, Quad) be empowered, or does that erode the Council's authority?</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Blocs to watch</h3>
+          <div class="blocs">
+            <div class="bloc"><h4 class="serif">Permanent members (P5)</h4><p>Each guards strategic interests; the veto shapes every draft before it reaches the floor.</p></div>
+            <div class="bloc"><h4 class="serif">Regional elected members</h4><p>Closest to the consequences; broker language the P5 can live with.</p></div>
+            <div class="bloc"><h4 class="serif">Non-aligned voices</h4><p>Press for restraint and process; leverage moral authority over hard power.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="topic-foot">
+        <span class="meta">Difficulty · Advanced — for experienced delegates comfortable with the veto</span>
+        <a href="/mun-background-guides#unsc">Read the background guide <span class="arr">→</span></a>
+      </div>
+    </article>
+
+    <!-- Crisis -->
+    <article class="topic apple-reveal" id="crisis">
+      <div class="topic-head">
+        <div class="num">03</div>
+        <div class="hbody">
+          <span class="comm-badge badge-crisis">Ad Hoc Crisis</span>
+          <h2 class="serif">Joint <em>Cabinet</em> — Crisis</h2>
+          <div class="seats">
+            <span>25 seats</span><span>Expert</span><span>Outcome · Live directives</span>
+          </div>
+        </div>
+      </div>
+      <p class="topic-statement"><span class="lbl">Topic on the placard</span>The cascading financial contagion of 2026: a G20 Emergency Finance Ministers' Council facing sovereign debt cascade and currency warfare.</p>
+      <div class="topic-body">
+        <div>
+          <h3>Context</h3>
+          <p>A sovereign default in one mid-sized economy has triggered a chain reaction: capital flight, currency collapse, and an emergency that the post-2008 financial firewalls were supposed to prevent. Delegates sit as Finance Ministers and central-bank governors in a G20 emergency session — and the situation will not hold still.</p>
+          <p>This committee does not debate a static topic. The Crisis Director introduces injections on a published and a hidden schedule, and every directive the cabinet passes feeds the next development. Delegates are graded on the consequences they cause, not the speeches they give.</p>
+          <h3 style="margin-top:24px">Opening pressures</h3>
+          <ul class="qlist">
+            <li><span class="q">i.</span><span>Coordinated liquidity support versus protecting domestic reserves — who blinks first?</span></li>
+            <li><span class="q">ii.</span><span>Capital controls: stabilising or contagion-accelerating?</span></li>
+            <li><span class="q">iii.</span><span>How does the cabinet respond to currency interventions made outside its mandate?</span></li>
+            <li><span class="q">iv.</span><span>What happens when a back-channel deal between two ministers leaks to the floor?</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Portfolios &amp; alignment</h3>
+          <div class="blocs">
+            <div class="bloc"><h4 class="serif">Surplus economies</h4><p>Hold the reserves everyone needs; will extract conditions for any rescue package.</p></div>
+            <div class="bloc"><h4 class="serif">Exposed debtor states</h4><p>Need liquidity now; weigh sovereignty against survival.</p></div>
+            <div class="bloc"><h4 class="serif">Institutional actors</h4><p>IMF and central-bank seats with tools but contested legitimacy.</p></div>
+          </div>
+          <p style="margin-top:12px; font-size:13px; color:var(--crisis)">See the full crisis-committee mechanics on the main MUN page.</p>
+        </div>
+      </div>
+      <div class="topic-foot">
+        <span class="meta">Difficulty · Expert — fast, document-heavy, real time pressure</span>
+        <a href="/mun#crisis">See crisis design <span class="arr">→</span></a>
+      </div>
+    </article>
+
+    <!-- UNEP -->
+    <article class="topic apple-reveal" id="unep">
+      <div class="topic-head">
+        <div class="num">04</div>
+        <div class="hbody">
+          <span class="comm-badge badge-env">Environment</span>
+          <h2 class="serif">UNEP <em>Special Session</em></h2>
+          <div class="seats">
+            <span>40 seats</span><span>Intermediate</span><span>Outcome · Resolution</span>
+          </div>
+        </div>
+      </div>
+      <p class="topic-statement"><span class="lbl">Topic on the placard</span>Governing the geoengineering frontier: solar radiation management, transboundary risk, and the architecture of global atmospheric governance.</p>
+      <div class="topic-body">
+        <div>
+          <h3>Context</h3>
+          <p>As emissions targets slip, solar geoengineering — deliberately reflecting sunlight to cool the planet — has moved from fringe theory to active research. The technology is comparatively cheap, which means a single state, or even a wealthy private actor, could deploy it unilaterally with planetary consequences. There is currently no governance regime for any of it.</p>
+          <p>UNEP must decide whether the world builds a moratorium, a research framework, or a full governance architecture — and who holds the authority to say "stop." The committee weighs precaution against the moral hazard of doing nothing while the climate window narrows.</p>
+          <h3 style="margin-top:24px">Key questions before the floor</h3>
+          <ul class="qlist">
+            <li><span class="q">i.</span><span>Who has the right to alter the global climate, and who must consent?</span></li>
+            <li><span class="q">ii.</span><span>Should research be paused, governed, or accelerated under safeguards?</span></li>
+            <li><span class="q">iii.</span><span>How is liability assigned for transboundary harm from deployment?</span></li>
+            <li><span class="q">iv.</span><span>Does a governance regime legitimise the technology by regulating it?</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Blocs to watch</h3>
+          <div class="blocs">
+            <div class="bloc"><h4 class="serif">Research-capable states</h4><p>Want a permissive framework that keeps the option open under oversight.</p></div>
+            <div class="bloc"><h4 class="serif">Climate-vulnerable states</h4><p>Split between precaution and demanding a seat at any deployment decision.</p></div>
+            <div class="bloc"><h4 class="serif">Precautionary coalition</h4><p>Push for a moratorium until governance exists; invoke the precautionary principle.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="topic-foot">
+        <span class="meta">Difficulty · Intermediate — strong fit for science-policy interest</span>
+        <a href="/mun-background-guides#unep">Read the background guide <span class="arr">→</span></a>
+      </div>
+    </article>
+
+    <!-- Youth -->
+    <article class="topic apple-reveal" id="youth">
+      <div class="topic-head">
+        <div class="num">05</div>
+        <div class="hbody">
+          <span class="comm-badge badge-youth">Youth Assembly</span>
+          <h2 class="serif">YSP Youth <em>Special Assembly</em></h2>
+          <div class="seats">
+            <span>30 seats</span><span>Beginner-friendly</span><span>Outcome · Policy paper</span>
+          </div>
+        </div>
+      </div>
+      <p class="topic-statement"><span class="lbl">Topic on the placard</span>Renegotiating the intergenerational social contract: youth representation mechanisms in multilateral climate finance frameworks.</p>
+      <div class="topic-body">
+        <div>
+          <h3>Context</h3>
+          <p>Decisions about climate finance made today bind the generation that will live with their outcomes — yet that generation has almost no formal seat at the table. The Youth Special Assembly asks delegates to design the mechanisms that would actually give young people decision-making power, not just consultation, in how climate finance is raised, allocated, and held accountable.</p>
+          <p>Built for first-time delegates, this committee trades veto politics for design thinking: the room produces a policy paper proposing concrete representation mechanisms, and the dais coaches procedure as the session runs.</p>
+          <h3 style="margin-top:24px">Key questions before the floor</h3>
+          <ul class="qlist">
+            <li><span class="q">i.</span><span>What does meaningful youth representation look like beyond a symbolic seat?</span></li>
+            <li><span class="q">ii.</span><span>How do you build accountability that outlasts a single conference cycle?</span></li>
+            <li><span class="q">iii.</span><span>Should youth bodies have advisory power, voting power, or budget authority?</span></li>
+            <li><span class="q">iv.</span><span>How is "youth" defined fairly across very different national contexts?</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Perspectives in the room</h3>
+          <div class="blocs">
+            <div class="bloc"><h4 class="serif">Youth delegations</h4><p>Argue for binding mechanisms and a real budget line, not consultation theatre.</p></div>
+            <div class="bloc"><h4 class="serif">Established institutions</h4><p>Favour advisory roles; cite mandate, capacity, and continuity concerns.</p></div>
+            <div class="bloc"><h4 class="serif">Funder states</h4><p>Want accountability attached to any new representation structure.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="topic-foot">
+        <span class="meta">Difficulty · Beginner-friendly — designed for first-time delegates</span>
+        <a href="/mun-background-guides#youth">Read the background guide <span class="arr">→</span></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Closer / pager -->
+<section class="closer" data-screen-label="Committee Topics — Next">
+  <div class="container narrow">
+    <span class="eyebrow mun-eye apple-reveal"><span class="leaf"></span> Keep reading</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.06s">Next: <em class="mun">the background guides.</em></h2>
+    <p class="section-sub apple-reveal" style="transition-delay:.12s">Every confirmed delegate receives a full background guide for their committee — the research, the framing, and the position-paper brief. Preview what's inside.</p>
+    <div class="pager apple-reveal" style="transition-delay:.16s">
+      <a class="prev" href="/mun#committees">
+        <span class="k">← Back to</span>
+        <span class="t serif">All committees</span>
+      </a>
+      <a class="next" href="/mun-background-guides">
+        <span class="k">Next →</span>
+        <span class="t serif">Background guides</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand">
+        <img src="assets/ysp-logo.png" alt="" />
+        <span class="word">Y<i>S</i>P</span>
+      </div>
+      <p class="blurb">Youth for Sustainable Policy (YSP) is a youth-led initiative empowering the next generation to engage with global challenges through research, storytelling, and policy dialogue.</p>
+    </div>
+    <div>
+      <h5>Winter MUN</h5>
+      <ul>
+        <li><a href="/mun">MUN Overview</a></li>
+        <li><a href="/mun-committee-topics">Committee Topics</a></li>
+        <li><a href="/mun-background-guides">Background Guides</a></li>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun#apply">Apply Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Registration</h5>
+      <ul>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun-terms-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="/mun-liability-waiver">Liability Waiver</a></li>
+        <li><a href="/mun#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="safe-band">
+    <div class="left">
+      <span class="leaf">✦</span>
+      <span>This is a safe, moderated space for youth. For Youth, By Youth.</span>
+    </div>
+    <div>View our <a href="/community-policy">Community Policy</a> · <a href="/privacy-notice">Privacy Notice</a></div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Youth for Sustainable Policy. A registered non-profit.</span>
+    <span>Made slowly, in good company.</span>
+  </div>
+</footer>
+
+<script src="mun-subpages.js"></script>
+<script src="mobile-nav.js"></script>
+</body>
+</html>

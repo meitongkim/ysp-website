@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>“It's not about animals. It's about systems under strain.” — In conversation with SPCA Selangor — YSP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#9ab078; --sage-deep:#89a36c; --sage-soft:#b9c99e;
+    --mist:#cfdfd8; --mist-pale:#e6efe9;
+    --paper:#fbfdfa; --ink:#1f2a22; --ink-soft:#3d4b40; --ink-mute:#67756a;
+    --line:rgba(31,42,34,.10);
+    --shadow-1: 0 1px 2px rgba(31,42,34,.04), 0 8px 24px -8px rgba(31,42,34,.10);
+    --shadow-2: 0 1px 2px rgba(31,42,34,.06), 0 24px 60px -20px rgba(122,150,108,.30);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color:var(--ink); background:var(--paper);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden; font-size:16px; line-height:1.55; letter-spacing:-0.005em;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .serif{font-family:"Fraunces", Georgia, serif; font-weight:400; letter-spacing:-0.02em}
+  .mono{font-family: ui-monospace, "SF Mono", Menlo, monospace}
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:9999;
+    opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.16  0 0 0 0 0.13  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Nav (matches site) */
+  .nav-wrap{ position:fixed; top:18px; left:0; right:0; z-index:100; display:flex; justify-content:center; pointer-events:none }
+  .nav{
+    pointer-events:auto; display:flex; align-items:center; gap:8px;
+    padding:8px 8px 8px 18px;
+    background:rgba(255,255,255,.42);
+    backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border:1px solid rgba(255,255,255,.55); border-radius:999px;
+    box-shadow: 0 1px 1px rgba(255,255,255,.6) inset, 0 10px 30px -12px rgba(31,42,34,.18);
+  }
+  .scrolled .nav{ background:rgba(255,255,255,.62); backdrop-filter: blur(22px) saturate(1.6); border-color: rgba(255,255,255,.7) }
+  .nav .brand{ display:flex; align-items:center; gap:10px; padding-right:14px; border-right:1px solid var(--line) }
+  .nav .brand img{ width:28px; height:28px; border-radius:8px; object-fit:cover; box-shadow:0 2px 6px rgba(31,42,34,.15) }
+  .nav .brand .word{ font-weight:600; letter-spacing:.02em; font-size:14px }
+  .nav .brand .word i{ font-style:normal; color:var(--sage-deep) }
+  .nav-links{ display:flex; align-items:center; gap:2px; padding:0 6px }
+  .nav-links a{ padding:8px 14px; border-radius:999px; font-size:13.5px; font-weight:500; color:var(--ink-soft); transition: background .25s, color .25s }
+  .nav-links a:hover{ background:rgba(255,255,255,.6); color:var(--ink) }
+  .nav-links a.is-current{ background:rgba(255,255,255,.7); color:var(--ink) }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:999px; font-size:13.5px; font-weight:500; transition: transform .25s, box-shadow .25s, background .25s, filter .25s }
+  .btn-primary{ background:var(--ink); color:#fbfdfa; box-shadow: 0 1px 1px rgba(255,255,255,.18) inset, 0 8px 22px -8px rgba(31,42,34,.45) }
+  .btn-primary:hover{ background:#0f1612 }
+  .btn-ghost{ color:var(--ink); background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.7); backdrop-filter: blur(10px) }
+  .btn-ghost:hover{ background:rgba(255,255,255,.8) }
+  .btn .arr{ display:inline-block; transition: transform .25s }
+  .btn:hover .arr{ transform: translate(2px,-2px) }
+
+  /* Reading-progress bar */
+  .progress{ position:fixed; top:0; left:0; height:3px; width:0; background: linear-gradient(90deg, var(--sage), var(--sage-deep)); z-index:200; transition: width .1s }
+
+  /* Article hero */
+  .a-hero{
+    position:relative; padding: 150px 24px 36px; overflow:hidden;
+    background: linear-gradient(180deg, #f3f8ef 0%, #fbfdfa 100%);
+  }
+  .a-hero .container{ max-width: 860px; margin: 0 auto; text-align:center }
+  .a-hero .crumbs{ display:inline-flex; gap:10px; align-items:center; font-size:12.5px; color:var(--ink-mute); margin-bottom:22px }
+  .a-hero .crumbs a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:3px; text-decoration-color: var(--line) }
+  .a-hero .crumbs a:hover{ text-decoration-color: var(--sage-deep) }
+  .a-hero .cat{ font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--sage-deep); font-weight:600; margin-bottom: 18px; display:inline-flex; align-items:center; gap:9px }
+  .a-hero .cat .leaf{ width:6px; height:6px; border-radius:50%; background:var(--sage) }
+  .a-hero h1{ font-family:"Fraunces",serif; font-weight:400; font-size: clamp(34px, 5vw, 60px); line-height:1.06; letter-spacing:-.02em; margin: 6px 0 24px; text-wrap: balance }
+  .a-hero h1 em{ font-style:italic; font-weight:300; color:var(--sage-deep) }
+  .a-hero .meta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; color:var(--ink-mute); font-size:13.5px }
+  .a-hero .meta .dot{ width:3px; height:3px; border-radius:50%; background:currentColor; opacity:.5; align-self:center }
+  .a-hero .lede{ color:var(--ink-soft); font-size: 18.5px; line-height:1.55; margin: 28px auto 0; max-width: 660px; text-wrap:pretty }
+  .a-hero .lede b{ color:var(--ink); font-weight:600 }
+
+  /* Cover */
+  .a-cover{ max-width: 1100px; margin: 14px auto 0; padding: 0 24px }
+  .a-cover .frame{
+    border-radius: 22px; overflow:hidden; aspect-ratio: 16/7; box-shadow: var(--shadow-2);
+    border:1px solid rgba(255,255,255,.7);
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.5) 0 2px, transparent 2px 16px),
+      linear-gradient(135deg, var(--mist) 0%, var(--sage-soft) 55%, var(--sage) 100%);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .a-cover .frame .ph{
+    font-family: ui-monospace, Menlo, monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-soft); background:rgba(255,255,255,.6); padding:9px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.8);
+  }
+
+  /* Body */
+  article.post{
+    max-width: 720px; margin: 0 auto; padding: 56px 24px 8px;
+    font-size: 18px; line-height: 1.7; color: var(--ink);
+  }
+  article.post > p{ margin: 0 0 1.2em; text-wrap: pretty; color:var(--ink-soft) }
+  article.post .intro{ font-size:19px; color:var(--ink); }
+  article.post hr{ border: 0; border-top: 1px solid var(--line); margin: 2.6em 0 }
+
+  /* Q&A blocks */
+  .qa{ margin: 0 0 8px; padding: 40px 0; border-top:1px solid var(--line) }
+  .qa:first-of-type{ border-top:0; padding-top: 8px }
+  .qa .qmeta{ display:flex; align-items:baseline; gap:14px; margin-bottom: 14px }
+  .qa .qnum{
+    font-family: ui-monospace, Menlo, monospace; font-size:12px; letter-spacing:.14em;
+    color:var(--sage-deep); font-weight:500; flex-shrink:0; padding-top:4px;
+  }
+  .qa .question{
+    font-family:"Fraunces",serif; font-weight:400; font-size: clamp(23px, 2.6vw, 30px);
+    line-height:1.22; letter-spacing:-.018em; color:var(--ink); margin:0;
+  }
+  .qa .answer{ margin-top: 4px }
+  .qa .answer p{ margin: 0 0 1.1em; color:var(--ink-soft); text-wrap:pretty }
+  .qa .answer p:last-child{ margin-bottom:0 }
+  .qa .answer p.lead-in{ color:var(--ink); font-weight:500 }
+  .qa .answer strong{ color:var(--ink); font-weight:600 }
+
+  /* Pull quote */
+  .pull{
+    margin: 1.4em 0; padding: 6px 0 6px 24px; border-left:3px solid var(--sage-deep);
+    font-family:"Fraunces",serif; font-weight:400; font-style:italic;
+    font-size: clamp(22px, 2.4vw, 27px); line-height:1.32; letter-spacing:-.015em; color:var(--ink);
+  }
+
+  /* Lists styled as ticks */
+  .qa .answer ul{ list-style:none; padding:0; margin: 0 0 1.2em; display:flex; flex-direction:column; gap:9px }
+  .qa .answer ul li{
+    position:relative; padding-left: 26px; color:var(--ink-soft); line-height:1.5;
+  }
+  .qa .answer ul li::before{
+    content:""; position:absolute; left:2px; top:.62em; width:7px; height:7px; border-radius:50%;
+    background:var(--sage); box-shadow:0 0 0 4px rgba(154,176,120,.16);
+  }
+
+  /* Inline stat band inside an answer */
+  .statline{
+    display:flex; flex-wrap:wrap; gap:10px; margin: 1.4em 0;
+  }
+  .statline .s{
+    flex:1 1 150px; padding: 18px 20px; border-radius:16px;
+    background: rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.8); box-shadow: var(--shadow-1);
+  }
+  .statline .s .n{ font-family:"Fraunces",serif; font-weight:300; font-size: 38px; line-height:1; letter-spacing:-.02em; color:var(--ink) }
+  .statline .s .n em{ font-style:italic; color:var(--sage-deep); font-size:.5em; letter-spacing:0 }
+  .statline .s .l{ margin-top:8px; font-size:12.5px; color:var(--ink-mute); line-height:1.4 }
+
+  /* Subject card */
+  .subject{
+    max-width: 720px; margin: 8px auto 0; padding: 0 24px;
+  }
+  .subject .card{
+    padding: 28px 30px; border-radius:22px;
+    background: linear-gradient(140deg, rgba(255,255,255,.75), rgba(207,223,216,.42));
+    border:1px solid rgba(255,255,255,.85); box-shadow: var(--shadow-2);
+    display:grid; grid-template-columns: 56px 1fr; gap: 20px; align-items:start;
+  }
+  .subject .mark{
+    width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(140deg, var(--mist), var(--sage)); color:#fbfdfa;
+    font-family:"Fraunces",serif; font-size:22px; box-shadow:0 4px 12px -4px rgba(31,42,34,.3);
+  }
+  .subject h4{ margin:0 0 4px; font-family:"Fraunces",serif; font-weight:400; font-size:21px; letter-spacing:-.015em }
+  .subject .role{ font-size:13px; color:var(--ink-mute); letter-spacing:.03em; margin-bottom:12px }
+  .subject p{ margin:0; font-size:14.5px; color:var(--ink-soft); line-height:1.6 }
+  .subject p a{ color:var(--sage-deep); border-bottom:1px solid rgba(137,163,108,.4) }
+
+  /* Editor's note / disclaimer */
+  .note{
+    max-width: 720px; margin: 36px auto 0; padding: 22px 26px; border-radius:16px;
+    background: rgba(31,42,34,.035); border:1px solid var(--line);
+    font-size: 13.5px; line-height:1.6; color:var(--ink-mute);
+  }
+  .note b{ color:var(--ink-soft); font-weight:600 }
+
+  /* Prev / Next */
+  .pn{ max-width: 1100px; margin: 56px auto 24px; padding: 0 24px; display:grid; grid-template-columns: 1fr 1fr; gap: 22px }
+  .pn a{ display:block; padding: 26px 28px; background:#fff; border:1px solid var(--line); border-radius:20px; transition: transform .3s, box-shadow .3s }
+  .pn a:hover{ transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: rgba(31,42,34,.16) }
+  .pn .dir{ font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); margin-bottom: 8px; display:block }
+  .pn h5{ font-family:"Fraunces", serif; font-weight:400; font-size: 20px; line-height:1.2; margin:0; letter-spacing:-.01em }
+  .pn h5 em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .pn .next{ text-align:right }
+
+  /* Footer */
+  footer{ padding: 60px 24px 80px; background:#0f1612; color:#d6dcd2; margin-top: 72px }
+  footer .container{ display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:48px; max-width:1280px; margin: 0 auto }
+  footer h5{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#8c9789; margin: 0 0 16px; font-weight:500 }
+  footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px }
+  footer a{ color:#d6dcd2; opacity:.85; font-size:14px }
+  footer a:hover{ opacity:1; color:#fff }
+  footer .brand-block .serif{ font-family:"Fraunces",serif; font-size:28px; color:#fff; letter-spacing:-.02em; margin-bottom:10px; display:block }
+  footer .brand-block .serif i{ font-style:normal; color:var(--sage-soft) }
+  footer .brand-block p{ font-size:14px; color:#a4ada0; line-height:1.55; max-width:340px }
+  footer .bottom{ max-width:1280px; margin: 56px auto 0; padding-top:24px; border-top:1px solid rgba(255,255,255,.08); display:flex; justify-content:space-between; font-size:12.5px; color:#7e887b }
+
+  @media (max-width: 720px){
+    .nav-links{ display:none }
+    .pn{ grid-template-columns: 1fr }
+    .pn .next{ text-align:left }
+    article.post{ font-size: 17px }
+    .subject .card{ grid-template-columns: 1fr }
+    footer .container{ grid-template-columns: 1fr 1fr }
+  }
+</style>
+<style id="btn-caps">.btn,.pbc-feat-btn,.btn-primary,.btn-forest,.btn-ghost{text-transform:capitalize}</style>
+</head>
+<body data-screen-label="SPCA Selangor Interview">
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress"></div>
+
+<!-- Nav -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <img src="assets/ysp-logo.png" alt="" />
+      <span class="word">Y<i>S</i>P</span>
+    </a>
+    <div class="nav-links">
+      <a href="/programmes">Programmes</a>
+      <a href="/team">Team</a>
+      <a href="/about">About</a>
+    </div>
+    <a href="mailto:youthforsustainablepolicy@gmail.com?subject=Press%20enquiry" class="btn btn-primary">Press enquiry <span class="arr">↗</span></a>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="a-hero" data-screen-label="Interview Hero">
+  <div class="container">
+    <div class="crumbs">
+      <a href="/substack">← Substack</a>
+    </div>
+    <span class="cat"><span class="leaf"></span> In conversation · Interview</span>
+    <h1>“It's not about animals. It's about <em>systems under strain.</em>”</h1>
+    <div class="meta">
+      <span>Interview by YSP</span>
+      <span class="dot"></span>
+      <span>With SPCA Selangor</span>
+      <span class="dot"></span>
+      <span>June 2026</span>
+      <span class="dot"></span>
+      <span>8 min read</span>
+    </div>
+    <p class="lede">SPCA Selangor runs kennels, a subsidised clinic, adoptions, and the <b>Potong Royong</b> population-control model. We spoke to the team about why rescue alone doesn't work, where Malaysia's animal-welfare framework actually breaks, and why the most useful young people in this field are operations thinkers — not just animal lovers.</p>
+  </div>
+</section>
+
+<!-- Cover -->
+<div class="a-cover">
+  <div class="frame">
+    <span class="ph">photo — SPCA Selangor (drop in here)</span>
+  </div>
+</div>
+
+<!-- Subject card -->
+<div class="subject">
+  <div class="card">
+    <div class="mark serif">S</div>
+    <div>
+      <h4 class="serif">SPCA Selangor</h4>
+      <div class="role">Society for the Prevention of Cruelty to Animals, Selangor · Malaysia</div>
+      <p>An independent animal-welfare society running kennels and catteries, a subsidised clinic, adoptions, and the <em>Potong Royong</em> neutering programme. <b>Note:</b> SPCA Selangor is not affiliated with other organisations sharing the “SPCA” name; the views below are specific to SPCA Selangor only.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Article body -->
+<article class="post">
+  <p class="intro">This is an edited transcript of an interview YSP conducted with SPCA Selangor. The answers are direct — and, in places, deliberately uncomfortable. We've kept them that way.</p>
+
+  <!-- Q1 -->
+  <div class="qa">
+    <div class="qmeta">
+      <span class="qnum">Q1</span>
+      <h2 class="question serif">Could you give us a brief overview of SPCA Selangor's day-to-day operations?</h2>
+    </div>
+    <div class="answer">
+      <p class="lead-in">Most people think animal welfare is about feeding animals and playing with them. It's not.</p>
+      <p>Our daily operations revolve around managing the consequences of human decisions — abandonment, irresponsible ownership, and uncontrolled breeding. Yes, we run kennels and catteries, a subsidised clinic, adoptions, and handle enquiries — but the bulk of our effort is spent on <strong>surrender cases</strong>, which are the most expensive and time-consuming.</p>
+      <p>Every surrendered animal is not just “rescued.” It becomes a months-long commitment — treatment, vaccination, neutering, recovery, and then hoping for adoption in an already saturated system.</p>
+      <p>The biggest constraint isn't space or manpower. It's <strong>funding</strong> — because funding dictates everything else. Without it, even the best intentions collapse. And when we run large-scale neutering programmes, we split our already limited team to manage both long-term prevention and immediate operational pressure at the same time.</p>
+      <div class="pull">That's the reality of animal welfare: it's not about animals. It's about systems under strain.</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa">
+    <div class="qmeta">
+      <span class="qnum">Q2</span>
+      <h2 class="question serif">Potong Royong is described as a sustainable population-control model. How does it work?</h2>
+    </div>
+    <div class="answer">
+      <p class="lead-in">Potong Royong exists because we accepted a hard truth: rescue does not solve the problem.</p>
+      <p>The programme is built around one principle — if you don't stop breeding, you are just recycling suffering. It started during the flood crisis when multiple parties — SPCA, UPM, MAVMA — came together. What we realised was this: emergency response is temporary, but population control is permanent.</p>
+      <p>Today, Potong Royong is a coordinated model involving veterinary institutions, local councils, NGOs, and the public.</p>
+      <div class="statline">
+        <div class="s"><div class="n">~700</div><div class="l">animals in a major project</div></div>
+        <div class="s"><div class="n">~130</div><div class="l">animals in a mini project</div></div>
+        <div class="s"><div class="n">~3,000</div><div class="l">neutered annually</div></div>
+      </div>
+      <p>But the real impact is not the numbers. It's <strong>behavioural change</strong>. When neutering becomes visible, accessible, and normalised:</p>
+      <ul>
+        <li>People start doing it</li>
+        <li>Peer pressure works</li>
+        <li>Costs stop being an excuse</li>
+      </ul>
+      <p>This is how you scale impact — not by rescuing more, but by preventing the next generation from being born into the same conditions.</p>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa">
+    <div class="qmeta">
+      <span class="qnum">Q3</span>
+      <h2 class="question serif">What are the most persistent misconceptions about animal welfare?</h2>
+    </div>
+    <div class="answer">
+      <p class="lead-in">The most damaging belief is this: “Shelters will solve the problem.” They won't.</p>
+      <div class="pull">Shelters are not solutions — they are overflow containers.</div>
+      <p>Every time someone rescues an animal and sends it to a shelter, they feel like they've helped. But what they've actually done is shift the burden, not solve it.</p>
+      <p>The second misconception is that animal welfare is about animals. It's not. It's about:</p>
+      <ul>
+        <li>Human behaviour</li>
+        <li>Urban planning</li>
+        <li>Policy gaps</li>
+        <li>Cultural realities</li>
+      </ul>
+      <p>If you don't address those, you can build 100 shelters and still fail.</p>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa">
+    <div class="qmeta">
+      <span class="qnum">Q4</span>
+      <h2 class="question serif">Where are the biggest gaps in Malaysia's animal-welfare framework?</h2>
+    </div>
+    <div class="answer">
+      <div class="pull">We don't lack laws. We lack enforcement and alignment.</div>
+      <p>Malaysia already has a reasonably strong legal framework. The issue is inconsistent enforcement, a lack of coordination between authorities, and — frankly — selective compliance.</p>
+      <p>Even within the animal-welfare space, there are groups who believe: “Because we are helping animals, the rules don't apply to us.” That mindset is part of the problem.</p>
+      <p>Real change doesn't come from adding more laws. It comes from:</p>
+      <ul>
+        <li>Enforcing existing ones properly</li>
+        <li>Setting clear operational standards</li>
+        <li>Holding everyone accountable — including NGOs</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa">
+    <div class="qmeta">
+      <span class="qnum">Q5</span>
+      <h2 class="question serif">How can young people contribute meaningfully beyond adoption or donation?</h2>
+    </div>
+    <div class="answer">
+      <p class="lead-in">This is where I'll be very direct: adoption is not going to solve the problem. Not at scale.</p>
+      <p>From our data:</p>
+      <div class="statline">
+        <div class="s"><div class="n">824</div><div class="l">enquiries about rescue / surrender</div></div>
+        <div class="s"><div class="n">33</div><div class="l">enquiries about adoption</div></div>
+        <div class="s"><div class="n">3–5<em>%</em></div><div class="l">realistically viable dog adopters</div></div>
+      </div>
+      <p>That gap is not emotional — it's structural. A small percentage of people can actually own pets; housing restrictions limit options; financial stability is a factor; and existing owners don't adopt frequently. Cats are higher, but still limited. So unless adoption increases by 700–800%, which is unrealistic, it will never catch up.</p>
+      <p>What we actually need:</p>
+      <ul>
+        <li>Operations thinkers</li>
+        <li>System builders</li>
+        <li>Data-driven planners</li>
+        <li>People who can work with councils and policy</li>
+      </ul>
+      <p>Animal welfare is no longer about “helping animals directly.” It's about reducing suffering at scale through systems.</p>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qa">
+    <div class="qmeta">
+      <span class="qnum">Q6</span>
+      <h2 class="question serif">What is something you wish received more public attention?</h2>
+    </div>
+    <div class="answer">
+      <div class="pull">Not all help is helpful.</div>
+      <p>People want to believe rescue is always good, that saving every animal is the goal, and that shelters are safe solutions. None of these are fully true.</p>
+      <p>If we keep operating based on emotion alone, shelters will collapse, intake will exceed capacity, and authorities will revert to catch-and-kill.</p>
+      <p class="lead-in">The goal is not to save every animal. The goal is to reduce overall suffering — sustainably and at scale.</p>
+      <p>That requires education, higher standards, and the willingness to challenge even our own practices — including within the animal-welfare community itself.</p>
+    </div>
+  </div>
+</article>
+
+<!-- Editor's note -->
+<div class="note">
+  <b>Editor's note.</b> This interview has been lightly edited for length and clarity. All figures and views are SPCA Selangor's own and apply to SPCA Selangor only — the organisation is not affiliated with other bodies sharing the “SPCA” name. With thanks to the SPCA Selangor team for their time and candour.
+</div>
+
+<!-- Prev / Next -->
+<nav class="pn">
+  <a href="/substack"><span class="dir">← Back</span><h5 class="serif">All <em>press</em> &amp; coverage</h5></a>
+  <a class="next" href="mailto:youthforsustainablepolicy@gmail.com?subject=Interview%20follow-up"><span class="dir">Get in touch →</span><h5 class="serif">Pitch an <em>interview</em></h5></a>
+</nav>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="brand-block">
+      <span class="serif">Y<i>S</i>P</span>
+      <p>Youth for Sustainable Policy — long-form, mentor-matched policy work by young people.</p>
+    </div>
+    <div>
+      <h5>YSP</h5>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/team">Team</a></li>
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/careers">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Writing</h5>
+      <ul>
+        <li><a href="/substack">Substack</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:youthforsustainablepolicy@gmail.com?subject=Press%20enquiry">Press desk</a></li>
+        <li><a href="/programmes#contact">General contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="bottom container">
+    <span>© 2026 Youth for Sustainable Policy</span>
+    <span>Made slowly, in good company.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', ()=>{
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = Math.max(0, Math.min(100, pct)) + '%';
+    document.body.classList.toggle('scrolled', window.scrollY > 20);
+  }, {passive:true});
+})();
+</script>
+
+<script src="mobile-nav.js"></script>
+</body>
+</html>

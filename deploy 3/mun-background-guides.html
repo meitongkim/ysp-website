@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Background Guides — YSP Winter MUN 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mun-subpages.css">
+<style>
+  .guides{ background: linear-gradient(180deg, #fbfdfa 0%, #f3f8ef 100%) }
+
+  /* Release banner */
+  .release{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:space-between;
+    margin-top:30px; padding:18px 24px; border-radius:16px;
+    background:var(--mun); color:#fbfdfa;
+  }
+  .release .l{ display:flex; align-items:center; gap:12px; font-size:14px }
+  .release .dot{ width:8px; height:8px; border-radius:50%; background:var(--sage); box-shadow:0 0 0 4px rgba(154,176,120,.25) }
+  .release .l b{ font-weight:600 }
+  .release .r{ font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.1em; color:rgba(255,255,255,.7); text-transform:uppercase }
+
+  .gguide-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:18px }
+  .gcard{
+    border-radius:22px; overflow:hidden; display:flex; flex-direction:column;
+    background:rgba(255,255,255,.7); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.85); box-shadow:var(--shadow-1);
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    scroll-margin-top:110px;
+  }
+  .gcard:hover{ transform:translateY(-4px); box-shadow:var(--shadow-2) }
+  .gcard-head{ padding:24px 26px 20px; border-bottom:1px solid var(--line) }
+  .comm-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family: ui-monospace, Menlo, monospace; font-size:10px; font-weight:500;
+    letter-spacing:.14em; text-transform:uppercase; padding:4px 11px; border-radius:999px; margin-bottom:12px;
+  }
+  .badge-ga{ background:rgba(154,176,120,.18); color:var(--sage-deep) }
+  .badge-sc{ background:var(--mun-soft); color:var(--mun) }
+  .badge-crisis{ background:var(--crisis-soft); color:var(--crisis) }
+  .badge-env{ background:#f6ead8; color:#9c6e1e }
+  .badge-youth{ background:#e7e3f5; color:#4d3f9f }
+  .gcard-head h3{ margin:0 0 6px; font-family:"Fraunces",serif; font-weight:400; font-size:23px; letter-spacing:-0.02em; color:var(--ink); line-height:1.15 }
+  .gcard-head h3 em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .gcard-head p{ margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.55 }
+
+  .gcard-specs{ display:flex; gap:0; border-bottom:1px solid var(--line) }
+  .gcard-specs .spec{ flex:1; padding:14px 16px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:3px }
+  .gcard-specs .spec:last-child{ border-right:0 }
+  .gcard-specs .spec .k{ font-family:ui-monospace,Menlo,monospace; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute) }
+  .gcard-specs .spec .v{ font-size:14px; color:var(--ink); font-weight:500 }
+
+  .gcard-body{ padding:20px 26px; flex:1 }
+  .gcard-body h4{ font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute); margin:0 0 12px; font-weight:500 }
+  .toc-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px; counter-reset:s }
+  .toc-list li{ display:flex; gap:11px; font-size:13.5px; color:var(--ink-soft); line-height:1.45; counter-increment:s }
+  .toc-list li::before{ content:counter(s,decimal-leading-zero); font-family:ui-monospace,Menlo,monospace; font-size:10.5px; color:var(--mun); flex-shrink:0; padding-top:2px }
+
+  .gcard-foot{ padding:16px 26px 20px; background:rgba(207,223,216,.22); border-top:1px solid var(--line); display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+  .gcard-foot .status{ font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.08em; color:var(--ink-mute); margin-left:auto; display:inline-flex; align-items:center; gap:6px }
+  .gcard-foot .status::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--sage) }
+  .btn-sm{ font-size:12.5px; padding:8px 15px }
+  .btn-locked{ background:rgba(31,42,34,.06); color:var(--ink-mute); cursor:not-allowed }
+  .btn-locked:hover{ background:rgba(31,42,34,.06) }
+
+  /* How to read + position paper */
+  .howto{ background: linear-gradient(180deg, #f3f8ef 0%, #ebf1e6 100%) }
+  .howto-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start }
+  .steps{ display:flex; flex-direction:column; gap:12px; margin-top:8px }
+  .step{ display:flex; gap:16px; padding:18px 20px; border-radius:14px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.85); backdrop-filter:blur(8px) }
+  .step .ix{ flex-shrink:0; font-family:"Fraunces",serif; font-style:italic; font-weight:300; font-size:22px; color:var(--sage-deep); min-width:30px }
+  .step h4{ margin:0 0 4px; font-family:"Fraunces",serif; font-weight:400; font-size:17px; letter-spacing:-0.015em; color:var(--ink) }
+  .step p{ margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.55 }
+
+  .pp-card{ padding:30px 32px; border-radius:22px; background:var(--mun); color:#fbfdfa; box-shadow:var(--shadow-2) }
+  .pp-card .e{ font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--sage); margin-bottom:12px }
+  .pp-card h3{ margin:0 0 10px; font-family:"Fraunces",serif; font-weight:400; font-size:26px; letter-spacing:-0.02em }
+  .pp-card h3 em{ font-style:italic; color:var(--sage); font-weight:300 }
+  .pp-card > p{ margin:0 0 20px; font-size:14px; color:rgba(255,255,255,.75); line-height:1.6 }
+  .pp-reqs{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column }
+  .pp-reqs li{ display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-top:1px dashed rgba(255,255,255,.14); font-size:13.5px }
+  .pp-reqs li:first-child{ border-top:0 }
+  .pp-reqs li .k{ color:rgba(255,255,255,.7) }
+  .pp-reqs li .v{ color:#fff; font-weight:500; text-align:right }
+  .pp-note{ margin-top:18px; font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.04em; color:rgba(255,255,255,.45); line-height:1.6 }
+
+  .closer{ background: linear-gradient(180deg, #ebf1e6 0%, #eef3ee 100%) }
+
+  @media (max-width:860px){
+    .gguide-grid{ grid-template-columns:1fr }
+    .howto-grid{ grid-template-columns:1fr; gap:32px }
+  }
+</style>
+<style id="btn-caps">.btn,.pbc-feat-btn,.btn-primary,.btn-forest,.btn-ghost{text-transform:capitalize}</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Nav -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <img src="assets/ysp-logo.png" alt="" />
+      <span class="word">Y<i>S</i>P</span>
+    </a>
+    <div class="nav-links">
+      <a href="/programmes">Programmes</a>
+      <a href="/mun" class="active">Winter MUN</a>
+      <a href="/team">Team</a>
+      <a href="/about">About</a>
+    </div>
+    <a href="/mun#apply" class="btn btn-primary">Apply to MUN <span class="arr">↗</span></a>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="sub-hero" data-screen-label="Background Guides — Hero">
+  <div class="container">
+    <div class="crumbs apple-reveal">
+      <span class="leaf"></span>
+      <a href="/">YSP</a><span class="sep">/</span>
+      <a href="/mun">Winter MUN 2026</a><span class="sep">/</span>
+      <a href="/mun#committees">Committees</a><span class="sep">/</span>
+      <span>Background Guides</span>
+    </div>
+    <span class="sub-hero-eyebrow apple-reveal">Committees · 02 of 02</span>
+    <h1 class="apple-reveal" style="transition-delay:.06s">Background <em>guides.</em></h1>
+    <p class="lede apple-reveal" style="transition-delay:.14s">Every confirmed delegate receives a comprehensive background guide for their committee — researched and written by the dais. It is the single document you need to prepare well: the context, the framing, the questions, and the brief for your position paper.</p>
+    <div class="sub-hero-meta apple-reveal" style="transition-delay:.22s">
+      <div class="it"><span class="k">Guides</span><span class="v">One per committee</span></div>
+      <div class="it"><span class="k">Typical length</span><span class="v">18–26 pages</span></div>
+      <div class="it"><span class="k">Released to</span><span class="v">Confirmed delegates</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Guides -->
+<section class="guides" data-screen-label="Background Guides — Cards">
+  <div class="container">
+    <span class="eyebrow mun-eye apple-reveal"><span class="leaf"></span> The 2026 guides</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.08s">Written by the dais, <em class="mun">for delegates who prepare.</em></h2>
+    <p class="section-sub apple-reveal" style="transition-delay:.16s">Each guide follows the same structure so you always know where to look. Guides unlock in your delegate portal once your committee placement is confirmed — preview the table of contents for each below.</p>
+
+    <div class="release apple-reveal">
+      <div class="l"><span class="dot"></span><span><b>Guides release on 8 November 2026</b> — three weeks before the conference, after placements are confirmed.</span></div>
+      <div class="r">Status · In final review</div>
+    </div>
+
+    <div class="gguide-grid">
+      <!-- UNGA -->
+      <article class="gcard apple-reveal" id="unga">
+        <div class="gcard-head">
+          <span class="comm-badge badge-ga">General Assembly</span>
+          <h3 class="serif">UNGA — <em>Third Committee</em></h3>
+          <p>Climate migration &amp; human rights — a framework for binding international protection standards.</p>
+        </div>
+        <div class="gcard-specs">
+          <div class="spec"><span class="k">Length</span><span class="v">24 pages</span></div>
+          <div class="spec"><span class="k">Difficulty</span><span class="v">Intermediate</span></div>
+          <div class="spec"><span class="k">Outcome</span><span class="v">Resolution</span></div>
+        </div>
+        <div class="gcard-body">
+          <h4>Inside the guide</h4>
+          <ul class="toc-list">
+            <li>Letter from the dais &amp; how to use this guide</li>
+            <li>Statement of the topic &amp; scope</li>
+            <li>History &amp; the gap in the 1951 Convention</li>
+            <li>Current legal &amp; institutional landscape</li>
+            <li>Bloc positions &amp; key stakeholders</li>
+            <li>Questions a resolution must answer</li>
+            <li>Further research &amp; position-paper brief</li>
+          </ul>
+        </div>
+        <div class="gcard-foot">
+          <button class="btn btn-mun btn-sm" type="button">Preview contents</button>
+          <button class="btn btn-locked btn-sm" type="button">Download · locked 🔒</button>
+          <span class="status">Releases 8 Nov</span>
+        </div>
+      </article>
+
+      <!-- UNSC -->
+      <article class="gcard apple-reveal" id="unsc" style="transition-delay:.04s">
+        <div class="gcard-head">
+          <span class="comm-badge badge-sc">Security Council</span>
+          <h3 class="serif">UN Security <em>Council</em></h3>
+          <p>Indo-Pacific stability — sovereignty, grey-zone tactics, and the limits of multilateral response.</p>
+        </div>
+        <div class="gcard-specs">
+          <div class="spec"><span class="k">Length</span><span class="v">26 pages</span></div>
+          <div class="spec"><span class="k">Difficulty</span><span class="v">Advanced</span></div>
+          <div class="spec"><span class="k">Outcome</span><span class="v">Directives</span></div>
+        </div>
+        <div class="gcard-body">
+          <h4>Inside the guide</h4>
+          <ul class="toc-list">
+            <li>Letter from the dais &amp; committee mandate</li>
+            <li>What "grey-zone" conflict means in practice</li>
+            <li>The Council's tools — and their limits</li>
+            <li>Regional flashpoints &amp; recent precedent</li>
+            <li>P5 dynamics &amp; the veto in this topic</li>
+            <li>Directive structure &amp; drafting standards</li>
+            <li>Further research &amp; position-paper brief</li>
+          </ul>
+        </div>
+        <div class="gcard-foot">
+          <button class="btn btn-mun btn-sm" type="button">Preview contents</button>
+          <button class="btn btn-locked btn-sm" type="button">Download · locked 🔒</button>
+          <span class="status">Releases 8 Nov</span>
+        </div>
+      </article>
+
+      <!-- Crisis -->
+      <article class="gcard apple-reveal" id="crisis" style="transition-delay:.08s">
+        <div class="gcard-head">
+          <span class="comm-badge badge-crisis">Ad Hoc Crisis</span>
+          <h3 class="serif">Joint <em>Cabinet</em> — Crisis</h3>
+          <p>The cascading financial contagion of 2026 — a G20 Emergency Finance Ministers' Council.</p>
+        </div>
+        <div class="gcard-specs">
+          <div class="spec"><span class="k">Length</span><span class="v">22 pages</span></div>
+          <div class="spec"><span class="k">Difficulty</span><span class="v">Expert</span></div>
+          <div class="spec"><span class="k">Outcome</span><span class="v">Live directives</span></div>
+        </div>
+        <div class="gcard-body">
+          <h4>Inside the guide</h4>
+          <ul class="toc-list">
+            <li>Letter from the Crisis Director</li>
+            <li>The opening scenario &amp; timeline</li>
+            <li>How crisis works — injections &amp; consequences</li>
+            <li>Your portfolio powers &amp; constraints</li>
+            <li>Directives, communiqués &amp; back-channel notes</li>
+            <li>Reading the room under time pressure</li>
+            <li>Position-paper brief (portfolio-specific)</li>
+          </ul>
+        </div>
+        <div class="gcard-foot">
+          <button class="btn btn-mun btn-sm" type="button">Preview contents</button>
+          <button class="btn btn-locked btn-sm" type="button">Download · locked 🔒</button>
+          <span class="status">Releases 8 Nov</span>
+        </div>
+      </article>
+
+      <!-- UNEP -->
+      <article class="gcard apple-reveal" id="unep" style="transition-delay:.12s">
+        <div class="gcard-head">
+          <span class="comm-badge badge-env">Environment</span>
+          <h3 class="serif">UNEP <em>Special Session</em></h3>
+          <p>Governing the geoengineering frontier — solar radiation management &amp; atmospheric governance.</p>
+        </div>
+        <div class="gcard-specs">
+          <div class="spec"><span class="k">Length</span><span class="v">20 pages</span></div>
+          <div class="spec"><span class="k">Difficulty</span><span class="v">Intermediate</span></div>
+          <div class="spec"><span class="k">Outcome</span><span class="v">Resolution</span></div>
+        </div>
+        <div class="gcard-body">
+          <h4>Inside the guide</h4>
+          <ul class="toc-list">
+            <li>Letter from the dais &amp; topic scope</li>
+            <li>Geoengineering 101 — the science, plainly</li>
+            <li>The governance vacuum &amp; moral hazard</li>
+            <li>Transboundary risk &amp; liability</li>
+            <li>Bloc positions &amp; the precautionary debate</li>
+            <li>What a credible resolution includes</li>
+            <li>Further research &amp; position-paper brief</li>
+          </ul>
+        </div>
+        <div class="gcard-foot">
+          <button class="btn btn-mun btn-sm" type="button">Preview contents</button>
+          <button class="btn btn-locked btn-sm" type="button">Download · locked 🔒</button>
+          <span class="status">Releases 8 Nov</span>
+        </div>
+      </article>
+
+      <!-- Youth -->
+      <article class="gcard apple-reveal" id="youth" style="transition-delay:.16s">
+        <div class="gcard-head">
+          <span class="comm-badge badge-youth">Youth Assembly</span>
+          <h3 class="serif">YSP Youth <em>Special Assembly</em></h3>
+          <p>The intergenerational social contract — youth representation in multilateral climate finance.</p>
+        </div>
+        <div class="gcard-specs">
+          <div class="spec"><span class="k">Length</span><span class="v">18 pages</span></div>
+          <div class="spec"><span class="k">Difficulty</span><span class="v">Beginner</span></div>
+          <div class="spec"><span class="k">Outcome</span><span class="v">Policy paper</span></div>
+        </div>
+        <div class="gcard-body">
+          <h4>Inside the guide</h4>
+          <ul class="toc-list">
+            <li>Welcome — your first MUN, and how this works</li>
+            <li>A plain-language intro to the topic</li>
+            <li>What climate finance actually is</li>
+            <li>Where youth voice exists today &amp; where it doesn't</li>
+            <li>Design prompts for representation mechanisms</li>
+            <li>How to write &amp; structure the policy paper</li>
+            <li>Starter glossary &amp; further reading</li>
+          </ul>
+        </div>
+        <div class="gcard-foot">
+          <button class="btn btn-mun btn-sm" type="button">Preview contents</button>
+          <button class="btn btn-locked btn-sm" type="button">Download · locked 🔒</button>
+          <span class="status">Releases 8 Nov</span>
+        </div>
+      </article>
+
+      <!-- Procedure primer -->
+      <article class="gcard apple-reveal" style="transition-delay:.2s">
+        <div class="gcard-head">
+          <span class="comm-badge" style="background:rgba(31,42,34,.06); color:var(--ink-mute)">All delegates</span>
+          <h3 class="serif">Rules of Procedure <em>primer</em></h3>
+          <p>Sent to every delegate regardless of committee — debate flow, motions, points, and diplomatic phrasing.</p>
+        </div>
+        <div class="gcard-specs">
+          <div class="spec"><span class="k">Length</span><span class="v">12 pages</span></div>
+          <div class="spec"><span class="k">Audience</span><span class="v">Everyone</span></div>
+          <div class="spec"><span class="k">Outcome</span><span class="v">Reference</span></div>
+        </div>
+        <div class="gcard-body">
+          <h4>Inside the primer</h4>
+          <ul class="toc-list">
+            <li>The flow of a session, start to finish</li>
+            <li>Moderated &amp; unmoderated caucus, explained</li>
+            <li>Every motion &amp; point, with examples</li>
+            <li>Voting procedure &amp; majorities</li>
+            <li>Formal register &amp; diplomatic phrasing</li>
+            <li>A first-timer's quick-start checklist</li>
+          </ul>
+        </div>
+        <div class="gcard-foot">
+          <a class="btn btn-mun btn-sm" href="/mun#rop">Read it on the MUN page <span class="arr">→</span></a>
+          <span class="status">Available now</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- How to read + position paper -->
+<section class="howto" data-screen-label="Background Guides — How to read">
+  <div class="container">
+    <div class="howto-grid">
+      <div>
+        <span class="eyebrow apple-reveal"><span class="leaf"></span> Make the guide work for you</span>
+        <h2 class="section-title apple-reveal" style="transition-delay:.06s">How to <em>read</em> a background guide.</h2>
+        <p class="section-sub apple-reveal" style="transition-delay:.12s; margin-bottom:18px">A background guide is not a textbook to memorise — it's a map of where the debate can go. Read it like a delegate, not a student.</p>
+        <div class="steps">
+          <div class="step apple-reveal" style="transition-delay:.16s">
+            <span class="ix">i.</span>
+            <div><h4 class="serif">Start with the questions</h4><p>Read the "questions before the floor" first. Everything else in the guide exists to help you answer them — let them direct your reading.</p></div>
+          </div>
+          <div class="step apple-reveal" style="transition-delay:.2s">
+            <span class="ix">ii.</span>
+            <div><h4 class="serif">Locate your country in the blocs</h4><p>Find where your assigned delegation actually sits. Your job is to defend a real foreign-policy position, not your personal opinion.</p></div>
+          </div>
+          <div class="step apple-reveal" style="transition-delay:.24s">
+            <span class="ix">iii.</span>
+            <div><h4 class="serif">Follow the further-reading trail</h4><p>The guide gives you the floor; the citations give you depth. The strongest delegates read two or three sources beyond the guide.</p></div>
+          </div>
+          <div class="step apple-reveal" style="transition-delay:.28s">
+            <span class="ix">iv.</span>
+            <div><h4 class="serif">Write your position paper from it</h4><p>The final section is a brief. Treat it as your assignment — it is the single best predictor of how prepared you'll feel on Day 1.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pp-card apple-reveal" style="transition-delay:.14s">
+        <div class="e">Required submission</div>
+        <h3 class="serif">The <em>position paper</em></h3>
+        <p>Every delegate submits one position paper before the conference. It states your country's stance on the topic and your proposed direction. It is reviewed by the dais and is eligible for the Best Position Paper award.</p>
+        <ul class="pp-reqs">
+          <li><span class="k">Length</span><span class="v">One to two pages (A4)</span></li>
+          <li><span class="k">Sections</span><span class="v">Background · National stance · Proposals</span></li>
+          <li><span class="k">Citations</span><span class="v">Required · any consistent style</span></li>
+          <li><span class="k">Format</span><span class="v">PDF, submitted via portal</span></li>
+          <li><span class="k">Due</span><span class="v">28 November 2026, 23:59 SGT</span></li>
+          <li><span class="k">Crisis delegates</span><span class="v">Portfolio-specific brief</span></li>
+        </ul>
+        <p class="pp-note">A position-paper template and worked example ship inside every background guide. First-time delegates receive light written feedback on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Closer / pager -->
+<section class="closer" data-screen-label="Background Guides — Next">
+  <div class="container narrow">
+    <span class="eyebrow mun-eye apple-reveal"><span class="leaf"></span> Ready to prepare</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.06s">Guides unlock once <em class="mun">you're confirmed.</em></h2>
+    <p class="section-sub apple-reveal" style="transition-delay:.12s">Apply, get placed, and your committee's full background guide appears in your delegate portal. Here's exactly how the application runs.</p>
+    <div class="pager apple-reveal" style="transition-delay:.16s">
+      <a class="prev" href="/mun-committee-topics">
+        <span class="k">← Previous</span>
+        <span class="t serif">Committee topics</span>
+      </a>
+      <a class="next" href="/mun-application-process">
+        <span class="k">Next →</span>
+        <span class="t serif">Application process</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand">
+        <img src="assets/ysp-logo.png" alt="" />
+        <span class="word">Y<i>S</i>P</span>
+      </div>
+      <p class="blurb">Youth for Sustainable Policy (YSP) is a youth-led initiative empowering the next generation to engage with global challenges through research, storytelling, and policy dialogue.</p>
+    </div>
+    <div>
+      <h5>Winter MUN</h5>
+      <ul>
+        <li><a href="/mun">MUN Overview</a></li>
+        <li><a href="/mun-committee-topics">Committee Topics</a></li>
+        <li><a href="/mun-background-guides">Background Guides</a></li>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun#apply">Apply Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Registration</h5>
+      <ul>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun-terms-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="/mun-liability-waiver">Liability Waiver</a></li>
+        <li><a href="/mun#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="safe-band">
+    <div class="left">
+      <span class="leaf">✦</span>
+      <span>This is a safe, moderated space for youth. For Youth, By Youth.</span>
+    </div>
+    <div>View our <a href="/community-policy">Community Policy</a> · <a href="/privacy-notice">Privacy Notice</a></div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Youth for Sustainable Policy. A registered non-profit.</span>
+    <span>Made slowly, in good company.</span>
+  </div>
+</footer>
+
+<script src="mun-subpages.js"></script>
+<script src="mobile-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Global Policy Brief Competition 2026 — YSP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#9ab078; --sage-deep:#89a36c; --sage-soft:#b9c99e;
+    --mist:#cfdfd8; --mist-pale:#e6efe9; --paper:#fbfdfa;
+    --ink:#1f2a22; --ink-soft:#3d4b40; --ink-mute:#67756a;
+    --line:rgba(31,42,34,.10);
+    --shadow-1: 0 1px 2px rgba(31,42,34,.04), 0 8px 24px -8px rgba(31,42,34,.10);
+    --shadow-2: 0 1px 2px rgba(31,42,34,.06), 0 24px 60px -20px rgba(122,150,108,.30);
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter", system-ui, -apple-system, sans-serif;
+    color:var(--ink); background:var(--paper);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden; font-size:16px; line-height:1.55; letter-spacing:-0.005em;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .serif{font-family:"Fraunces", Georgia, serif; font-weight:400; letter-spacing:-0.02em}
+
+  /* Grain */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:9999;
+    opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.16  0 0 0 0 0.13  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Mesh */
+  .mesh{ position:absolute; inset:-10%; pointer-events:none; z-index:0; filter:blur(60px) saturate(1.05); opacity:.8 }
+  .mesh::before, .mesh::after, .mesh > span{ content:""; position:absolute; border-radius:50% }
+  .mesh::before{ width:55%; aspect-ratio:1; left:-8%; top:-12%; background:radial-gradient(circle, rgba(207,223,216,.95), rgba(207,223,216,0) 70%) }
+  .mesh::after{ width:60%; aspect-ratio:1; right:-12%; bottom:-18%; background:radial-gradient(circle, rgba(137,163,108,.7), rgba(137,163,108,0) 70%) }
+  .mesh > span{ width:48%; aspect-ratio:1; left:30%; top:25%; background:radial-gradient(circle, rgba(154,176,120,.5), rgba(154,176,120,0) 70%) }
+
+  /* Nav */
+  .nav-wrap{ position:fixed; top:18px; left:0; right:0; z-index:100; display:flex; justify-content:center; pointer-events:none }
+  .nav{
+    pointer-events:auto; display:flex; align-items:center; gap:8px;
+    padding:8px 8px 8px 18px;
+    background:rgba(255,255,255,.42);
+    backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border:1px solid rgba(255,255,255,.55); border-radius:999px;
+    box-shadow: 0 1px 1px rgba(255,255,255,.6) inset, 0 10px 30px -12px rgba(31,42,34,.18);
+    transition: all .35s var(--ease);
+  }
+  .scrolled .nav{
+    background:rgba(255,255,255,.65);
+    backdrop-filter: blur(22px) saturate(1.6);
+    box-shadow: 0 1px 1px rgba(255,255,255,.7) inset, 0 18px 50px -18px rgba(31,42,34,.22);
+  }
+  .nav .brand{ display:flex; align-items:center; gap:10px; padding-right:14px; border-right:1px solid var(--line) }
+  .nav .brand img{ width:28px; height:28px; border-radius:8px; object-fit:cover; box-shadow:0 2px 6px rgba(31,42,34,.15) }
+  .nav .brand .word{ font-weight:600; letter-spacing:.02em; font-size:14px }
+  .nav .brand .word i{ font-style:normal; color:var(--sage-deep) }
+  .nav-links{ display:flex; align-items:center; gap:2px; padding:0 6px }
+  .nav-links a{ padding:8px 14px; border-radius:999px; font-size:13.5px; font-weight:500; color:var(--ink-soft); transition: background .25s, color .25s }
+  .nav-links a:hover, .nav-links a.active{ background:rgba(255,255,255,.7); color:var(--ink) }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:999px; font-size:13.5px; font-weight:500; transition: transform .25s var(--ease), box-shadow .25s, background .25s, filter .25s }
+  .btn-primary{ background:var(--ink); color:#fbfdfa; box-shadow: 0 1px 1px rgba(255,255,255,.18) inset, 0 8px 22px -8px rgba(31,42,34,.45) }
+  .btn-primary:hover{ background:#0f1612 }
+  .btn-forest{ background: linear-gradient(180deg, var(--sage), var(--sage-deep)); color:#fbfdfa; box-shadow: 0 1px 1px rgba(255,255,255,.35) inset, 0 10px 26px -10px rgba(137,163,108,.6) }
+  .btn-forest:hover{ filter:brightness(1.04) }
+  .btn-ghost{ color:var(--ink); background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.7); backdrop-filter:blur(10px) }
+  .btn-ghost:hover{ background:rgba(255,255,255,.8) }
+  .btn .arr{ display:inline-block; transition: transform .25s var(--ease) }
+  .btn:hover .arr{ transform: translate(2px,-2px) }
+
+  /* Hero */
+  .hero{
+    position:relative; min-height:72vh; padding:170px 24px 90px;
+    background:
+      radial-gradient(120% 70% at 50% 0%, var(--mist) 0%, rgba(207,223,216,0) 60%),
+      linear-gradient(180deg, #f3f8ef 0%, #fbfdfa 60%);
+    overflow:hidden; isolation:isolate;
+  }
+  .hero-inner{ position:relative; z-index:2; max-width:1180px; margin:0 auto; text-align:center; display:flex; flex-direction:column; align-items:center }
+  .eyebrow-pill{
+    display:inline-flex; align-items:center; gap:10px; padding:6px;
+    background:rgba(255,255,255,.6); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.75); border-radius:999px;
+    box-shadow: 0 1px 1px rgba(255,255,255,.6) inset, 0 6px 18px -8px rgba(31,42,34,.15);
+    font-size:12.5px; color:var(--ink-soft); margin-bottom:32px;
+  }
+  .eyebrow-pill .tag{ display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; background:var(--ink); color:#fbfdfa; font-weight:500; font-size:11.5px; letter-spacing:.04em }
+  .eyebrow-pill .tag .dot{ width:5px; height:5px; border-radius:50%; background:var(--sage) }
+  .eyebrow-pill .meta{ padding-right:14px }
+  .hero h1{
+    margin:0 0 22px; font-size: clamp(48px, 7vw, 104px);
+    line-height:1.02; letter-spacing:-0.035em; font-weight:400; color:var(--ink); max-width:14ch;
+  }
+  .hero h1 em{ font-style:italic; font-weight:300; color:var(--sage-deep) }
+  .hero p.lede{ max-width:60ch; margin:0 auto; color:var(--ink-soft); font-size:17.5px; line-height:1.65 }
+  .hero-cta{ display:flex; gap:10px; margin-top:36px; flex-wrap:wrap; justify-content:center }
+
+  /* Section base */
+  section{ position:relative; padding:130px 24px; isolation:isolate }
+  .container{ max-width:1180px; margin:0 auto; position:relative; z-index:2 }
+  .eyebrow{ display:inline-flex; align-items:center; gap:10px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--sage-deep); font-weight:500 }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--sage) }
+  h2.section-title{ font-size: clamp(36px, 5vw, 64px); line-height:1.04; letter-spacing:-0.028em; font-weight:400; color:var(--ink); margin:16px 0 18px; max-width:22ch }
+  h2.section-title em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  p.section-sub{ max-width:62ch; color:var(--ink-soft); font-size:17px; margin:0 0 48px; line-height:1.65 }
+  .bg-light{ background: linear-gradient(180deg, #fbfdfa 0%, #f3f8ef 100%) }
+  .bg-mid{ background: linear-gradient(180deg, #f3f8ef 0%, #eaf1e3 100%) }
+  .bg-sage{ background: linear-gradient(180deg, #eaf1e3 0%, #d9e6cf 100%) }
+  .bg-deep{ background: linear-gradient(180deg, #d9e6cf 0%, #eaf1e3 60%, #fbfdfa 100%) }
+
+  /* ── Why YSP Matters — editorial light slab ── */
+  .why-section{
+    background:
+      radial-gradient(70% 60% at 12% 8%, rgba(207,223,216,.5), transparent 55%),
+      radial-gradient(60% 55% at 92% 95%, rgba(154,176,120,.25), transparent 55%),
+      linear-gradient(180deg, #fbfdfa 0%, #f3f8ef 100%);
+    padding:150px 24px 140px;
+  }
+  .why-marker{
+    display:inline-flex; align-items:center; gap:14px; margin-bottom:36px;
+    font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--sage-deep); font-weight:600;
+  }
+  .why-marker .asterism{
+    font-family:"Fraunces", serif; font-weight:300; font-style:italic;
+    font-size:22px; color:var(--sage-deep); line-height:1;
+  }
+  .why-marker .label::before{
+    content:''; display:inline-block; width:28px; height:1px;
+    background:rgba(137,163,108,.5); vertical-align:middle; margin-right:14px;
+  }
+  .why-grid{
+    display:grid; grid-template-columns: minmax(280px, .82fr) minmax(0, 1.18fr); gap: 80px;
+    align-items:start;
+  }
+  .why-headline h2{
+    margin:0; font-weight:400;
+    font-size: clamp(54px, 8.5vw, 116px); line-height:.94; letter-spacing:-0.038em;
+    color:var(--ink);
+  }
+  .why-headline h2 .line{ display:block }
+  .why-headline h2 em{ font-style:italic; font-weight:300; color: var(--sage-deep) }
+  .why-aside{
+    margin-top: 36px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display:flex; align-items:flex-start; gap:14px;
+    max-width: 36ch;
+  }
+  .why-aside .pip{
+    width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:7px;
+    background: var(--sage); box-shadow: 0 0 0 4px rgba(154,176,120,.18);
+  }
+  .why-aside p{
+    margin:0; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--ink-mute); line-height:1.7;
+  }
+
+  .why-body{ display:flex; flex-direction:column; gap: 26px; padding-top: 18px; max-width: 62ch }
+  .why-body p{ margin:0; font-size: 17px; line-height: 1.75; color: var(--ink-soft) }
+  .why-body p.lede{
+    font-family:"Fraunces", serif; font-weight:400;
+    font-size: clamp(22px, 2.3vw, 30px); line-height: 1.35; letter-spacing:-0.012em;
+    color:var(--ink); padding-bottom: 8px;
+  }
+  .why-body p.lede em{ font-style:italic; font-weight:300; color: var(--sage-deep) }
+  .why-body p b{ color: var(--ink); font-weight:500 }
+
+  /* Mechanisms — editorial row of 4 */
+  .mech-band{
+    background: linear-gradient(180deg, #f3f8ef 0%, #eaf1e3 100%);
+    padding:140px 24px;
+  }
+  .mech-grid{
+    display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:8px;
+  }
+  .mech-card{
+    position:relative; padding:30px 26px 32px; border-radius:22px;
+    background:rgba(255,255,255,.78); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.9);
+    box-shadow: var(--shadow-1);
+    display:flex; flex-direction:column; gap:10px; min-height:240px;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .mech-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-2) }
+  .mech-card .num{
+    font-family:"Fraunces", serif; font-style:italic; font-weight:300;
+    font-size:28px; color:var(--sage-deep); line-height:1; letter-spacing:-0.02em;
+  }
+  .mech-card .title{
+    font-family:"Fraunces", serif; font-weight:400; font-size:24px;
+    letter-spacing:-0.018em; line-height:1.15; color:var(--ink);
+  }
+  .mech-card .title em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .mech-card .desc{ color:var(--ink-soft); font-size:14px; line-height:1.6; margin:0 }
+  .mech-card .footer-tag{
+    margin-top:auto; padding-top:14px;
+    font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); font-weight:500;
+    border-top: 1px dashed rgba(31,42,34,.1);
+  }
+
+  /* Identity strip — what YSP is */
+  .identity-band{
+    background: linear-gradient(180deg, #eaf1e3 0%, #d9e6cf 100%);
+    padding:130px 24px;
+  }
+  .id-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:8px;
+  }
+  .id-card{
+    padding:32px 28px; border-radius:22px;
+    background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+    border:1px solid rgba(255,255,255,.95);
+    box-shadow: 0 1px 1px rgba(255,255,255,.9) inset, var(--shadow-1);
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .id-card .label{
+    display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
+    padding:5px 12px; border-radius:999px;
+    background: rgba(154,176,120,.16); border:1px solid rgba(154,176,120,.28);
+    font-size:11px; color:var(--sage-deep); font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  }
+  .id-card h3{
+    font-family:"Fraunces", serif; font-weight:400; font-size:30px;
+    letter-spacing:-0.022em; line-height:1.1; margin:0;
+  }
+  .id-card h3 em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .id-card p{ margin:0; color:var(--ink-soft); font-size:14.5px; line-height:1.65 }
+
+  /* Closing CTA */
+  .closing{
+    background: linear-gradient(180deg, #d9e6cf 0%, #eaf1e3 60%, #fbfdfa 100%);
+    padding:140px 24px 160px; overflow:hidden;
+  }
+  .closing .card{ position:relative; max-width:980px; margin:0 auto; text-align:center }
+  .closing h2{
+    font-family:"Fraunces", serif; font-weight:400;
+    font-size: clamp(42px, 6vw, 80px); line-height:1.04; letter-spacing:-0.03em; margin:0 0 22px;
+  }
+  .closing h2 em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .closing p{ color:var(--ink-soft); font-size:17px; max-width:54ch; margin:0 auto 36px; line-height:1.65 }
+  .closing-cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+
+  /* Footer */
+  .footer{ background:var(--ink); color:#d6dcd2; padding:72px 24px 36px }
+  .footer-grid{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns: 2fr 1fr 1fr; gap:48px }
+  .footer .brand{ display:flex; align-items:center; gap:12px; margin-bottom:18px }
+  .footer .brand img{ width:36px; height:36px; border-radius:10px }
+  .footer .brand .word{ font-weight:600; font-size:16px; letter-spacing:.02em; color:#fbfdfa }
+  .footer .brand .word i{ font-style:normal; color:var(--sage-soft) }
+  .footer .blurb{ color:#aab1a3; font-size:14px; max-width:38ch; line-height:1.55 }
+  .footer h5{ color:#fbfdfa; font-size:12px; letter-spacing:.18em; text-transform:uppercase; margin:0 0 14px; font-weight:500 }
+  .footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; font-size:14px }
+  .footer ul a{ color:#aab1a3; transition: color .2s }
+  .footer ul a:hover{ color:#fbfdfa }
+  .safe-band{
+    max-width:1180px; margin:56px auto 0; padding:18px 22px; border-radius:16px;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10);
+    display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    font-size:13px; color:#d6dcd2;
+  }
+  .safe-band .left{ display:flex; align-items:center; gap:12px }
+  .safe-band .leaf{ width:24px; height:24px; border-radius:50%; background:linear-gradient(140deg, var(--sage), var(--sage-deep)); display:inline-flex; align-items:center; justify-content:center; color:#fbfdfa; font-size:12px; flex-shrink:0 }
+  .safe-band a{ color:#fbfdfa; text-decoration:underline; text-decoration-color:rgba(251,253,250,.4); text-underline-offset:3px }
+  .copy{ max-width:1180px; margin:24px auto 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:12px; color:#7d857a; letter-spacing:.04em }
+
+  /* Reveals */
+  .apple-reveal{ opacity:0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); will-change: transform, opacity }
+  .is-in.apple-reveal{ opacity:1; transform: translateY(0) }
+
+  @media (max-width: 980px){
+    .nav-links{ display:none }
+    .why-grid{ grid-template-columns: 1fr; gap: 32px }
+    .why-headline h2{ font-size: clamp(48px, 11vw, 84px) }
+    .mech-grid{ grid-template-columns: 1fr 1fr }
+    .id-grid{ grid-template-columns: 1fr }
+    .footer-grid{ grid-template-columns: 1fr 1fr; gap:32px }
+  }
+  @media (max-width: 640px){
+    .mech-grid{ grid-template-columns: 1fr }
+    .hero{ padding:140px 20px 70px }
+    .why-section{ padding:110px 20px 100px }
+  }
+</style>
+<style>
+.pbc-hero{padding:150px 24px 80px}.pbc-hero h1,.pbc-h2,.pbc-cat-head h3,.pbc-track h4,.pbc-crit h4,.pbc-prize h4,.pbc-faq summary{text-transform:capitalize}.pbc-hero .hero-cta .btn,.pbc-cta .btn{white-space:nowrap}.pbc-hero .hero-inner{max-width:1080px}
+.pbc-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:44px 0 0;border-top:1px solid var(--line)}
+.pbc-facts div{padding:22px 20px 0 0}.pbc-facts .k{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}.pbc-facts .v{font-family:"Fraunces",Georgia,serif;font-size:clamp(28px,3vw,40px);letter-spacing:-.02em}.pbc-facts .v em{font-style:italic;color:var(--sage-deep);font-size:.6em}
+.pbc-sec{padding:96px 24px;border-top:1px solid var(--line)}.pbc-sec.alt{background:linear-gradient(180deg,#f6f9f3,#eef4ea)}
+.pbc-wrap{max-width:1080px;margin:0 auto}
+.pbc-eye{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:18px}.pbc-eye::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sage-deep)}
+.pbc-h2{font-family:"Fraunces",Georgia,serif;font-weight:400;font-size:clamp(34px,4.4vw,56px);line-height:1.04;letter-spacing:-.025em;margin:0 0 22px;text-wrap:balance}.pbc-h2 em{font-style:italic;color:var(--sage-deep);font-weight:300}
+.pbc-p{max-width:62ch;color:var(--ink-soft);font-size:17px;line-height:1.65;margin:0 0 14px;text-wrap:pretty}
+.pbc-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.pbc-ul{list-style:none;margin:0;padding:0;display:grid;gap:0}.pbc-ul li{padding:16px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:16px;line-height:1.55;display:grid;grid-template-columns:34px minmax(0,1fr)}.pbc-ul li span{font-size:12px;color:var(--sage-deep);padding-top:3px;letter-spacing:.08em}
+.pbc-prompt{margin:8px 0 0;padding:36px 40px;border-radius:24px;background:#1f2a22;color:#eef4ea;font-family:"Fraunces",Georgia,serif;font-size:clamp(22px,2.4vw,30px);line-height:1.3;letter-spacing:-.015em;text-wrap:pretty}.pbc-prompt small{display:block;font-family:"Inter",system-ui,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-soft);margin-bottom:16px}
+.pbc-tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}.pbc-track{padding:26px 28px;border-radius:20px;background:rgba(255,255,255,.75);border:1px solid var(--line)}.pbc-track h4{font-family:"Fraunces",Georgia,serif;font-weight:400;font-size:26px;margin:0 0 6px}.pbc-track p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.55}
+.pbc-crit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.pbc-crit div{padding:26px 22px;border-radius:20px;background:rgba(255,255,255,.8);border:1px solid var(--line)}.pbc-crit .n{font-family:"Fraunces",Georgia,serif;font-size:44px;line-height:1;color:var(--sage-deep);font-style:italic;font-weight:300}.pbc-crit h4{margin:14px 0 6px;font-size:16px;font-weight:600}.pbc-crit p{margin:0;color:var(--ink-mute);font-size:13.5px}
+.pbc-note{margin-top:18px;font-size:14px;color:var(--ink-mute)}
+.pbc-tl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}.pbc-tl li{padding:20px 20px 0 0;position:relative}.pbc-tl li::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}.pbc-tl li.done::before{background:var(--sage-deep);border-color:var(--sage-deep)}.pbc-tl .d{display:block;font-family:"Fraunces",Georgia,serif;font-size:22px;margin-bottom:4px}.pbc-tl .t{font-size:14px;color:var(--ink-soft)}
+.pbc-cat{margin-top:56px}.pbc-cat-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:24px}.pbc-cat-head h3{font-size:clamp(28px,3vw,38px);margin:0}.pbc-cat-head h3 em{font-style:italic;color:var(--sage-deep);font-weight:300}.pbc-count{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute)}
+.pbc-podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pbc-win{border-radius:22px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-1);display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}.pbc-win:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+.pbc-badge{display:block;aspect-ratio:1/1;background:#12301f}.pbc-badge img{width:100%;height:100%;object-fit:cover;display:block}
+.pbc-win-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:6px;flex:1}.pbc-win-body h4{font-size:24px;margin:2px 0 0;line-height:1.15}
+.pbc-place{align-self:flex-start;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:5px 10px;border-radius:999px;background:#f3ead4;color:#7a5a12}.pbc-place.p2{background:#eceff0;color:#4a5358}.pbc-place.p3{background:#f3e3d6;color:#7a4520}
+.pbc-country{font-size:13px;color:var(--ink-mute)}.pbc-title{margin:6px 0 0;font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:16px;line-height:1.4;color:var(--ink-soft);text-wrap:pretty;flex:1}.pbc-soon{margin-top:12px;font-size:12px;color:var(--sage-deep);letter-spacing:.04em}
+.pbc-list{list-style:none;margin:22px 0 0;padding:0}.pbc-list li{display:grid;grid-template-columns:40px 56px minmax(0,1fr) auto;gap:18px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}.pbc-list li:last-child{border-bottom:1px solid var(--line)}
+.pbc-rank{font-family:"Fraunces",Georgia,serif;font-size:22px;color:var(--ink-mute)}.pbc-thumb{display:block;width:56px;height:56px;border-radius:12px;overflow:hidden;background:#12301f}.pbc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.pbc-li-main{display:flex;flex-direction:column;gap:2px;min-width:0}.pbc-li-main b{font-weight:400;font-size:19px}.pbc-li-main span{font-size:14px;color:var(--ink-soft);font-style:italic}
+.pbc-prizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.pbc-prize{padding:30px 26px;border-radius:22px;background:rgba(255,255,255,.8);border:1px solid var(--line)}.pbc-prize .i{font-size:12px;letter-spacing:.16em;color:var(--sage-deep)}.pbc-prize h4{font-family:"Fraunces",Georgia,serif;font-weight:400;font-size:28px;margin:14px 0 0}
+.pbc-faq{border-top:1px solid var(--line)}.pbc-faq details{border-bottom:1px solid var(--line)}.pbc-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-family:"Fraunces",Georgia,serif;font-size:21px}.pbc-faq summary::-webkit-details-marker{display:none}.pbc-faq summary::after{content:"+";color:var(--sage-deep);font-size:24px;line-height:1;transition:transform .25s}.pbc-faq details[open] summary::after{transform:rotate(45deg)}.pbc-faq p{margin:0 0 22px;max-width:66ch;color:var(--ink-soft);font-size:16px;line-height:1.65}
+.pbc-cta{padding:110px 24px;text-align:center;background:radial-gradient(80% 90% at 50% 0%,#dfe9d4,#f3f8ef 70%)}.pbc-cta .pbc-h2{margin-left:auto;margin-right:auto;max-width:18ch}.pbc-cta .pbc-p{margin:0 auto 28px}.pbc-cta .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media (max-width:900px){.pbc-facts,.pbc-crit,.pbc-tl{grid-template-columns:repeat(2,minmax(0,1fr))}.pbc-tl li{padding-bottom:20px}.pbc-two,.pbc-podium,.pbc-prizes,.pbc-tracks{grid-template-columns:minmax(0,1fr)}.pbc-two{gap:28px}.pbc-list li{grid-template-columns:32px 48px minmax(0,1fr);gap:12px}.pbc-list .pbc-country{grid-column:3}.pbc-thumb{width:48px;height:48px}}
+</style>
+<style id="btn-caps">.btn,.pbc-feat-btn,.btn-primary,.btn-forest,.btn-ghost{text-transform:capitalize}</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Nav -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <img src="assets/ysp-logo.png" alt="" />
+      <span class="word">Y<i>S</i>P</span>
+    </a>
+    <div class="nav-links">
+      <a href="/programmes" class="active">Programmes</a>
+      <a href="/team">Team</a>
+      <a href="/careers">Careers</a>
+      <a href="/about">About</a>
+    </div>
+    <a href="https://forms.gle/rKPHAxvj6NaM9Dd66" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-magnetic>Join YSP <span class="arr">↗</span></a>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="hero pbc-hero" data-screen-label="01 Competition Hero">
+<div class="mesh" aria-hidden="true"><span></span></div>
+<div class="hero-inner">
+<div class="eyebrow-pill apple-reveal"><span class="tag"><span class="dot"></span>Results Announced</span><span class="meta">5 November 2026 · 1:30 PM SGT</span></div>
+<h1 class="serif apple-reveal" style="transition-delay:.1s">Global Policy Brief<br/><em>Competition 2026.</em></h1>
+<p class="lede apple-reveal" style="transition-delay:.2s">Participants submitted a 600–900 word policy brief responding to a climate and energy policy prompt. Here are the twenty briefs that stood out.</p>
+<div class="hero-cta apple-reveal" style="transition-delay:.28s"><a href="#results" class="btn btn-forest" data-magnetic>Check The Results <span class="arr">↘</span></a><a href="https://forms.gle/ZswMRRwHePw5Q7Jr8" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Register Interest for 2027 ▸</a></div>
+<div class="pbc-facts apple-reveal" style="transition-delay:.36s"><div><span class="k">Entries</span><span class="v">100<em>+</em></span></div><div><span class="k">Countries</span><span class="v">40</span></div><div><span class="k">Categories</span><span class="v"><em>Open · Junior</em></span></div><div><span class="k">Finalists</span><span class="v">20</span></div></div>
+</div>
+</section>
+<section class="pbc-sec" id="about" data-screen-label="02 About">
+<div class="pbc-wrap pbc-two">
+<div><div class="pbc-eye apple-reveal">01 / About the competition</div><h2 class="pbc-h2 apple-reveal">Short briefs, <em>real policy.</em></h2><p class="pbc-p apple-reveal">Participants submit a 600–900 word policy brief responding to a climate and energy policy prompt.</p></div>
+<ul class="pbc-ul apple-reveal" style="transition-delay:.1s"><li><span>01</span>Develop research synthesis and policy argumentation skills</li><li><span>02</span>Introduce YSP’s publication and writing standards</li><li><span>03</span>Produce accessible, high-quality climate policy writing</li></ul>
+</div>
+</section>
+<section class="pbc-sec alt" id="theme" data-screen-label="03 Theme and Tracks">
+<div class="pbc-wrap">
+<div class="pbc-eye apple-reveal">02 / Theme &amp; tracks</div><h2 class="pbc-h2 apple-reveal">Fossil fuel <em>subsidy reform.</em></h2>
+<div class="pbc-prompt apple-reveal"><small>The 2026 prompt</small>Choose one fossil fuel subsidy reform policy implemented in any country in the last five years. Evaluate its effectiveness and recommend one improvement a national government could adopt by 2030.</div>
+<div class="pbc-tracks"><div class="pbc-track apple-reveal"><h4>Open</h4><p>Ranked separately, with its own Top 10 and first, second and third places.</p></div><div class="pbc-track apple-reveal" style="transition-delay:.08s"><h4>Junior</h4><p>Ranked separately, with its own Top 10 and first, second and third places.</p></div></div>
+</div>
+</section>
+<section class="pbc-sec" id="rules" data-screen-label="04 Eligibility and Rules">
+<div class="pbc-wrap pbc-two">
+<div><div class="pbc-eye apple-reveal">03 / Eligibility &amp; rules</div><h2 class="pbc-h2 apple-reveal">Submission <em>Requirements</em></h2></div>
+<ul class="pbc-ul apple-reveal" style="transition-delay:.1s"><li><span>01</span>Length of 600–900 words.</li><li><span>02</span>Analyse one fossil fuel subsidy reform implemented in any country within the last five years.</li><li><span>03</span>Evaluate how effective that reform has been.</li><li><span>04</span>Recommend one improvement a national government could adopt by 2030.</li><li><span>05</span>Submit by 15 October 2026, 11:59 PM GMT+8.</li></ul>
+</div>
+</section>
+<section class="pbc-sec alt" id="judging" data-screen-label="05 Judging Criteria">
+<div class="pbc-wrap">
+<div class="pbc-eye apple-reveal">04 / Judging criteria</div><h2 class="pbc-h2 apple-reveal">Four Criterias. <em>Scored out of 40.</em></h2>
+<div class="pbc-crit"><div class="apple-reveal"><span class="n">10</span><h4>Argument quality</h4><p>Scored 1–10</p></div><div class="apple-reveal" style="transition-delay:.06s"><span class="n">10</span><h4>Evidence use</h4><p>Scored 1–10</p></div><div class="apple-reveal" style="transition-delay:.12s"><span class="n">10</span><h4>Accessibility</h4><p>Scored 1–10</p></div><div class="apple-reveal" style="transition-delay:.18s"><span class="n">10</span><h4>Policy practicality</h4><p>Scored 1–10</p></div></div>
+<p class="pbc-note apple-reveal">Every finalist brief was read in full.</p>
+</div>
+</section>
+<section class="pbc-sec" id="timeline" data-screen-label="06 Timeline">
+<div class="pbc-wrap">
+<div class="pbc-eye apple-reveal">05 / Timeline</div><h2 class="pbc-h2 apple-reveal">The 2026 <em>edition.</em></h2>
+<ol class="pbc-tl apple-reveal"><li class="done"><span class="d">26 Aug 2026</span><span class="t">Competition launched</span></li><li class="done"><span class="d">15 Oct 2026</span><span class="t">Submissions closed, 11:59 PM GMT+8</span></li><li class="done"><span class="d">5 Nov 2026</span><span class="t">Results announced, 1:30 PM SGT</span></li><li><span class="d">Coming soon</span><span class="t">Winning briefs published</span></li></ol>
+</div>
+</section>
+<section class="pbc-sec alt" id="results" data-screen-label="07 Results">
+<div class="pbc-wrap">
+<div class="pbc-eye apple-reveal">06 / Results</div><h2 class="pbc-h2 apple-reveal">The 2026 <em>finalists.</em></h2>
+<p class="pbc-p apple-reveal">100+ submissions from 40 countries. Ten finalists in each category.</p>
+<div class="pbc-cat apple-reveal" id="open"><div class="pbc-cat-head"><h3 class="serif">Open <em>category</em></h3><span class="pbc-count">Top 10</span></div><div class="pbc-podium"><article class="pbc-win"><a class="pbc-badge" href="assets/pbc/kaashvi-sheoran.jpg" target="_blank" rel="noopener"><img src="assets/pbc/kaashvi-sheoran.jpg" alt="First Place badge for Kaashvi Sheoran" loading="lazy" /></a><div class="pbc-win-body"><span class="pbc-place p1">First Place</span><h4 class="serif">Kaashvi Sheoran</h4><span class="pbc-country">Netherlands</span><p class="pbc-title">“Who Receives the Dividend? Angola’s Fuel Subsidy Reform Needs an Automatic Social Guarantee”</p><span class="pbc-soon">Full brief coming soon</span></div></article><article class="pbc-win"><a class="pbc-badge" href="assets/pbc/haoyuan-luo.jpg" target="_blank" rel="noopener"><img src="assets/pbc/haoyuan-luo.jpg" alt="Second Place badge for Haoyuan Luo" loading="lazy" /></a><div class="pbc-win-body"><span class="pbc-place p2">Second Place</span><h4 class="serif">Haoyuan Luo</h4><span class="pbc-country">United States</span><p class="pbc-title">“The Diesel That Disappeared: Malaysia’s Fuel Subsidy Reform”</p><span class="pbc-soon">Full brief coming soon</span></div></article><article class="pbc-win"><a class="pbc-badge" href="assets/pbc/oluwadurotimi-olusola.jpg" target="_blank" rel="noopener"><img src="assets/pbc/oluwadurotimi-olusola.jpg" alt="Third Place badge for Oluwadurotimi Olusola" loading="lazy" /></a><div class="pbc-win-body"><span class="pbc-place p3">Third Place</span><h4 class="serif">Oluwadurotimi Olusola</h4><span class="pbc-country">United Kingdom</span><p class="pbc-title">“Pay the Farm, Price the Litre: Fixing Germany’s Farm Diesel Refund by 2030”</p><span class="pbc-soon">Full brief coming soon</span></div></article></div><ol class="pbc-list" start="4"><li><span class="pbc-rank">04</span><a class="pbc-thumb" href="assets/pbc/pham-ha-phuong.jpg" target="_blank" rel="noopener"><img src="assets/pbc/pham-ha-phuong.jpg" alt="Top 10 finalist badge for Pham Ha Phuong" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Pham Ha Phuong</b><span>“Cushion the People, Not the Fuel: Making Vietnam’s Fuel Price Reform Work for Farmers and Fishers”</span></div><span class="pbc-country">Vietnam</span></li><li><span class="pbc-rank">05</span><a class="pbc-thumb" href="assets/pbc/hailing-ma.jpg" target="_blank" rel="noopener"><img src="assets/pbc/hailing-ma.jpg" alt="Top 10 finalist badge for Hailing Ma" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Hailing Ma</b><span>“From Blanket Fuel Subsidies to Targeted Protection: Completing Indonesia’s 2022 Fuel-Subsidy Reform by 2030”</span></div><span class="pbc-country">China</span></li><li><span class="pbc-rank">06</span><a class="pbc-thumb" href="assets/pbc/olaoye-eunice-tolulope.jpg" target="_blank" rel="noopener"><img src="assets/pbc/olaoye-eunice-tolulope.jpg" alt="Top 10 finalist badge for Olaoye Eunice Tolulope" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Olaoye Eunice Tolulope</b><span>“Where Did the Savings Go? Let the Subsidy Savings Act Answer”</span></div><span class="pbc-country">Nigeria</span></li><li><span class="pbc-rank">07</span><a class="pbc-thumb" href="assets/pbc/esla-cletus-john.jpg" target="_blank" rel="noopener"><img src="assets/pbc/esla-cletus-john.jpg" alt="Top 10 finalist badge for Esla Cletus John" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Esla Cletus John</b><span>“Who Pays When Fuel Prices Rise? A Gender-Responsive Accountability System for Nigeria’s Fossil-Fuel Subsidy Reform”</span></div><span class="pbc-country">Nigeria</span></li><li><span class="pbc-rank">08</span><a class="pbc-thumb" href="assets/pbc/atitaya-phoemphon.jpg" target="_blank" rel="noopener"><img src="assets/pbc/atitaya-phoemphon.jpg" alt="Top 10 finalist badge for Atitaya Phoemphon" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Atitaya Phoemphon</b><span>“From Blanket Diesel Support to Targeted Protection: Completing Thailand’s Fuel Subsidy Reform by 2030”</span></div><span class="pbc-country">Thailand</span></li><li><span class="pbc-rank">09</span><a class="pbc-thumb" href="assets/pbc/ibukunoluwa-diadem-adeyemi.jpg" target="_blank" rel="noopener"><img src="assets/pbc/ibukunoluwa-diadem-adeyemi.jpg" alt="Top 10 finalist badge for Ibukunoluwa Diadem Adeyemi" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Ibukunoluwa Diadem Adeyemi</b><span>“The Cost Arrived Before the Compensation: Nigeria’s Unfinished Petrol Subsidy Reform”</span></div><span class="pbc-country">Nigeria</span></li><li><span class="pbc-rank">10</span><a class="pbc-thumb" href="assets/pbc/yasmine-ouali.jpg" target="_blank" rel="noopener"><img src="assets/pbc/yasmine-ouali.jpg" alt="Top 10 finalist badge for Yasmine Ouali" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Yasmine Ouali</b><span>“Tunisia’s 2022 Fuel Price Adjustments: Making Fossil Fuel Subsidy Reform Fairer by 2030”</span></div><span class="pbc-country">Tunisia</span></li></ol></div>
+<div class="pbc-cat apple-reveal" id="junior"><div class="pbc-cat-head"><h3 class="serif">Junior <em>category</em></h3><span class="pbc-count">Top 10</span></div><div class="pbc-podium"><article class="pbc-win"><a class="pbc-badge" href="assets/pbc/nandini-singh.jpg" target="_blank" rel="noopener"><img src="assets/pbc/nandini-singh.jpg" alt="First Place badge for Nandini Singh" loading="lazy" /></a><div class="pbc-win-body"><span class="pbc-place p1">First Place</span><h4 class="serif">Nandini Singh</h4><span class="pbc-country">India</span><p class="pbc-title">“Paying at the Counter: Fixing India’s Targeted LPG Subsidy by 2030”</p><span class="pbc-soon">Full brief coming soon</span></div></article><article class="pbc-win"><a class="pbc-badge" href="assets/pbc/panagiotis-tsimplis.jpg" target="_blank" rel="noopener"><img src="assets/pbc/panagiotis-tsimplis.jpg" alt="Second Place badge for Panagiotis Tsimplis" loading="lazy" /></a><div class="pbc-win-body"><span class="pbc-place p2">Second Place</span><h4 class="serif">Panagiotis Tsimplis</h4><span class="pbc-country">Greece</span><p class="pbc-title">“Pay People Before Prices Rise: A Prepayment Rule for Indonesia’s Next Fuel-Subsidy Reform”</p><span class="pbc-soon">Full brief coming soon</span></div></article><article class="pbc-win"><a class="pbc-badge" href="assets/pbc/ahmed-ayman-saleh-wally.jpg" target="_blank" rel="noopener"><img src="assets/pbc/ahmed-ayman-saleh-wally.jpg" alt="Third Place badge for Ahmed Ayman Saleh Wally" loading="lazy" /></a><div class="pbc-win-body"><span class="pbc-place p3">Third Place</span><h4 class="serif">Ahmed Ayman Saleh Wally</h4><span class="pbc-country">Egypt</span><p class="pbc-title">“Nigeria’s Petrol Subsidy Reform: Fiscal Gains, Weak Protection, and a Funded Transfer Rule”</p><span class="pbc-soon">Full brief coming soon</span></div></article></div><ol class="pbc-list" start="4"><li><span class="pbc-rank">04</span><a class="pbc-thumb" href="assets/pbc/tanakrit-rattanachantra.jpg" target="_blank" rel="noopener"><img src="assets/pbc/tanakrit-rattanachantra.jpg" alt="Top 10 finalist badge for Tanakrit Rattanachantra" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Tanakrit Rattanachantra</b><span>“Protect People, Not Diesel: Rethinking Thailand’s Fuel Subsidy Reform for 2030”</span></div><span class="pbc-country">Thailand</span></li><li><span class="pbc-rank">05</span><a class="pbc-thumb" href="assets/pbc/kanishk-kanthe.jpg" target="_blank" rel="noopener"><img src="assets/pbc/kanishk-kanthe.jpg" alt="Top 10 finalist badge for Kanishk Kanthe" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Kanishk Kanthe</b><span>“Making India’s LPG Subsidy Work at the Point of Refill”</span></div><span class="pbc-country">India</span></li><li><span class="pbc-rank">06</span><a class="pbc-thumb" href="assets/pbc/yash-bhide.jpg" target="_blank" rel="noopener"><img src="assets/pbc/yash-bhide.jpg" alt="Top 10 finalist badge for Yash Bhide" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Yash Bhide</b><span>“Who the Cards Missed”</span></div><span class="pbc-country">United States</span></li><li><span class="pbc-rank">07</span><a class="pbc-thumb" href="assets/pbc/biloliddin-boymurotov.jpg" target="_blank" rel="noopener"><img src="assets/pbc/biloliddin-boymurotov.jpg" alt="Top 10 finalist badge for Biloliddin Boymurotov" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Biloliddin Boymurotov</b><span>“Hardship Now, Nothing Verifiable Later: What Nigeria’s 2023 Fuel Subsidy Removal Got Wrong”</span></div><span class="pbc-country">Uzbekistan</span></li><li><span class="pbc-rank">08</span><a class="pbc-thumb" href="assets/pbc/emanuele-barbosa-costa.jpg" target="_blank" rel="noopener"><img src="assets/pbc/emanuele-barbosa-costa.jpg" alt="Top 10 finalist badge for Emanuele Barbosa Costa" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Emanuele Barbosa Costa</b><span>“Making Fuel Subsidy Reform Fairer: Protecting Vulnerable Households in Indonesia”</span></div><span class="pbc-country">Brazil</span></li><li><span class="pbc-rank">09</span><a class="pbc-thumb" href="assets/pbc/tuyizere-schadrack.jpg" target="_blank" rel="noopener"><img src="assets/pbc/tuyizere-schadrack.jpg" alt="Top 10 finalist badge for Tuyizere Schadrack" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Tuyizere Schadrack</b><span>“Reforming Nigeria’s Petrol Subsidy: Evaluating the 2023 Reform and One Improvement for 2030”</span></div><span class="pbc-country">Rwanda</span></li><li><span class="pbc-rank">10</span><a class="pbc-thumb" href="assets/pbc/aldri-zaninello-dos-santos.jpg" target="_blank" rel="noopener"><img src="assets/pbc/aldri-zaninello-dos-santos.jpg" alt="Top 10 finalist badge for Aldri Zaninello dos Santos" loading="lazy" /></a><div class="pbc-li-main"><b class="serif">Aldri Zaninello dos Santos</b><span>“Colombia’s Gasoline Subsidy Reform: Fiscal Impact and Social Costs”</span></div><span class="pbc-country">Brazil</span></li></ol></div>
+</div>
+</section>
+<section class="pbc-sec" id="prizes" data-screen-label="08 Prizes">
+<div class="pbc-wrap">
+<div class="pbc-eye apple-reveal">07 / Prizes &amp; recognition</div><h2 class="pbc-h2 apple-reveal">What finalists <em>receive.</em></h2>
+<div class="pbc-prizes"><div class="pbc-prize apple-reveal"><span class="i">01</span><h4>Certificate</h4></div><div class="pbc-prize apple-reveal" style="transition-delay:.06s"><span class="i">02</span><h4>E-Badge</h4></div><div class="pbc-prize apple-reveal" style="transition-delay:.12s"><span class="i">03</span><h4>Exclusive Page for their Work</h4></div></div>
+</div>
+</section>
+<section class="pbc-sec alt" id="faq" data-screen-label="09 FAQ">
+<div class="pbc-wrap pbc-two">
+<div><div class="pbc-eye apple-reveal">08 / FAQ</div><h2 class="pbc-h2 apple-reveal">Questions.</h2></div>
+<div class="pbc-faq apple-reveal" style="transition-delay:.1s">
+<details><summary>Can I still enter the 2026 competition?</summary><p>No. Submissions closed on 15 October 2026 at 11:59 PM GMT+8, and results were announced on 5 November 2026. <a href="#interest" style="color:var(--sage-deep);text-decoration:underline">Register Interest for 2027</a> instead.</p></details>
+<details><summary>How long did a brief need to be?</summary><p>Between 600 and 900 words.</p></details>
+<details><summary>How were briefs judged?</summary><p>Each brief was scored from 1 to 10 on argument quality, evidence use, accessibility and policy practicality, for a total out of 40. Every finalist brief was read in full.</p></details>
+<details><summary>Where can I read the winning briefs?</summary><p>The winning briefs will be published on this page soon.</p></details>
+<details><summary>Will there be a 2027 edition?</summary><p>You can register your interest below and we will contact you when the next edition opens.</p></details>
+</div>
+</div>
+</section>
+<section class="pbc-cta" id="interest" data-screen-label="10 Register Interest">
+<div class="pbc-eye apple-reveal" style="justify-content:center">2027 edition</div>
+<h2 class="pbc-h2 apple-reveal">Write the next <em>winning brief.</em></h2>
+<p class="pbc-p apple-reveal">Register your interest and we will let you know when the 2027 competition opens.</p>
+<div class="row apple-reveal"><a href="https://forms.gle/ZswMRRwHePw5Q7Jr8" target="_blank" rel="noopener noreferrer" class="btn btn-forest" data-magnetic>Register interest <span class="arr">↗</span></a><a href="/programmes" class="btn btn-ghost">Explore Our Programmes ▸</a></div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand">
+        <img src="assets/ysp-logo.png" alt="" />
+        <span class="word">Y<i>S</i>P</span>
+      </div>
+      <p class="blurb" style="font-family:system-ui">
+        Youth for Sustainable Policy (YSP) is a youth-led initiative empowering the next generation to engage with global challenges through research, storytelling, and policy dialogue.
+      </p>
+    </div>
+    <div>
+      <h5>Programmes</h5>
+      <ul>
+        <li><a href="/programmes">Programme Overview</a></li>
+        <li><a href="/mun">Winter MUN 2026</a></li>
+        <li><a href="/programmes#tracks">Six Tracks</a></li>
+        <li><a href="/programmes#how">How It Works</a></li>
+        <li><a href="/programmes#schools">For Schools</a></li>
+        <li><a href="/programmes#pledge">The YSP Pledge</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Organisation</h5>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/team">Team</a></li>
+        <li><a href="/chapters">Chapters</a></li>
+        <li><a href="/careers">Careers</a></li>
+        <li><a href="/programmes#contact">Contact</a></li>
+              <li><a href="/annual-reports">Annual Reports</a></li>
+        <li><a href="/policies">Policies &amp; Declarations</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="safe-band">
+    <div class="left">
+      <span class="leaf">✦</span>
+      <span>This is a safe, moderated space for youth. For Youth, By Youth.</span>
+    </div>
+    <div>View our <a href="/community-policy">Community Policy</a> · <a href="/privacy-notice">Privacy Notice</a></div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Youth for Sustainable Policy. A registered non-profit.</span>
+    <span>Made slowly, in good company.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Nav scroll state
+  const navWrap = document.getElementById('navWrap');
+  let lastScroll = -1;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY || window.pageYOffset;
+    if (y === lastScroll) return;
+    lastScroll = y;
+    if (y > 40) navWrap.classList.add('scrolled'); else navWrap.classList.remove('scrolled');
+  }, { passive:true });
+
+  // Magnetic buttons
+  document.querySelectorAll('[data-magnetic]').forEach(el => {
+    let raf=null, tx=0, ty=0, cx=0, cy=0;
+    const STR = 12;
+    function loop(){
+      tx += (cx-tx)*0.18; ty += (cy-ty)*0.18;
+      el.style.transform = 'translate(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px)';
+      if (Math.abs(cx-tx)>0.05 || Math.abs(cy-ty)>0.05) raf = requestAnimationFrame(loop); else raf=null;
+    }
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      cx = ((e.clientX - (r.left + r.width/2)) / (r.width/2)) * STR;
+      cy = ((e.clientY - (r.top + r.height/2)) / (r.height/2)) * STR;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    el.addEventListener('mouseleave', () => { cx=0; cy=0; if (!raf) raf = requestAnimationFrame(loop); });
+  });
+
+  // Apple reveals
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting){
+        en.target.classList.add('is-in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.apple-reveal').forEach(el => io.observe(el));
+})();
+</script>
+<script src="mobile-nav.js"></script>
+</body>
+</html>

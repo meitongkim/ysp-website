@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Terms &amp; Conditions — YSP Winter MUN 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mun-subpages.css">
+<style>
+  .doc{ background: linear-gradient(180deg, #fbfdfa 0%, #f3f8ef 100%) }
+  .doc .container{ max-width:880px }
+  .doc-layout{ display:grid; grid-template-columns: 220px 1fr; gap:48px; align-items:start; margin-top:8px }
+
+  /* Sticky contents rail */
+  .doc-toc{ position:sticky; top:104px }
+  .doc-toc .lbl{ font-family:ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:14px }
+  .doc-toc ol{ list-style:none; padding:0; margin:0; counter-reset:c; display:flex; flex-direction:column; gap:2px }
+  .doc-toc li{ counter-increment:c }
+  .doc-toc a{ display:flex; gap:10px; padding:7px 10px; border-radius:8px; font-size:13px; color:var(--ink-soft); line-height:1.35; transition:background .2s, color .2s }
+  .doc-toc a::before{ content:counter(c,decimal-leading-zero); font-family:ui-monospace,Menlo,monospace; font-size:10px; color:var(--mun); flex-shrink:0; padding-top:2px }
+  .doc-toc a:hover{ background:rgba(255,255,255,.7); color:var(--ink) }
+
+  .preamble{
+    padding:24px 28px; border-radius:18px; margin-bottom:8px;
+    background:rgba(255,255,255,.6); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.8);
+    font-family:"Fraunces",serif; font-weight:300; font-size:18px; line-height:1.45; letter-spacing:-0.012em; color:var(--ink);
+  }
+  .preamble em{ font-style:italic; color:var(--mun); font-weight:400 }
+
+  .clause{ padding:34px 0; border-top:1px solid var(--line); scroll-margin-top:104px }
+  .clause .num{ display:inline-block; font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.1em; color:var(--mun); margin-bottom:10px }
+  .clause h2{ font-family:"Fraunces",serif; font-weight:400; font-size:clamp(23px,2.6vw,30px); letter-spacing:-0.02em; line-height:1.15; margin:0 0 14px; color:var(--ink) }
+  .clause h2 em{ font-style:italic; color:var(--mun); font-weight:300 }
+  .clause p{ color:var(--ink-soft); font-size:15.5px; line-height:1.65; margin:0 0 12px; max-width:64ch }
+  .clause p:last-child{ margin-bottom:0 }
+  .clause ul{ padding-left:20px; margin:10px 0 12px; color:var(--ink-soft); font-size:15px; line-height:1.55 }
+  .clause li{ margin:7px 0; max-width:62ch }
+  .clause li b{ color:var(--ink); font-weight:500 }
+  .clause a.inl{ color:var(--mun); font-weight:500; text-decoration:underline; text-decoration-color:rgba(31,58,95,.35); text-underline-offset:2px }
+
+  .callout{
+    margin:16px 0 4px; padding:16px 20px; border-radius:13px;
+    background:var(--mun-soft); border:1px solid rgba(31,58,95,.18);
+    font-family:"Fraunces",serif; font-weight:300; font-size:16px; line-height:1.5; letter-spacing:-0.01em; color:var(--mun-deep);
+  }
+  .callout b{ font-weight:500 }
+
+  .meta-line{ margin-top:38px; padding-top:24px; border-top:1px solid var(--line); display:flex; gap:14px 26px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-mute) }
+  .meta-line b{ display:inline-block; margin-right:6px; font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:500; color:var(--ink-mute) }
+  .meta-line a{ color:var(--mun); text-decoration:underline; text-underline-offset:2px }
+
+  .agreement{ margin-top:28px; padding:24px 28px; border-radius:18px; background:var(--mun); color:#fbfdfa; box-shadow:var(--shadow-2) }
+  .agreement .e{ font-family:ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--sage); margin-bottom:10px }
+  .agreement p{ margin:0; font-family:"Fraunces",serif; font-weight:300; font-size:18px; line-height:1.5; letter-spacing:-0.012em }
+  .agreement p em{ font-style:italic; color:var(--sage); font-weight:400 }
+
+  @media (max-width:820px){
+    .doc-layout{ grid-template-columns:1fr; gap:20px }
+    .doc-toc{ position:static }
+    .doc-toc ol{ display:grid; grid-template-columns:1fr 1fr }
+  }
+</style>
+<style id="btn-caps">.btn,.pbc-feat-btn,.btn-primary,.btn-forest,.btn-ghost{text-transform:capitalize}</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Nav -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <img src="assets/ysp-logo.png" alt="" />
+      <span class="word">Y<i>S</i>P</span>
+    </a>
+    <div class="nav-links">
+      <a href="/programmes">Programmes</a>
+      <a href="/mun" class="active">Winter MUN</a>
+      <a href="/team">Team</a>
+      <a href="/about">About</a>
+    </div>
+    <a href="/mun#apply" class="btn btn-primary">Apply to MUN <span class="arr">↗</span></a>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="sub-hero" data-screen-label="Terms & Conditions — Hero">
+  <div class="container">
+    <div class="crumbs apple-reveal">
+      <span class="leaf"></span>
+      <a href="/">YSP</a><span class="sep">/</span>
+      <a href="/mun">Winter MUN 2026</a><span class="sep">/</span>
+      <a href="/mun#apply">Registration</a><span class="sep">/</span>
+      <span>Terms &amp; Conditions</span>
+    </div>
+    <span class="sub-hero-eyebrow apple-reveal">Registration · 02 of 03</span>
+    <h1 class="apple-reveal" style="transition-delay:.06s">Terms &amp; <em>conditions.</em></h1>
+    <p class="lede apple-reveal" style="transition-delay:.14s">The conditions under which a delegate registers for and participates in YSP Winter MUN 2026. By confirming your seat, you agree to these terms. They sit alongside the <b>Code of Conduct</b> and the <b>Delegate Liability Waiver</b>.</p>
+    <div class="sub-hero-meta apple-reveal" style="transition-delay:.22s">
+      <div class="it"><span class="k">Applies to</span><span class="v">All registered delegates</span></div>
+      <div class="it"><span class="k">Version</span><span class="v">2026.1</span></div>
+      <div class="it"><span class="k">Last updated</span><span class="v">1 June 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Document -->
+<section class="doc" data-screen-label="Terms & Conditions — Body">
+  <div class="container">
+    <div class="doc-layout">
+      <!-- Contents rail -->
+      <aside class="doc-toc apple-reveal" aria-label="Contents">
+        <div class="lbl">Contents</div>
+        <ol>
+          <li><a href="#definitions">Definitions</a></li>
+          <li><a href="#eligibility">Eligibility &amp; registration</a></li>
+          <li><a href="#fees">Fees &amp; payment</a></li>
+          <li><a href="#refunds">Cancellation &amp; refunds</a></li>
+          <li><a href="#placement">Placements &amp; substitution</a></li>
+          <li><a href="#conduct">Conduct &amp; participation</a></li>
+          <li><a href="#platform">Platform &amp; technical</a></li>
+          <li><a href="#media">Recording &amp; media</a></li>
+          <li><a href="#ip">Intellectual property</a></li>
+          <li><a href="#data">Data &amp; privacy</a></li>
+          <li><a href="#awards">Awards &amp; evaluation</a></li>
+          <li><a href="#liability">Liability &amp; force majeure</a></li>
+          <li><a href="#changes">Changes to these terms</a></li>
+          <li><a href="#law">Governing law &amp; contact</a></li>
+        </ol>
+      </aside>
+
+      <!-- Clauses -->
+      <div>
+        <div class="preamble apple-reveal">These terms govern your registration and participation in the <em>YSP Winter Model United Nations 2026</em> conference. Please read them before confirming your seat — confirmation constitutes acceptance.</div>
+
+        <section class="clause apple-reveal" id="definitions">
+          <span class="num">01</span>
+          <h2 class="serif">Definitions</h2>
+          <p>In these terms: <b>"YSP"</b>, <b>"we"</b>, or <b>"the organiser"</b> means Youth for Sustainable Policy and its appointed Secretariat. <b>"The conference"</b> means YSP Winter MUN 2026, held virtually on 5–7 December 2026. <b>"Delegate"</b> or <b>"you"</b> means a person who applies for or is registered to participate. <b>"Materials"</b> means background guides, the Rules of Procedure primer, and other documents provided for the conference.</p>
+        </section>
+
+        <section class="clause apple-reveal" id="eligibility">
+          <span class="num">02</span>
+          <h2 class="serif">Eligibility &amp; <em>registration</em></h2>
+          <p>Participation is open to individuals aged 16 to 28 at the time of the conference. Delegates under the age of 18 must complete the parental- or guardian-consent section of the Liability Waiver before participating.</p>
+          <ul>
+            <li>Registration is complete only when your seat is confirmed, the applicable fee is paid (or an approved waiver is in place), and the required agreements are accepted.</li>
+            <li>You agree to provide accurate information. Material misrepresentation may result in withdrawal of a placement without refund.</li>
+            <li>A confirmed seat is personal to you and may not be transferred without the Secretariat's written approval (see clause 5).</li>
+          </ul>
+        </section>
+
+        <section class="clause apple-reveal" id="fees">
+          <span class="num">03</span>
+          <h2 class="serif">Fees &amp; <em>payment</em></h2>
+          <p>The registration fee is SGD 35 per individual delegate, or SGD 28 per delegate for school delegations of three or more. Fees are payable via PayNow (Singapore), bank transfer, or PayPal once your seat is confirmed.</p>
+          <ul>
+            <li>Your placement is held for seven days from confirmation; payment (or finalisation of an approved waiver) must be completed within this window or the seat may be released.</li>
+            <li>Receipts are issued within 48 hours of payment.</li>
+            <li><b>Financial assistance</b> — partial and full waivers are available. No delegate is turned away for financial reasons, and waiver status is confidential.</li>
+          </ul>
+        </section>
+
+        <section class="clause apple-reveal" id="refunds">
+          <span class="num">04</span>
+          <h2 class="serif">Cancellation &amp; <em>refunds</em></h2>
+          <p>If you withdraw, the following applies based on the date we receive written notice at the conference email:</p>
+          <ul>
+            <li>On or before <b>25 November 2026</b> — an 80% refund of fees paid.</li>
+            <li>After 25 November 2026 — fees are non-refundable, as materials and placements have been committed.</li>
+            <li>If YSP cancels the conference in full, registered delegates receive a full refund of fees paid (see clause 12 on force majeure).</li>
+          </ul>
+        </section>
+
+        <section class="clause apple-reveal" id="placement">
+          <span class="num">05</span>
+          <h2 class="serif">Placements &amp; <em>substitution</em></h2>
+          <p>Committee, country, and portfolio assignments are made at the Secretariat's discretion, weighting your stated preferences, experience, and overall balance across committees. We aim to honour first choices but cannot guarantee any specific assignment.</p>
+          <ul>
+            <li>Where a first-choice committee is full, you will be placed in your second choice and notified before confirmation.</li>
+            <li>Substitution of one delegate for another within a confirmed school delegation may be permitted with written approval, subject to materials already issued.</li>
+          </ul>
+        </section>
+
+        <section class="clause apple-reveal" id="conduct">
+          <span class="num">06</span>
+          <h2 class="serif">Conduct &amp; <em>participation</em></h2>
+          <p>All delegates are bound by the YSP <a class="inl" href="/code-of-conduct">Code of Conduct</a> and the conference Rules of Procedure for the duration of the event, including all associated channels and social sessions.</p>
+          <ul>
+            <li>Harassment, discrimination, plagiarism, or disruptive behaviour may result in removal from the conference without refund.</li>
+            <li>This is a moderated youth space; the Secretariat may take action it considers necessary to keep it safe.</li>
+            <li>Decisions of the dais on procedure, and of the Secretariat on conduct, are final.</li>
+          </ul>
+        </section>
+
+        <section class="clause apple-reveal" id="platform">
+          <span class="num">07</span>
+          <h2 class="serif">Platform &amp; <em>technical</em></h2>
+          <p>The conference runs virtually over Zoom, Discord, and shared document tools. You are responsible for your own equipment, internet connection, and a suitable environment for participation.</p>
+          <ul>
+            <li>YSP provides dedicated technical support during sessions but is not responsible for delegate-side connectivity, hardware, or third-party platform outages.</li>
+            <li>Access credentials are personal and must not be shared. Sharing access may result in removal.</li>
+          </ul>
+        </section>
+
+        <section class="clause apple-reveal" id="media">
+          <span class="num">08</span>
+          <h2 class="serif">Recording &amp; <em>media</em></h2>
+          <p>Sessions may be recorded for delegate access, training, accessibility, and limited promotional use. By participating, you acknowledge that your name, voice, likeness, and on-screen contributions may be captured.</p>
+          <ul>
+            <li>Detailed consent and opt-out provisions are set out in the <a class="inl" href="/mun-liability-waiver">Liability Waiver</a>, including specific protections for delegates under 18.</li>
+            <li>Delegates may not record, screenshot, or redistribute other delegates' contributions without consent.</li>
+          </ul>
+        </section>
+
+        <section class="clause apple-reveal" id="ip">
+          <span class="num">09</span>
+          <h2 class="serif">Intellectual <em>property</em></h2>
+          <p>Background guides, the ROP primer, and other YSP-produced materials remain the property of YSP and are licensed to you for personal conference use only. They may not be redistributed or published without permission.</p>
+          <p>You retain ownership of documents you author — position papers, working papers, resolutions, and directives — and grant YSP a non-exclusive licence to use them for the administration, evaluation, and documentation of the conference. See the YSP <a class="inl" href="/ip-policy">Intellectual Property Policy</a>.</p>
+        </section>
+
+        <section class="clause apple-reveal" id="data">
+          <span class="num">10</span>
+          <h2 class="serif">Data &amp; <em>privacy</em></h2>
+          <p>Information you provide is used only to administer the conference — placement, communication, payment, and evaluation. It is handled in line with the YSP <a class="inl" href="/data-privacy-policy">Data Privacy Policy</a> and the <a class="inl" href="/privacy-notice">Privacy Notice</a>.</p>
+          <p>Financial-assistance status is confidential and is not disclosed to chairs or other delegates.</p>
+        </section>
+
+        <section class="clause apple-reveal" id="awards">
+          <span class="num">11</span>
+          <h2 class="serif">Awards &amp; <em>evaluation</em></h2>
+          <p>Awards are determined by the dais using a structured rubric across documents authored, floor presence, bloc collaboration, and foreign-policy alignment. Evaluation is at the sole discretion of the dais and Secretariat, and outcomes are final and not subject to appeal.</p>
+        </section>
+
+        <section class="clause apple-reveal" id="liability">
+          <span class="num">12</span>
+          <h2 class="serif">Liability &amp; <em>force majeure</em></h2>
+          <p>To the fullest extent permitted by law, YSP is not liable for indirect or consequential loss arising from participation, technical failure, or content shared by other delegates. Nothing in these terms excludes liability that cannot be excluded by law.</p>
+          <div class="callout"><b>Force majeure.</b> If events beyond our reasonable control — including platform failure, public-health measures, or similar — require us to modify, postpone, or cancel the conference, we will act reasonably and communicate promptly. Full cancellation by YSP entitles registered delegates to a full refund of fees paid.</div>
+        </section>
+
+        <section class="clause apple-reveal" id="changes">
+          <span class="num">13</span>
+          <h2 class="serif">Changes to <em>these terms</em></h2>
+          <p>YSP may update these terms before the conference where reasonably necessary. Material changes will be communicated to registered delegates by email, and the version number and date above will be updated. Continued participation after notice constitutes acceptance.</p>
+        </section>
+
+        <section class="clause apple-reveal" id="law">
+          <span class="num">14</span>
+          <h2 class="serif">Governing law &amp; <em>contact</em></h2>
+          <p>These terms are governed by the laws of Singapore. Questions about registration or these terms can be sent to the Secretariat, who reply within 48 hours on weekdays.</p>
+          <div class="agreement">
+            <div class="e">Acceptance</div>
+            <p>By confirming a seat at YSP Winter MUN 2026, you confirm that you have read, understood, and <em>agree to be bound</em> by these Terms &amp; Conditions, the Code of Conduct, and the Delegate Liability Waiver.</p>
+          </div>
+          <div class="meta-line">
+            <span><b>Version</b>2026.1</span>
+            <span><b>Last updated</b>1 June 2026</span>
+            <span><b>Reach us</b><a href="mailto:mun@ysp.org">mun@ysp.org</a></span>
+          </div>
+        </section>
+
+        <div class="pager apple-reveal" style="margin-top:40px">
+          <a class="prev" href="/mun-application-process">
+            <span class="k">← Previous</span>
+            <span class="t serif">Application process</span>
+          </a>
+          <a class="next" href="/mun-liability-waiver">
+            <span class="k">Next →</span>
+            <span class="t serif">Liability waiver</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand">
+        <img src="assets/ysp-logo.png" alt="" />
+        <span class="word">Y<i>S</i>P</span>
+      </div>
+      <p class="blurb">Youth for Sustainable Policy (YSP) is a youth-led initiative empowering the next generation to engage with global challenges through research, storytelling, and policy dialogue.</p>
+    </div>
+    <div>
+      <h5>Winter MUN</h5>
+      <ul>
+        <li><a href="/mun">MUN Overview</a></li>
+        <li><a href="/mun-committee-topics">Committee Topics</a></li>
+        <li><a href="/mun-background-guides">Background Guides</a></li>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun#apply">Apply Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Registration</h5>
+      <ul>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun-terms-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="/mun-liability-waiver">Liability Waiver</a></li>
+        <li><a href="/mun#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="safe-band">
+    <div class="left">
+      <span class="leaf">✦</span>
+      <span>This is a safe, moderated space for youth. For Youth, By Youth.</span>
+    </div>
+    <div>View our <a href="/community-policy">Community Policy</a> · <a href="/privacy-notice">Privacy Notice</a></div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Youth for Sustainable Policy. A registered non-profit.</span>
+    <span>Made slowly, in good company.</span>
+  </div>
+</footer>
+
+<script src="mun-subpages.js"></script>
+<script src="mobile-nav.js"></script>
+</body>
+</html>

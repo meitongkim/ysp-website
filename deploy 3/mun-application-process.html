@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Application Process — YSP Winter MUN 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mun-subpages.css">
+<style>
+  .process{ background: linear-gradient(180deg, #fbfdfa 0%, #f3f8ef 100%) }
+
+  /* Vertical timeline of steps */
+  .timeline{ margin-top:18px; position:relative }
+  .timeline::before{
+    content:''; position:absolute; left:26px; top:14px; bottom:14px; width:2px;
+    background:linear-gradient(180deg, var(--mun), var(--sage)); opacity:.35;
+  }
+  .tstep{
+    position:relative; padding:0 0 18px 76px;
+  }
+  .tstep:last-child{ padding-bottom:0 }
+  .tstep .marker{
+    position:absolute; left:0; top:0; width:54px; height:54px; border-radius:50%;
+    background:#fff; border:2px solid var(--mun-soft); display:flex; align-items:center; justify-content:center;
+    font-family:"Fraunces",serif; font-weight:400; font-size:22px; color:var(--mun); z-index:2;
+    box-shadow:var(--shadow-1);
+  }
+  .tcard{
+    padding:24px 28px; border-radius:18px;
+    background:rgba(255,255,255,.7); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.85); box-shadow:var(--shadow-1);
+  }
+  .tcard .when{ font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mun); margin-bottom:8px; display:inline-flex; align-items:center; gap:8px }
+  .tcard .when .pill{ padding:2px 9px; border-radius:999px; background:var(--mun-soft); color:var(--mun); font-size:9.5px }
+  .tcard h3{ margin:0 0 8px; font-family:"Fraunces",serif; font-weight:400; font-size:22px; letter-spacing:-0.018em; color:var(--ink) }
+  .tcard h3 em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .tcard p{ margin:0 0 12px; font-size:14.5px; color:var(--ink-soft); line-height:1.6; max-width:60ch }
+  .tcard p:last-child{ margin-bottom:0 }
+  .tcard ul{ margin:8px 0 0; padding-left:18px; color:var(--ink-soft); font-size:14px; line-height:1.55 }
+  .tcard ul li{ margin:5px 0 }
+  .tcard ul li b{ color:var(--ink); font-weight:500 }
+
+  /* Eligibility + prepare */
+  .prep{ background: linear-gradient(180deg, #f3f8ef 0%, #ebf1e6 100%) }
+  .prep-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px }
+  .pbox{ padding:26px 28px; border-radius:20px; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.85); backdrop-filter:blur(12px) }
+  .pbox h3{ margin:0 0 14px; font-family:"Fraunces",serif; font-weight:400; font-size:20px; letter-spacing:-0.015em; color:var(--ink) }
+  .pbox h3 em{ font-style:italic; color:var(--sage-deep); font-weight:300 }
+  .checklist{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px }
+  .checklist li{ display:flex; gap:12px; font-size:14px; color:var(--ink-soft); line-height:1.5 }
+  .checklist li::before{ content:'✓'; flex-shrink:0; width:20px; height:20px; border-radius:6px; background:rgba(154,176,120,.2); color:var(--sage-deep); display:inline-flex; align-items:center; justify-content:center; font-size:11px; margin-top:1px }
+  .checklist.mun-check li::before{ background:var(--mun-soft); color:var(--mun) }
+  .checklist li b{ color:var(--ink); font-weight:500 }
+
+  /* Dates strip */
+  .dates{ background: linear-gradient(180deg, #ebf1e6 0%, #e0e9e9 100%) }
+  .date-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:8px }
+  .dcard{ padding:24px 22px; border-radius:18px; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.85); backdrop-filter:blur(12px) }
+  .dcard .d{ font-family:"Fraunces",serif; font-weight:400; font-size:30px; letter-spacing:-0.02em; color:var(--mun); line-height:1 }
+  .dcard .d em{ font-style:italic; font-weight:300; color:var(--sage-deep); font-size:.5em; display:block; margin-top:6px }
+  .dcard .l{ margin-top:12px; font-size:13px; color:var(--ink-soft); line-height:1.5 }
+
+  /* CTA */
+  .ctaband{
+    background:
+      radial-gradient(80% 60% at 12% 10%, rgba(31,58,95,.32), transparent 55%),
+      radial-gradient(70% 60% at 88% 92%, rgba(154,176,120,.18), transparent 55%),
+      linear-gradient(180deg, #1a2c4a 0%, #142745 100%);
+    color:#fbfdfa;
+  }
+  .ctaband .eyebrow{ color:var(--sage) } .ctaband .eyebrow .leaf{ background:var(--sage) }
+  .ctaband h2{ color:#fff } .ctaband h2 em{ color:var(--sage) }
+  .ctaband p.section-sub{ color:rgba(255,255,255,.72) }
+  .cta-row{ display:flex; gap:10px; flex-wrap:wrap }
+
+  @media (max-width:860px){
+    .prep-grid{ grid-template-columns:1fr }
+    .date-grid{ grid-template-columns:1fr 1fr }
+  }
+  @media (max-width:520px){
+    .date-grid{ grid-template-columns:1fr }
+    .tstep{ padding-left:62px }
+    .timeline::before{ left:20px }
+    .tstep .marker{ width:42px; height:42px; font-size:18px }
+  }
+</style>
+<style id="btn-caps">.btn,.pbc-feat-btn,.btn-primary,.btn-forest,.btn-ghost{text-transform:capitalize}</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Nav -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <img src="assets/ysp-logo.png" alt="" />
+      <span class="word">Y<i>S</i>P</span>
+    </a>
+    <div class="nav-links">
+      <a href="/programmes">Programmes</a>
+      <a href="/mun" class="active">Winter MUN</a>
+      <a href="/team">Team</a>
+      <a href="/about">About</a>
+    </div>
+    <a href="/mun#apply" class="btn btn-primary">Apply to MUN <span class="arr">↗</span></a>
+  </nav>
+</div>
+
+<!-- Hero -->
+<section class="sub-hero" data-screen-label="Application Process — Hero">
+  <div class="container">
+    <div class="crumbs apple-reveal">
+      <span class="leaf"></span>
+      <a href="/">YSP</a><span class="sep">/</span>
+      <a href="/mun">Winter MUN 2026</a><span class="sep">/</span>
+      <a href="/mun#apply">Registration</a><span class="sep">/</span>
+      <span>Application Process</span>
+    </div>
+    <span class="sub-hero-eyebrow apple-reveal">Registration · 01 of 03</span>
+    <h1 class="apple-reveal" style="transition-delay:.06s">The application <em>process.</em></h1>
+    <p class="lede apple-reveal" style="transition-delay:.14s">Six steps, about five minutes to start, and no account required. Here is exactly what happens from the moment you submit your application to the moment you take your seat on Day 1 — including every deadline and what we ask you to prepare.</p>
+    <div class="sub-hero-meta apple-reveal" style="transition-delay:.22s">
+      <div class="it"><span class="k">Applications close</span><span class="v">15 November 2026</span></div>
+      <div class="it"><span class="k">Placements confirmed</span><span class="v">25 November 2026</span></div>
+      <div class="it"><span class="k">Eligibility</span><span class="v">Ages 16–28, worldwide</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="process" data-screen-label="Application Process — Steps">
+  <div class="container narrow">
+    <span class="eyebrow mun-eye apple-reveal"><span class="leaf"></span> Step by step</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.08s">From application <em class="mun">to placard.</em></h2>
+    <p class="section-sub apple-reveal" style="transition-delay:.16s">Nothing here is a surprise. Every delegate moves through the same six steps, and the Secretariat is reachable at every one of them.</p>
+
+    <div class="timeline">
+      <div class="tstep apple-reveal">
+        <div class="marker">1</div>
+        <div class="tcard">
+          <span class="when"><span class="pill">Now – 15 Nov</span> Open</span>
+          <h3 class="serif">Submit your <em>application</em></h3>
+          <p>Complete the short delegate application on the MUN page. It takes about five minutes and asks for your details, your first- and second-choice committees, your MUN experience level, and whether you'd like to be considered for financial assistance.</p>
+          <ul>
+            <li>No account or payment is required to apply.</li>
+            <li><b>School delegations</b> of three or more can apply together for the group rate.</li>
+            <li>Financial-assistance requests are handled confidentially and never shared with chairs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tstep apple-reveal" style="transition-delay:.05s">
+        <div class="marker">2</div>
+        <div class="tcard">
+          <span class="when"><span class="pill">Within 48h</span> Automatic</span>
+          <h3 class="serif">Receive your <em>acknowledgement</em></h3>
+          <p>You'll get an email confirming we've received your application, within 48 hours. It includes your reference number and a summary of your committee choices so you can check everything is correct. If anything is wrong, you simply reply.</p>
+        </div>
+      </div>
+
+      <div class="tstep apple-reveal" style="transition-delay:.1s">
+        <div class="marker">3</div>
+        <div class="tcard">
+          <span class="when"><span class="pill">By 25 Nov</span> Placement</span>
+          <h3 class="serif">Get your committee <em>placement</em></h3>
+          <p>The Secretariat reviews applications and confirms placements by 25 November. We weight your first choice heavily, then balance experience level and country representation across each committee.</p>
+          <ul>
+            <li>If your first choice is full, we place you in your second choice and write to you first.</li>
+            <li>Country and portfolio assignments are sent with your placement email.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tstep apple-reveal" style="transition-delay:.15s">
+        <div class="marker">4</div>
+        <div class="tcard">
+          <span class="when"><span class="pill">Within 7 days of placement</span> Action</span>
+          <h3 class="serif">Confirm your seat &amp; <em>register</em></h3>
+          <p>To lock in your placement, confirm your seat and complete registration within seven days. This is where you agree to the conference terms and the delegate liability waiver, and pay your fee (or finalise your approved waiver).</p>
+          <ul>
+            <li>Fees are paid via PayNow (SG), bank transfer, or PayPal. Receipts issue within 48 hours.</li>
+            <li>Review the <a href="/mun-terms-conditions" style="color:var(--mun);font-weight:500;text-decoration:underline;text-underline-offset:2px">Terms &amp; Conditions</a> and <a href="/mun-liability-waiver" style="color:var(--mun);font-weight:500;text-decoration:underline;text-underline-offset:2px">Liability Waiver</a> before confirming.</li>
+            <li>Delegates under 18 complete the parental-consent section of the waiver.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tstep apple-reveal" style="transition-delay:.2s">
+        <div class="marker">5</div>
+        <div class="tcard">
+          <span class="when"><span class="pill">8 – 28 Nov</span> Prepare</span>
+          <h3 class="serif">Receive your prep pack &amp; submit your <em>position paper</em></h3>
+          <p>Once confirmed, your delegate portal unlocks: your committee background guide, the Rules of Procedure primer, and your Discord access. Read your guide, then write and submit your position paper by 28 November.</p>
+          <ul>
+            <li>Background guides release on <b>8 November</b>.</li>
+            <li>Position papers are due <b>28 November, 23:59 SGT</b> — one to two pages, with citations.</li>
+            <li>First-time delegates can request light written feedback on their draft.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tstep apple-reveal" style="transition-delay:.25s">
+        <div class="marker">6</div>
+        <div class="tcard">
+          <span class="when"><span class="pill">5 – 7 Dec</span> Conference</span>
+          <h3 class="serif">Take your <em>seat</em></h3>
+          <p>Join the opening ceremony on 5 December and step into three days of debate. You'll already know the platform, your committee, and your position — so you can spend the conference doing diplomacy, not figuring out logistics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Eligibility + prepare -->
+<section class="prep" data-screen-label="Application Process — Prepare">
+  <div class="container">
+    <span class="eyebrow apple-reveal"><span class="leaf"></span> Before you apply</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.08s">Who can apply, <em>and what to have ready.</em></h2>
+    <p class="section-sub apple-reveal" style="transition-delay:.16s">The application is deliberately light. You don't need anything formal to start — but knowing these things in advance makes it faster.</p>
+
+    <div class="prep-grid">
+      <div class="pbox apple-reveal">
+        <h3 class="serif">Eligibility</h3>
+        <ul class="checklist">
+          <li><span><b>Ages 16–28</b> at the time of the conference. Delegates under 18 complete a parental-consent section.</span></li>
+          <li><span><b>Open worldwide.</b> The schedule runs on SGT (UTC+8) to suit Asia, the Middle East, and Europe.</span></li>
+          <li><span><b>All experience levels.</b> The Youth Assembly is built for first-timers; advanced committees suit experienced delegates.</span></li>
+          <li><span><b>No nomination needed.</b> You can apply as an individual or as part of a school delegation.</span></li>
+        </ul>
+      </div>
+      <div class="pbox apple-reveal" style="transition-delay:.06s">
+        <h3 class="serif">Have these to hand</h3>
+        <ul class="checklist mun-check">
+          <li><span>Your <b>name, email, and country/region</b> — that's all the application requires.</span></li>
+          <li><span>Your <b>first and second committee choices</b> (see Committee Topics if you're undecided).</span></li>
+          <li><span>An honest sense of your <b>MUN experience level</b> so we place you well.</span></li>
+          <li><span>A <b>stable internet connection, microphone, and quiet space</b> for the conference days.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key dates -->
+<section class="dates" data-screen-label="Application Process — Dates">
+  <div class="container">
+    <span class="eyebrow mun-eye apple-reveal"><span class="leaf"></span> Key dates</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.08s">The dates <em class="mun">that matter.</em></h2>
+    <div class="date-grid">
+      <div class="dcard apple-reveal"><div class="d">15<em>Oct 2026</em></div><div class="l">Applications close. Late applications considered only if seats remain.</div></div>
+      <div class="dcard apple-reveal" style="transition-delay:.05s"><div class="d">1<em>Nov 2026</em></div><div class="l">Committee placements confirmed and emailed to all applicants.</div></div>
+      <div class="dcard apple-reveal" style="transition-delay:.1s"><div class="d">8<em>Nov 2026</em></div><div class="l">Background guides and the ROP primer release to confirmed delegates.</div></div>
+      <div class="dcard apple-reveal" style="transition-delay:.15s"><div class="d">28<em>Nov 2026</em></div><div class="l">Position papers due, 23:59 SGT. Refund window for cancellations is 25 Nov.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ctaband" data-screen-label="Application Process — CTA">
+  <div class="container narrow">
+    <span class="eyebrow apple-reveal"><span class="leaf"></span> Ready when you are</span>
+    <h2 class="section-title apple-reveal" style="transition-delay:.06s">Start your <em>application.</em></h2>
+    <p class="section-sub apple-reveal" style="transition-delay:.12s">It takes about five minutes, and you can review the terms and waiver before you ever pay. Seats are placed in the order strong applications arrive.</p>
+    <div class="cta-row apple-reveal" style="transition-delay:.16s">
+      <a class="btn btn-mun" href="/mun#apply">Apply as a delegate <span class="arr">↗</span></a>
+      <a class="btn btn-ghost-dark" href="/mun-committee-topics">Browse committee topics ▸</a>
+    </div>
+    <div class="pager apple-reveal" style="transition-delay:.2s; margin-top:36px">
+      <a class="prev" href="/mun-background-guides" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.14)">
+        <span class="k" style="color:rgba(255,255,255,.5)">← Previous</span>
+        <span class="t serif" style="color:#fff">Background guides</span>
+      </a>
+      <a class="next" href="/mun-terms-conditions" style="background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.14)">
+        <span class="k" style="color:rgba(255,255,255,.5)">Next →</span>
+        <span class="t serif" style="color:#fff">Terms &amp; Conditions</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="brand">
+        <img src="assets/ysp-logo.png" alt="" />
+        <span class="word">Y<i>S</i>P</span>
+      </div>
+      <p class="blurb">Youth for Sustainable Policy (YSP) is a youth-led initiative empowering the next generation to engage with global challenges through research, storytelling, and policy dialogue.</p>
+    </div>
+    <div>
+      <h5>Winter MUN</h5>
+      <ul>
+        <li><a href="/mun">MUN Overview</a></li>
+        <li><a href="/mun-committee-topics">Committee Topics</a></li>
+        <li><a href="/mun-background-guides">Background Guides</a></li>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun#apply">Apply Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Registration</h5>
+      <ul>
+        <li><a href="/mun-application-process">Application Process</a></li>
+        <li><a href="/mun-terms-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="/mun-liability-waiver">Liability Waiver</a></li>
+        <li><a href="/mun#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="safe-band">
+    <div class="left">
+      <span class="leaf">✦</span>
+      <span>This is a safe, moderated space for youth. For Youth, By Youth.</span>
+    </div>
+    <div>View our <a href="/community-policy">Community Policy</a> · <a href="/privacy-notice">Privacy Notice</a></div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Youth for Sustainable Policy. A registered non-profit.</span>
+    <span>Made slowly, in good company.</span>
+  </div>
+</footer>
+
+<script src="mun-subpages.js"></script>
+<script src="mobile-nav.js"></script>
+</body>
+</html>
